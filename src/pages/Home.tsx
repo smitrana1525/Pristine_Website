@@ -291,10 +291,10 @@ const Home = () => {
       </section>
 
       {/* CTA Section */}
-      <section ref={ctaRef} className="py-20 bg-gradient-to-r from-primary to-primary-hover text-primary-foreground">
+      <section ref={ctaRef} className="py-20 bg-white text-foreground border-t border-b border-border">
         <div className="container mx-auto px-4 text-center">
           <motion.h2 
-            className="text-4xl md:text-5xl font-heading font-bold mb-6"
+            className="text-4xl md:text-5xl font-heading font-bold mb-6 text-primary"
             initial={{ opacity: 0, y: 30 }}
             animate={ctaInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
             transition={{ duration: 0.6 }}
@@ -302,9 +302,9 @@ const Home = () => {
             Ready to Transform Your Community?
           </motion.h2>
           <motion.p 
-            className="text-xl mb-8 max-w-2xl mx-auto opacity-90"
+            className="text-xl mb-8 max-w-2xl mx-auto text-muted-foreground"
             initial={{ opacity: 0, y: 20 }}
-            animate={ctaInView ? { opacity: 0.9, y: 0 } : { opacity: 0, y: 20 }}
+            animate={ctaInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
             Let us help you create a thriving, well-managed community that residents love to call home.
@@ -316,7 +316,7 @@ const Home = () => {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
-            <Button size="lg" variant="secondary" asChild className="group">
+            <Button size="lg" variant="default" asChild className="group">
               <Link to="/contact">
                 Schedule a Consultation
                 <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />

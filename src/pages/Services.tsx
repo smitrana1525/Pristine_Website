@@ -4,10 +4,9 @@ import {
   DollarSign,
   Users,
   Wrench,
-  FileText,
   MessageSquare,
   Shield,
-  TrendingUp,
+  Laptop,
   Phone,
 } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
@@ -41,76 +40,102 @@ const Services = () => {
 
   const services = [
     {
-      icon: DollarSign,
-      title: "Financial Management",
+      icon: Users,
+      title: "Owners Association Management",
       description:
-        "Comprehensive budgeting, accounting, and financial reporting services. We ensure transparent financial operations and optimal resource allocation.",
-      features: ["Budget Planning", "Financial Reporting", "Collections Management", "Reserve Fund Analysis"],
+        "Tailored governance frameworks that keep boards supported, communication transparent, and communities running smoothly.",
+      features: [
+        "Customized governance plans",
+        "Board advisory & meeting support",
+        "Policy documentation",
+        "Resident communication playbooks",
+      ],
+      bgGradient: "from-blue-500 to-blue-600",
+      shadowColor: "shadow-blue-500/30",
+    },
+    {
+      icon: DollarSign,
+      title: "Financial & Administrative Management",
+      description:
+        "Expert budgeting, accounting, collections, and financial reporting backed by RERA-compliant processes.",
+      features: [
+        "Annual budgets & reserve planning",
+        "Transparent financial reporting",
+        "Accounts receivable & collections",
+        "Audit-ready documentation",
+      ],
       bgGradient: "from-green-500 to-green-600",
-      shadowColor: "shadow-green-500/30"
+      shadowColor: "shadow-green-500/30",
     },
     {
       icon: Wrench,
-      title: "Property Maintenance",
+      title: "Facilities & Operations Management",
       description:
-        "Proactive maintenance programs to keep your community in pristine condition. From routine inspections to emergency repairs.",
-      features: ["Preventive Maintenance", "Vendor Management", "Quality Control", "Emergency Response"],
+        "Maintenance programs, vendor oversight, and preventive care that protect assets and extend lifecycle value.",
+      features: [
+        "Preventive maintenance planning",
+        "24/7 vendor supervision",
+        "Quality inspections",
+        "Lifecycle asset strategies",
+      ],
       bgGradient: "from-orange-500 to-orange-600",
-      shadowColor: "shadow-orange-500/30"
-    },
-    {
-      icon: FileText,
-      title: "Legal & Compliance",
-      description:
-        "Full compliance with UAE regulations including RERA requirements. Expert handling of all legal documentation and procedures.",
-      features: ["RERA Compliance", "Contract Management", "Insurance Coordination", "Regulatory Reporting"],
-      bgGradient: "from-red-500 to-red-600",
-      shadowColor: "shadow-red-500/30"
-    },
-    {
-      icon: Users,
-      title: "Community Relations",
-      description:
-        "Building strong relationships between residents, board members, and management through effective communication and engagement.",
-      features: ["Resident Portal", "Board Support", "Conflict Resolution", "Community Events"],
-      bgGradient: "from-cyan-500 to-cyan-600",
-      shadowColor: "shadow-cyan-500/30"
+      shadowColor: "shadow-orange-500/30",
     },
     {
       icon: Shield,
-      title: "Security Management",
+      title: "Health, Safety & Compliance",
       description:
-        "Comprehensive security solutions to ensure the safety and well-being of all residents and their properties.",
-      features: ["Access Control", "CCTV Monitoring", "Security Personnel", "Emergency Protocols"],
-      bgGradient: "from-indigo-500 to-indigo-600",
-      shadowColor: "shadow-indigo-500/30"
-    },
-    {
-      icon: Building2,
-      title: "Facility Management",
-      description:
-        "Expert management of all community facilities including pools, gyms, gardens, and common areas.",
-      features: ["Facility Operations", "Equipment Maintenance", "Amenity Management", "Landscaping"],
-      bgGradient: "from-teal-500 to-teal-600",
-      shadowColor: "shadow-teal-500/30"
+        "Regular audits, emergency response planning, and UAE HSE compliance to safeguard residents and assets.",
+      features: [
+        "Routine HSE audits",
+        "Emergency readiness plans",
+        "Regulatory compliance tracking",
+        "Risk mitigation reporting",
+      ],
+      bgGradient: "from-red-500 to-red-600",
+      shadowColor: "shadow-red-500/30",
     },
     {
       icon: MessageSquare,
-      title: "Communication Services",
+      title: "Community Engagement",
       description:
-        "Modern communication tools and strategies to keep residents informed and engaged with their community.",
-      features: ["Digital Notices", "Resident App", "Email Updates", "Social Media"],
-      bgGradient: "from-pink-500 to-pink-600",
-      shadowColor: "shadow-pink-500/30"
+        "Resident-first programs that build trust through events, surveys, and consistent communication channels.",
+      features: [
+        "Resident events & activations",
+        "Feedback & survey programs",
+        "Stakeholder newsletters",
+        "Conflict resolution support",
+      ],
+      bgGradient: "from-indigo-500 to-indigo-600",
+      shadowColor: "shadow-indigo-500/30",
     },
     {
-      icon: TrendingUp,
-      title: "Property Enhancement",
+      icon: Laptop,
+      title: "Technology & Portal Solutions",
       description:
-        "Strategic planning and implementation of improvement projects to enhance property values and resident satisfaction.",
-      features: ["Capital Projects", "Renovation Planning", "Value Engineering", "ROI Analysis"],
-      bgGradient: "from-violet-500 to-violet-600",
-      shadowColor: "shadow-violet-500/30"
+        "Smart platforms for payments, service requests, and real-time community updates accessible anywhere.",
+      features: [
+        "Resident portal & mobile app",
+        "Online payments & billing",
+        "Service request automation",
+        "Real-time announcement center",
+      ],
+      bgGradient: "from-cyan-500 to-cyan-600",
+      shadowColor: "shadow-cyan-500/30",
+    },
+    {
+      icon: Building2,
+      title: "Consultancy for New Developments",
+      description:
+        "Guiding developers with design input, community setup, and RERA documentation for seamless handovers.",
+      features: [
+        "Design & operational review",
+        "Service charge modelling",
+        "Community launch playbooks",
+        "RERA documentation support",
+      ],
+      bgGradient: "from-purple-500 to-purple-600",
+      shadowColor: "shadow-purple-500/30",
     },
   ];
 
@@ -126,7 +151,7 @@ const Services = () => {
               animate={heroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
               transition={{ duration: 0.6 }}
             >
-              Our Services
+              Comprehensive Community Management Solutions
             </motion.h1>
             <motion.p 
               className="text-xl text-muted-foreground"
@@ -134,7 +159,7 @@ const Services = () => {
               animate={heroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
-              Comprehensive community management solutions tailored to your needs
+              At POAM, we deliver end-to-end services designed to keep communities safe, compliant, and sustainable.
             </motion.p>
           </div>
         </div>
