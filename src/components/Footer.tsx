@@ -14,17 +14,17 @@ const Footer = () => {
               Excellence in owners association management services across UAE. Building better communities together.
             </p>
             <div className="flex space-x-4">
-              <a href="#" className="hover:text-secondary transition-colors">
-                <Facebook size={20} />
+              <a href="#" className="w-10 h-10 bg-primary-foreground/10 hover:bg-primary-foreground/20 rounded-lg flex items-center justify-center transition-colors group">
+                <Facebook size={20} className="text-primary-foreground group-hover:text-secondary transition-colors" />
               </a>
-              <a href="#" className="hover:text-secondary transition-colors">
-                <Twitter size={20} />
+              <a href="#" className="w-10 h-10 bg-primary-foreground/10 hover:bg-primary-foreground/20 rounded-lg flex items-center justify-center transition-colors group">
+                <Twitter size={20} className="text-primary-foreground group-hover:text-secondary transition-colors" />
               </a>
-              <a href="#" className="hover:text-secondary transition-colors">
-                <Linkedin size={20} />
+              <a href="#" className="w-10 h-10 bg-primary-foreground/10 hover:bg-primary-foreground/20 rounded-lg flex items-center justify-center transition-colors group">
+                <Linkedin size={20} className="text-primary-foreground group-hover:text-secondary transition-colors" />
               </a>
-              <a href="#" className="hover:text-secondary transition-colors">
-                <Instagram size={20} />
+              <a href="#" className="w-10 h-10 bg-primary-foreground/10 hover:bg-primary-foreground/20 rounded-lg flex items-center justify-center transition-colors group">
+                <Instagram size={20} className="text-primary-foreground group-hover:text-secondary transition-colors" />
               </a>
             </div>
           </div>
@@ -72,15 +72,21 @@ const Footer = () => {
             <h3 className="text-lg font-heading font-semibold">Contact Us</h3>
             <ul className="space-y-3">
               <li className="flex items-start space-x-3">
-                <MapPin size={18} className="mt-1 flex-shrink-0" />
+                <div className="w-8 h-8 bg-primary-foreground/10 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <MapPin size={16} className="text-primary-foreground" />
+                </div>
                 <span className="text-sm">Dubai, United Arab Emirates</span>
               </li>
               <li className="flex items-center space-x-3">
-                <Phone size={18} className="flex-shrink-0" />
+                <div className="w-8 h-8 bg-primary-foreground/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <Phone size={16} className="text-primary-foreground" />
+                </div>
                 <span className="text-sm">+971 XX XXX XXXX</span>
               </li>
               <li className="flex items-center space-x-3">
-                <Mail size={18} className="flex-shrink-0" />
+                <div className="w-8 h-8 bg-primary-foreground/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <Mail size={16} className="text-primary-foreground" />
+                </div>
                 <span className="text-sm">info@pristine.ae</span>
               </li>
             </ul>
