@@ -1,0 +1,188 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 210 30% 15%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 210 30% 15%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 210 30% 15%;
+
+    --primary: 212 50% 28%;
+    --primary-foreground: 0 0% 100%;
+    --primary-hover: 212 50% 35%;
+    
+    --secondary: 200 100% 68%;
+    --secondary-foreground: 0 0% 100%;
+    --secondary-hover: 200 100% 75%;
+
+    --muted: 210 20% 96%;
+    --muted-foreground: 210 15% 45%;
+
+    --accent: 210 20% 96%;
+    --accent-foreground: 212 50% 28%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 210 20% 90%;
+    --input: 210 20% 90%;
+    --ring: 212 50% 28%;
+
+    --radius: 0.75rem;
+
+    --gradient-primary: linear-gradient(135deg, hsl(212 50% 28%), hsl(200 100% 68%));
+    --gradient-hero: linear-gradient(135deg, hsl(212 50% 28% / 0.95), hsl(200 100% 68% / 0.85));
+    --gradient-subtle: linear-gradient(180deg, hsl(210 20% 98%), hsl(0 0% 100%));
+    
+    --shadow-soft: 0 4px 20px -2px hsl(212 50% 28% / 0.08);
+    --shadow-medium: 0 10px 40px -5px hsl(212 50% 28% / 0.15);
+    --shadow-glow: 0 0 40px hsl(200 100% 68% / 0.3);
+
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 210 30% 20%;
+    --sidebar-primary: 212 50% 28%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 210 20% 96%;
+    --sidebar-accent-foreground: 212 50% 28%;
+    --sidebar-border: 210 20% 90%;
+    --sidebar-ring: 200 100% 68%;
+  }
+
+  .dark {
+    --background: 210 30% 8%;
+    --foreground: 0 0% 98%;
+
+    --card: 210 30% 12%;
+    --card-foreground: 0 0% 98%;
+
+    --popover: 210 30% 12%;
+    --popover-foreground: 0 0% 98%;
+
+    --primary: 200 100% 68%;
+    --primary-foreground: 210 30% 8%;
+    --primary-hover: 200 100% 75%;
+
+    --secondary: 212 50% 28%;
+    --secondary-foreground: 0 0% 100%;
+    --secondary-hover: 212 50% 35%;
+
+    --muted: 210 30% 15%;
+    --muted-foreground: 210 15% 60%;
+
+    --accent: 210 30% 15%;
+    --accent-foreground: 0 0% 98%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 210 30% 20%;
+    --input: 210 30% 20%;
+    --ring: 200 100% 68%;
+    
+    --sidebar-background: 210 30% 10%;
+    --sidebar-foreground: 0 0% 95%;
+    --sidebar-primary: 200 100% 68%;
+    --sidebar-primary-foreground: 210 30% 8%;
+    --sidebar-accent: 210 30% 15%;
+    --sidebar-accent-foreground: 0 0% 95%;
+    --sidebar-border: 210 30% 20%;
+    --sidebar-ring: 200 100% 68%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-body;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading;
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    @apply bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent;
+  }
+
+  .hover-lift {
+    @apply transition-all duration-300 hover:-translate-y-1 hover:shadow-lg;
+  }
+
+  .hover-scale {
+    @apply transition-transform duration-300 hover:scale-105;
+  }
+
+  .fade-in {
+    animation: fadeIn 0.6s ease-out forwards;
+  }
+
+  .slide-up {
+    animation: slideUp 0.8s ease-out forwards;
+  }
+
+  .floating {
+    animation: floating 3s ease-in-out infinite;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(40px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes floating {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  @keyframes pulse-glow {
+    0%, 100% {
+      box-shadow: 0 0 20px hsl(var(--secondary) / 0.3);
+    }
+    50% {
+      box-shadow: 0 0 40px hsl(var(--secondary) / 0.6);
+    }
+  }
+}
