@@ -1,10 +1,14 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { ArrowRight, Building2, Users, Shield, TrendingUp, ChevronDown } from "lucide-react";
+import { ArrowRight, ChevronDown } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { useCountUp } from "@/hooks/useCountUp";
 import heroImage from "@/assets/hero-cityscape.jpg";
+import community1Image from "@/assets/community-1.jpg";
+import community2Image from "@/assets/community-2.jpg";
+import community3Image from "@/assets/community-3.jpg";
+import teamImage from "@/assets/about-team.jpg";
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
@@ -187,39 +191,31 @@ const Home = () => {
           </motion.div>
 
            <motion.div 
-             className="grid md:grid-cols-2 lg:grid-cols-4 gap-8"
+             className="grid md:grid-cols-2 lg:grid-cols-4 gap-6"
              variants={staggerContainer}
              initial="hidden"
              animate={featuresInView ? "visible" : "hidden"}
            >
              {[
                { 
-                 icon: Building2, 
+                 image: teamImage,
                  title: "Expert Management", 
-                 desc: "Professional oversight of all community operations",
-                 bgGradient: "from-blue-500 to-blue-600",
-                 shadowColor: "shadow-blue-500/30"
+                 desc: "Professional oversight of all community operations"
                },
                { 
-                 icon: Users, 
+                 image: community1Image,
                  title: "Community Focus", 
-                 desc: "Building strong relationships with residents",
-                 bgGradient: "from-emerald-500 to-emerald-600",
-                 shadowColor: "shadow-emerald-500/30"
+                 desc: "Building strong relationships with residents"
                },
                { 
-                 icon: Shield, 
+                 image: community2Image,
                  title: "Legal Compliance", 
-                 desc: "Full adherence to UAE regulations",
-                 bgGradient: "from-amber-500 to-amber-600",
-                 shadowColor: "shadow-amber-500/30"
+                 desc: "Full adherence to UAE regulations"
                },
                { 
-                 icon: TrendingUp, 
+                 image: community3Image,
                  title: "Value Enhancement", 
-                 desc: "Maximizing property values through excellence",
-                 bgGradient: "from-purple-500 to-purple-600",
-                 shadowColor: "shadow-purple-500/30"
+                 desc: "Maximizing property values through excellence"
                },
              ].map((feature, index) => (
                <motion.div
@@ -227,25 +223,30 @@ const Home = () => {
                  variants={fadeInUp}
                  whileHover={{ y: -8, transition: { duration: 0.2 } }}
                >
-                 <Card className="p-6 hover-lift border-border/50 h-full group relative overflow-hidden">
-                   <motion.div
-                     initial={{ opacity: 0 }}
-                     animate={featuresInView ? { opacity: 1 } : { opacity: 0 }}
-                     transition={{ delay: index * 0.1 + 0.3, duration: 0.5 }}
-                     className="relative mb-4"
-                   >
-                     {/* Icon container with unique styling */}
-                     <div className={`relative w-16 h-16 bg-gradient-to-br ${feature.bgGradient} rounded-2xl flex items-center justify-center ${feature.shadowColor} shadow-lg`}>
-                       {/* Subtle border */}
-                       <div className="absolute inset-0 rounded-2xl border border-white/20" />
-                       
-                       {/* Icon */}
-                       <feature.icon className="w-8 h-8 text-white relative z-10 drop-shadow-sm" strokeWidth={2.5} />
-                     </div>
-                   </motion.div>
+                 <Card className="group relative overflow-hidden h-full border-border/50 hover-lift">
+                   {/* Image Container */}
+                   <div className="relative h-56 overflow-hidden bg-muted">
+                     <motion.img
+                       src={feature.image}
+                       alt={feature.title}
+                       className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                       initial={{ opacity: 0, scale: 1.05 }}
+                       animate={featuresInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 1.05 }}
+                       transition={{ delay: index * 0.1 + 0.3, duration: 0.6 }}
+                     />
+                     {/* Subtle overlay on hover */}
+                     <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300" />
+                   </div>
                    
-                   <h3 className="text-xl font-heading font-semibold mb-2 group-hover:text-primary transition-colors duration-300">{feature.title}</h3>
-                   <p className="text-muted-foreground leading-relaxed">{feature.desc}</p>
+                   {/* Content */}
+                   <div className="p-6">
+                     <h3 className="text-xl font-heading font-semibold mb-2 group-hover:text-primary transition-colors duration-300">
+                       {feature.title}
+                     </h3>
+                     <p className="text-muted-foreground leading-relaxed text-sm">
+                       {feature.desc}
+                     </p>
+                   </div>
                  </Card>
                </motion.div>
              ))}

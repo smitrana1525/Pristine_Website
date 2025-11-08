@@ -171,7 +171,7 @@ const Navigation = () => {
                   </DropdownMenuItem>
                 </Link>
                 <div className="border-t border-border/50 my-2" />
-                <div className="max-h-[400px] overflow-y-auto">
+                <div className="max-h-[400px] overflow-y-auto scrollbar-hide">
                   {services.map((service, index) => (
                     <DropdownMenuItem key={index} asChild>
                       <Link 

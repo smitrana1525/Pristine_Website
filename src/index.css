@@ -185,4 +185,13 @@ All colors MUST be HSL.
       box-shadow: 0 0 40px hsl(var(--secondary) / 0.6);
     }
   }
+
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
 }

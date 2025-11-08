@@ -39,155 +39,245 @@ const Contact = () => {
   };
 
   return (
-    <div className="pt-20">
+    <div className="pt-20 min-h-screen bg-background">
       {/* Hero Section */}
-      <section ref={heroRef} className="py-20 bg-gradient-to-br from-primary/10 to-secondary/10">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center">
-            <motion.h1 
-              className="text-5xl md:text-6xl font-heading font-bold mb-6"
-              initial={{ opacity: 0, y: 30 }}
-              animate={heroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-              transition={{ duration: 0.6 }}
+      <section ref={heroRef} className="relative min-h-[80vh] flex items-center overflow-hidden">
+        <div className="absolute inset-0 bg-background" />
+        <div className="absolute left-0 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-border to-transparent" />
+        
+        <div className="container mx-auto px-6 sm:px-8 lg:px-12 relative z-10 w-full">
+          <div className="max-w-[1400px] mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              animate={heroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
+              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+              className="max-w-4xl"
             >
-              Get in Touch
-            </motion.h1>
-            <motion.p 
-              className="text-xl text-muted-foreground"
-              initial={{ opacity: 0, y: 20 }}
-              animate={heroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-            >
-              Let's discuss how we can help transform your community
-            </motion.p>
+              <div className="flex items-center gap-4 text-sm font-medium tracking-[0.2em] uppercase text-muted-foreground mb-6">
+                <span className="w-12 h-px bg-border" />
+                <span>Contact Us</span>
+              </div>
+              
+              <h1 className="text-6xl sm:text-7xl lg:text-8xl font-heading font-bold leading-[0.95] tracking-tight mb-8">
+                <motion.span
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={heroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+                  transition={{ delay: 0.2, duration: 0.8 }}
+                  className="block"
+                >
+                  Let's Start
+                </motion.span>
+                <motion.span
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={heroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+                  transition={{ delay: 0.3, duration: 0.8 }}
+                  className="block text-primary"
+                >
+                  a Conversation
+                </motion.span>
+              </h1>
+
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={heroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                transition={{ delay: 0.4, duration: 0.8 }}
+                className="text-xl sm:text-2xl text-muted-foreground leading-relaxed max-w-3xl"
+              >
+                Let's discuss how we can help transform your community. Our team is ready to assist you.
+              </motion.p>
+            </motion.div>
           </div>
         </div>
       </section>
 
       {/* Contact Section */}
-      <section className="py-20">
-        <div className="container mx-auto px-4">
-          <div className="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
-            {/* Contact Info */}
-            <motion.div 
-              ref={contactInfoRef}
-              className="space-y-8"
-              initial={{ opacity: 0, x: -50 }}
-              animate={contactInfoInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
-              transition={{ duration: 0.6 }}
-            >
-              <div>
-                <h2 className="text-3xl font-heading font-bold mb-6">Contact Information</h2>
-                <p className="text-muted-foreground mb-8">
-                  Reach out to us through any of the following channels. Our team is ready to assist you.
-                </p>
-              </div>
-
+      <section className="py-32 lg:py-40 border-t border-border">
+        <div className="container mx-auto px-6 sm:px-8 lg:px-12">
+          <div className="max-w-[1400px] mx-auto">
+            <div className="grid lg:grid-cols-2 gap-16 lg:gap-24">
+              {/* Contact Info */}
               <motion.div 
-                className="space-y-6"
-                variants={staggerContainer}
-                initial="hidden"
-                animate={contactInfoInView ? "visible" : "hidden"}
+                ref={contactInfoRef}
+                initial={{ opacity: 0, x: -60 }}
+                animate={contactInfoInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -60 }}
+                transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                className="space-y-12"
               >
-                {[
-                  { icon: MapPin, title: "Office Location", content: "Dubai, United Arab Emirates\nBusiness Bay Area", bgColor: "bg-gradient-to-br from-primary to-primary-hover" },
-                  { icon: Phone, title: "Phone", content: "+971 XX XXX XXXX\n+971 XX XXX XXXX (Emergency)", bgColor: "bg-gradient-to-br from-secondary to-secondary-hover" },
-                  { icon: Mail, title: "Email", content: "info@pristine.ae\nsupport@pristine.ae", bgColor: "bg-gradient-to-br from-primary to-primary-hover" },
-                  { icon: Clock, title: "Business Hours", content: "Saturday - Thursday: 8:00 AM - 6:00 PM\nFriday: Closed\nEmergency Support: 24/7", bgColor: "bg-gradient-to-br from-secondary to-secondary-hover" },
-                ].map((item, index) => (
-                  <motion.div key={index} variants={fadeInUp} whileHover={{ y: -5, transition: { duration: 0.2 } }}>
-                    <Card className="p-6 flex items-start space-x-4 hover-lift">
-                      <div className={`w-12 h-12 ${item.bgColor} rounded-lg flex items-center justify-center flex-shrink-0`}>
-                        <item.icon className="w-6 h-6 text-primary-foreground" />
+                <div>
+                  <div className="flex items-center gap-4 text-sm font-medium tracking-[0.2em] uppercase text-muted-foreground mb-6">
+                    <span className="w-12 h-px bg-border" />
+                    <span>Get in Touch</span>
+                  </div>
+                  <h2 className="text-5xl sm:text-6xl lg:text-7xl font-heading font-bold leading-[0.95] tracking-tight mb-6">
+                    Contact Information
+                  </h2>
+                  <p className="text-lg sm:text-xl text-muted-foreground leading-relaxed">
+                    Reach out to us through any of the following channels. Our team is ready to assist you.
+                  </p>
+                </div>
+
+                <div className="space-y-8">
+                  {[
+                    { icon: MapPin, title: "Office Location", content: "Dubai, United Arab Emirates\nBusiness Bay Area" },
+                    { icon: Phone, title: "Phone", content: "+971 XX XXX XXXX\n+971 XX XXX XXXX (Emergency)" },
+                    { icon: Mail, title: "Email", content: "info@pristine.ae\nsupport@pristine.ae" },
+                    { icon: Clock, title: "Business Hours", content: "Saturday - Thursday: 8:00 AM - 6:00 PM\nFriday: Closed\nEmergency Support: 24/7" },
+                  ].map((item, index) => (
+                    <motion.div
+                      key={index}
+                      initial={{ opacity: 0, y: 30 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true, margin: "-50px" }}
+                      transition={{ duration: 0.6, delay: index * 0.1 }}
+                      className="group"
+                    >
+                      <div className="flex gap-6">
+                        <div className="flex-shrink-0 pt-1">
+                          <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+                            <item.icon className="w-7 h-7 text-primary" strokeWidth={2} />
+                          </div>
+                        </div>
+                        <div className="flex-1 space-y-1">
+                          <h3 className="text-xl font-heading font-bold mb-2">{item.title}</h3>
+                          <p className="text-muted-foreground leading-relaxed whitespace-pre-line">
+                            {item.content}
+                          </p>
+                        </div>
                       </div>
-                      <div>
-                        <h3 className="font-semibold mb-1">{item.title}</h3>
-                        <p className="text-muted-foreground whitespace-pre-line">{item.content}</p>
-                      </div>
-                    </Card>
-                  </motion.div>
-                ))}
+                    </motion.div>
+                  ))}
+                </div>
               </motion.div>
-            </motion.div>
 
-            {/* Contact Form */}
-            <motion.div 
-              ref={formRef.ref}
-              initial={{ opacity: 0, x: 50 }}
-              animate={formRef.isVisible ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }}
-              transition={{ duration: 0.6 }}
-            >
-              <Card className="p-8">
-                <h2 className="text-2xl font-heading font-bold mb-6">Send Us a Message</h2>
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  <div className="grid sm:grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-sm font-medium mb-2">First Name</label>
-                      <Input placeholder="John" required />
+              {/* Contact Form */}
+              <motion.div 
+                ref={formRef.ref}
+                initial={{ opacity: 0, x: 60 }}
+                animate={formRef.isVisible ? { opacity: 1, x: 0 } : { opacity: 0, x: 60 }}
+                transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+              >
+                <div className="space-y-8">
+                  <div>
+                    <div className="flex items-center gap-4 text-sm font-medium tracking-[0.2em] uppercase text-muted-foreground mb-6">
+                      <span className="w-12 h-px bg-border" />
+                      <span>Send Message</span>
                     </div>
-                    <div>
-                      <label className="block text-sm font-medium mb-2">Last Name</label>
-                      <Input placeholder="Doe" required />
+                    <h2 className="text-5xl sm:text-6xl lg:text-7xl font-heading font-bold leading-[0.95] tracking-tight">
+                      Get in Touch
+                    </h2>
+                  </div>
+
+                  <form onSubmit={handleSubmit} className="space-y-6">
+                    <div className="grid sm:grid-cols-2 gap-6">
+                      <div className="space-y-2">
+                        <label className="block text-sm font-medium text-foreground">First Name</label>
+                        <Input 
+                          placeholder="John" 
+                          required 
+                          className="h-12 rounded-xl border-border focus:ring-2 focus:ring-primary"
+                        />
+                      </div>
+                      <div className="space-y-2">
+                        <label className="block text-sm font-medium text-foreground">Last Name</label>
+                        <Input 
+                          placeholder="Doe" 
+                          required 
+                          className="h-12 rounded-xl border-border focus:ring-2 focus:ring-primary"
+                        />
+                      </div>
                     </div>
-                  </div>
 
-                  <div>
-                    <label className="block text-sm font-medium mb-2">Email</label>
-                    <Input type="email" placeholder="john@example.com" required />
-                  </div>
+                    <div className="space-y-2">
+                      <label className="block text-sm font-medium text-foreground">Email</label>
+                      <Input 
+                        type="email" 
+                        placeholder="john@example.com" 
+                        required 
+                        className="h-12 rounded-xl border-border focus:ring-2 focus:ring-primary"
+                      />
+                    </div>
 
-                  <div>
-                    <label className="block text-sm font-medium mb-2">Phone</label>
-                    <Input type="tel" placeholder="+971 XX XXX XXXX" required />
-                  </div>
+                    <div className="space-y-2">
+                      <label className="block text-sm font-medium text-foreground">Phone</label>
+                      <Input 
+                        type="tel" 
+                        placeholder="+971 XX XXX XXXX" 
+                        required 
+                        className="h-12 rounded-xl border-border focus:ring-2 focus:ring-primary"
+                      />
+                    </div>
 
-                  <div>
-                    <label className="block text-sm font-medium mb-2">Subject</label>
-                    <Input placeholder="How can we help you?" required />
-                  </div>
+                    <div className="space-y-2">
+                      <label className="block text-sm font-medium text-foreground">Subject</label>
+                      <Input 
+                        placeholder="How can we help you?" 
+                        required 
+                        className="h-12 rounded-xl border-border focus:ring-2 focus:ring-primary"
+                      />
+                    </div>
 
-                  <div>
-                    <label className="block text-sm font-medium mb-2">Message</label>
-                    <Textarea
-                      placeholder="Tell us more about your community management needs..."
-                      rows={5}
-                      required
-                    />
-                  </div>
+                    <div className="space-y-2">
+                      <label className="block text-sm font-medium text-foreground">Message</label>
+                      <Textarea
+                        placeholder="Tell us more about your community management needs..."
+                        rows={6}
+                        required
+                        className="rounded-xl border-border focus:ring-2 focus:ring-primary resize-none"
+                      />
+                    </div>
 
-                  <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-                    <Button type="submit" size="lg" className="w-full">
-                      Send Message
-                    </Button>
-                  </motion.div>
-                </form>
-              </Card>
-            </motion.div>
+                    <motion.div 
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                      className="pt-4"
+                    >
+                      <Button type="submit" size="lg" className="w-full text-lg px-8 py-6 h-auto rounded-xl">
+                        Send Message
+                      </Button>
+                    </motion.div>
+                  </form>
+                </div>
+              </motion.div>
+            </div>
           </div>
         </div>
       </section>
 
       {/* Map Section */}
-      <section ref={mapRef} className="py-20 bg-gradient-to-br from-muted to-background">
-        <div className="container mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={mapInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-            transition={{ duration: 0.6 }}
-          >
-            <Card className="h-96 overflow-hidden">
-              <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d462565.91384445744!2d54.89782859999999!3d25.0762095!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f43496ad9c645%3A0xbde66e5084295162!2sDubai%20-%20United%20Arab%20Emirates!5e0!3m2!1sen!2sus!4v1234567890123!5m2!1sen!2sus"
-                width="100%"
-                height="100%"
-                style={{ border: 0 }}
-                allowFullScreen
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                title="Pristine Location Map"
-              />
-            </Card>
-          </motion.div>
+      <section ref={mapRef} className="py-32 lg:py-40 border-t border-border">
+        <div className="container mx-auto px-6 sm:px-8 lg:px-12">
+          <div className="max-w-[1400px] mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              animate={mapInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
+              transition={{ duration: 0.8 }}
+              className="space-y-8"
+            >
+              <div>
+                <div className="flex items-center gap-4 text-sm font-medium tracking-[0.2em] uppercase text-muted-foreground mb-6">
+                  <span className="w-12 h-px bg-border" />
+                  <span>Find Us</span>
+                </div>
+                <h2 className="text-5xl sm:text-6xl lg:text-7xl font-heading font-bold leading-[0.95] tracking-tight">
+                  Our Location
+                </h2>
+              </div>
+
+              <div className="relative h-[500px] lg:h-[600px] rounded-3xl overflow-hidden border border-border">
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d462565.91384445744!2d54.89782859999999!3d25.0762095!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f43496ad9c645%3A0xbde66e5084295162!2sDubai%20-%20United%20Arab%20Emirates!5e0!3m2!1sen!2sus!4v1234567890123!5m2!1sen!2sus"
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0 }}
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  title="Pristine Location Map"
+                  className="absolute inset-0"
+                />
+              </div>
+            </motion.div>
+          </div>
         </div>
       </section>
     </div>

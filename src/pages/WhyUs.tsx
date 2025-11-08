@@ -90,98 +90,127 @@ const WhyUs = () => {
   ];
 
   return (
-    <div className="pt-20">
+    <div className="pt-20 min-h-screen bg-background">
       {/* Hero Section */}
-      <section ref={heroRef} className="py-20 bg-gradient-to-br from-primary/10 to-secondary/10">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center">
-            <motion.h1 
-              className="text-5xl md:text-6xl font-heading font-bold mb-6"
-              initial={{ opacity: 0, y: 30 }}
-              animate={heroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-              transition={{ duration: 0.6 }}
+      <section ref={heroRef} className="relative min-h-[85vh] flex items-center overflow-hidden">
+        <div className="absolute inset-0 bg-background" />
+        <div className="absolute left-0 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-border to-transparent" />
+        
+        <div className="container mx-auto px-6 sm:px-8 lg:px-12 relative z-10 w-full">
+          <div className="max-w-[1400px] mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              animate={heroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
+              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+              className="max-w-4xl"
             >
-              Why Choose Pristine?
-            </motion.h1>
-            <motion.p 
-              className="text-xl text-muted-foreground"
-              initial={{ opacity: 0, y: 20 }}
-              animate={heroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-            >
-              Experience the difference that true excellence makes
-            </motion.p>
+              <div className="flex items-center gap-4 text-sm font-medium tracking-[0.2em] uppercase text-muted-foreground mb-6">
+                <span className="w-12 h-px bg-border" />
+                <span>Why Choose Us</span>
+              </div>
+              
+              <h1 className="text-6xl sm:text-7xl lg:text-8xl font-heading font-bold leading-[0.95] tracking-tight mb-8">
+                <motion.span
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={heroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+                  transition={{ delay: 0.2, duration: 0.8 }}
+                  className="block"
+                >
+                  The Difference
+                </motion.span>
+                <motion.span
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={heroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+                  transition={{ delay: 0.3, duration: 0.8 }}
+                  className="block text-primary"
+                >
+                  of Excellence
+                </motion.span>
+              </h1>
+
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={heroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                transition={{ delay: 0.4, duration: 0.8 }}
+                className="text-xl sm:text-2xl text-muted-foreground leading-relaxed max-w-3xl"
+              >
+                Experience what sets Pristine apart in community management. Two decades of proven expertise, 
+                unwavering commitment, and results that speak for themselves.
+              </motion.p>
+            </motion.div>
           </div>
         </div>
       </section>
 
-      {/* Differentiators Grid */}
-      <section ref={featuresRef.ref} className="py-20">
-        <div className="container mx-auto px-4">
-          <motion.div 
-            className="text-center mb-16"
-            initial={{ opacity: 0, y: 30 }}
-            animate={featuresRef.isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-            transition={{ duration: 0.6 }}
-          >
-            <h2 className="text-4xl font-heading font-bold mb-4">What Sets Us Apart</h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Discover the unique advantages of partnering with Pristine
-            </p>
-          </motion.div>
+      {/* Differentiators Section */}
+      <section ref={featuresRef.ref} className="py-32 lg:py-40 border-t border-border">
+        <div className="container mx-auto px-6 sm:px-8 lg:px-12">
+          <div className="max-w-[1400px] mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+              className="mb-20"
+            >
+              <div className="flex items-center gap-4 text-sm font-medium tracking-[0.2em] uppercase text-muted-foreground mb-6">
+                <span className="w-12 h-px bg-border" />
+                <span>What Sets Us Apart</span>
+              </div>
+              <h2 className="text-5xl sm:text-6xl lg:text-7xl font-heading font-bold leading-[0.95] tracking-tight max-w-3xl">
+                Our Differentiators
+              </h2>
+            </motion.div>
 
-          <motion.div 
-            className="grid md:grid-cols-2 lg:grid-cols-4 gap-6"
-            variants={staggerContainer}
-            initial="hidden"
-            animate={featuresRef.isVisible ? "visible" : "hidden"}
-          >
-            {differentiators.map((item, index) => (
-              <motion.div
-                key={index}
-                variants={fadeInUp}
-                whileHover={{ y: -8, transition: { duration: 0.2 } }}
-              >
-                <Card className="p-6 text-center hover-lift h-full">
-                  <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={featuresRef.isVisible ? { opacity: 1 } : { opacity: 0 }}
-                    transition={{ delay: index * 0.1 + 0.3, duration: 0.5 }}
-                    className="relative mb-4"
-                  >
-                    <div className={`relative w-16 h-16 bg-gradient-to-br ${item.bgGradient} rounded-2xl flex items-center justify-center mx-auto ${item.shadowColor} shadow-lg`}>
-                      <div className="absolute inset-0 rounded-2xl border border-white/20" />
-                      <item.icon className="w-8 h-8 text-white relative z-10 drop-shadow-sm" strokeWidth={2.5} />
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
+              {differentiators.map((item, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 40 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-50px" }}
+                  transition={{ duration: 0.6, delay: index * 0.1 }}
+                  className="group"
+                >
+                  <div className="space-y-4">
+                    <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+                      <item.icon className="w-7 h-7 text-primary" strokeWidth={2} />
                     </div>
-                  </motion.div>
-                  <h3 className="text-lg font-heading font-semibold mb-2">{item.title}</h3>
-                  <p className="text-sm text-muted-foreground">{item.description}</p>
-                </Card>
-              </motion.div>
-            ))}
-          </motion.div>
+                    <h3 className="text-xl font-heading font-bold leading-tight">
+                      {item.title}
+                    </h3>
+                    <p className="text-muted-foreground leading-relaxed">
+                      {item.description}
+                    </p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
 
       {/* Benefits Section */}
-      <section ref={benefitsRef.ref} className="py-20 bg-gradient-to-br from-muted to-background">
-        <div className="container mx-auto px-4">
-          <motion.div 
-            className="max-w-4xl mx-auto"
-            initial={{ opacity: 0, y: 30 }}
-            animate={benefitsRef.isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-            transition={{ duration: 0.6 }}
-          >
-            <h2 className="text-4xl font-heading font-bold text-center mb-16">
-              The Pristine Advantage
-            </h2>
-
-            <motion.div 
-              className="space-y-6"
-              variants={staggerContainer}
-              initial="hidden"
-              animate={benefitsRef.isVisible ? "visible" : "hidden"}
+      <section ref={benefitsRef.ref} className="py-32 lg:py-40 border-t border-border">
+        <div className="container mx-auto px-6 sm:px-8 lg:px-12">
+          <div className="max-w-[1400px] mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+              className="mb-20"
             >
+              <div className="flex items-center gap-4 text-sm font-medium tracking-[0.2em] uppercase text-muted-foreground mb-6">
+                <span className="w-12 h-px bg-border" />
+                <span>The Advantage</span>
+              </div>
+              <h2 className="text-5xl sm:text-6xl lg:text-7xl font-heading font-bold leading-[0.95] tracking-tight max-w-3xl">
+                Why It Matters
+              </h2>
+            </motion.div>
+
+            <div className="space-y-12 lg:space-y-16">
               {[
                 {
                   title: "Enhanced Property Values",
@@ -216,52 +245,65 @@ const WhyUs = () => {
               ].map((benefit, index) => (
                 <motion.div
                   key={index}
-                  variants={fadeInUp}
-                  whileHover={{ x: 10, transition: { duration: 0.2 } }}
+                  initial={{ opacity: 0, y: 40 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-50px" }}
+                  transition={{ duration: 0.6, delay: index * 0.1 }}
+                  className="flex gap-8 lg:gap-12 group"
                 >
-                  <Card className="p-6 flex items-start space-x-4">
-                    <motion.div
-                      initial={{ scale: 0 }}
-                      animate={benefitsRef.isVisible ? { scale: 1 } : { scale: 0 }}
-                      transition={{ delay: index * 0.1, type: "spring", stiffness: 200 }}
-                      className="w-10 h-10 bg-gradient-to-br from-secondary to-secondary-hover rounded-lg flex items-center justify-center flex-shrink-0 mt-1"
-                    >
-                      <CheckCircle2 className="w-5 h-5 text-secondary-foreground" />
-                    </motion.div>
-                    <div>
-                      <h3 className="text-xl font-heading font-semibold mb-2">{benefit.title}</h3>
-                      <p className="text-muted-foreground">{benefit.description}</p>
+                  <div className="flex-shrink-0 pt-2">
+                    <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+                      <CheckCircle2 className="w-6 h-6 text-primary" strokeWidth={2} />
                     </div>
-                  </Card>
+                  </div>
+                  <div className="flex-1 space-y-3">
+                    <h3 className="text-2xl sm:text-3xl font-heading font-bold">
+                      {benefit.title}
+                    </h3>
+                    <p className="text-lg sm:text-xl text-muted-foreground leading-relaxed max-w-3xl">
+                      {benefit.description}
+                    </p>
+                  </div>
                 </motion.div>
               ))}
-            </motion.div>
-          </motion.div>
+            </div>
+          </div>
         </div>
       </section>
 
       {/* CTA Section */}
-      <section ref={ctaRef} className="py-20">
-        <div className="container mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={ctaInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-            transition={{ duration: 0.6 }}
-          >
-            <Card className="max-w-4xl mx-auto p-12 text-center bg-gradient-to-br from-primary/5 to-secondary/5">
-              <h2 className="text-3xl md:text-4xl font-heading font-bold mb-4">
-                Ready to Experience Excellence?
+      <section ref={ctaRef} className="py-32 lg:py-40 border-t border-border">
+        <div className="container mx-auto px-6 sm:px-8 lg:px-12">
+          <div className="max-w-[1400px] mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              animate={ctaInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
+              transition={{ duration: 0.8 }}
+              className="max-w-4xl"
+            >
+              <div className="flex items-center gap-4 text-sm font-medium tracking-[0.2em] uppercase text-muted-foreground mb-6">
+                <span className="w-12 h-px bg-border" />
+                <span>Get Started</span>
+              </div>
+              <h2 className="text-5xl sm:text-6xl lg:text-7xl font-heading font-bold leading-[0.95] tracking-tight mb-8">
+                Ready to Experience
+                <br />
+                <span className="text-primary">Excellence?</span>
               </h2>
-              <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
+              <p className="text-xl sm:text-2xl text-muted-foreground mb-12 leading-relaxed max-w-2xl">
                 Join over 100 communities who trust Pristine for their management needs.
               </p>
-              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                <Button size="lg" asChild>
+              <motion.div
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                className="inline-block"
+              >
+                <Button size="lg" className="text-lg px-10 py-7 h-auto rounded-xl" asChild>
                   <Link to="/contact">Get Started Today</Link>
                 </Button>
               </motion.div>
-            </Card>
-          </motion.div>
+            </motion.div>
+          </div>
         </div>
       </section>
     </div>
