@@ -17,6 +17,11 @@ import { useInView } from "framer-motion";
 import { useRef } from "react";
 import SEO from "@/components/SEO";
 import { seoConfig } from "@/utils/seoData";
+import facilitiesImage from "@/assets/Facilities & Operations Management.png";
+import communityEngagementImage from "@/assets/Community Engagement.png";
+import technologyImage from "@/assets/Technology & Portal Solutions.png";
+import healthSafetyImage from "@/assets/Health, Safety & Compliance.png";
+import consultancyImage from "@/assets/Consultancy for New Developments.png";
 
 const Services = () => {
   const servicesRef = useScrollAnimation();
@@ -66,7 +71,7 @@ const Services = () => {
       ],
     },
     {
-      icon: Wrench,
+      image: facilitiesImage,
       title: "Facilities & Operations Management",
       description:
         "Maintenance programs, vendor oversight, and preventive care that protect assets and extend lifecycle value.",
@@ -76,11 +81,9 @@ const Services = () => {
         "Quality inspections",
         "Lifecycle asset strategies",
       ],
-      bgGradient: "from-orange-500 to-orange-600",
-      shadowColor: "shadow-orange-500/30",
     },
     {
-      icon: Shield,
+      image: healthSafetyImage,
       title: "Health, Safety & Compliance",
       description:
         "Regular audits, emergency response planning, and UAE HSE compliance to safeguard residents and assets.",
@@ -90,11 +93,9 @@ const Services = () => {
         "Regulatory compliance tracking",
         "Risk mitigation reporting",
       ],
-      bgGradient: "from-red-500 to-red-600",
-      shadowColor: "shadow-red-500/30",
     },
     {
-      icon: MessageSquare,
+      image: communityEngagementImage,
       title: "Community Engagement",
       description:
         "Resident-first programs that build trust through events, surveys, and consistent communication channels.",
@@ -104,11 +105,9 @@ const Services = () => {
         "Stakeholder newsletters",
         "Conflict resolution support",
       ],
-      bgGradient: "from-indigo-500 to-indigo-600",
-      shadowColor: "shadow-indigo-500/30",
     },
     {
-      icon: Laptop,
+      image: technologyImage,
       title: "Technology & Portal Solutions",
       description:
         "Smart platforms for payments, service requests, and real-time community updates accessible anywhere.",
@@ -118,11 +117,9 @@ const Services = () => {
         "Service request automation",
         "Real-time announcement center",
       ],
-      bgGradient: "from-cyan-500 to-cyan-600",
-      shadowColor: "shadow-cyan-500/30",
     },
     {
-      icon: Building2,
+      image: consultancyImage,
       title: "Consultancy for New Developments",
       description:
         "Guiding developers with design input, community setup, and RERA documentation for seamless handovers.",
@@ -132,8 +129,6 @@ const Services = () => {
         "Community launch playbooks",
         "RERA documentation support",
       ],
-      bgGradient: "from-purple-500 to-purple-600",
-      shadowColor: "shadow-purple-500/30",
     },
   ];
 
