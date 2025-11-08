@@ -7,6 +7,8 @@ import aboutImage from "@/assets/about-team.jpg";
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
+import SEO from "@/components/SEO";
+import { seoConfig } from "@/utils/seoData";
 
 const About = () => {
   const missionRef = useScrollAnimation();
@@ -35,17 +37,24 @@ const About = () => {
 
   return (
     <div className="pt-20 min-h-screen bg-background">
+      <SEO 
+        title={seoConfig.about.title}
+        description={seoConfig.about.description}
+        keywords={seoConfig.about.keywords}
+        structuredData={seoConfig.about.structuredData}
+        url="https://pristine.ae/about"
+      />
       {/* Hero Section - Editorial Style */}
       <section ref={heroRef} className="relative min-h-[90vh] flex items-center overflow-hidden">
         <div className="absolute inset-0 bg-background" />
         <div className="absolute left-0 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-border to-transparent" />
         
-        <div className="container mx-auto px-6 sm:px-8 lg:px-12 relative z-10 w-full">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 relative z-10 w-full">
           <div className="max-w-[1400px] mx-auto">
-            <div className="grid lg:grid-cols-12 gap-8 lg:gap-16 items-center">
+            <div className="grid lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-16 items-center">
               {/* Left Column - Text */}
               <motion.div
-                className="lg:col-span-7 space-y-8"
+                className="lg:col-span-7 space-y-6 sm:space-y-8"
                 initial={{ opacity: 0, x: -80 }}
                 animate={heroInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -80 }}
                 transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
@@ -55,13 +64,13 @@ const About = () => {
                     initial={{ opacity: 0, y: 20 }}
                     animate={heroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                     transition={{ delay: 0.2, duration: 0.8 }}
-                    className="flex items-center gap-4 text-sm font-medium tracking-[0.2em] uppercase text-muted-foreground"
+                    className="flex items-center gap-3 sm:gap-4 text-xs sm:text-sm font-medium tracking-[0.2em] uppercase text-muted-foreground"
                   >
-                    <span className="w-12 h-px bg-border" />
+                    <span className="w-8 sm:w-12 h-px bg-border" />
                     <span>Established 2004</span>
                   </motion.div>
                   
-                  <h1 className="text-6xl sm:text-7xl lg:text-8xl font-heading font-bold leading-[0.95] tracking-tight">
+                  <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-heading font-bold leading-[0.95] tracking-tight">
                     <motion.span
                       initial={{ opacity: 0, y: 30 }}
                       animate={heroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}

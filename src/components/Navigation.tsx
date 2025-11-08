@@ -81,8 +81,8 @@ const Navigation = () => {
         shouldShowBackground ? "bg-background/95 backdrop-blur-md shadow-md" : "bg-transparent"
       }`}
     >
-      <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-20">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-16 sm:h-20">
           <Link to="/" className="flex items-center space-x-3">
             <img 
               src={logo} 
@@ -160,7 +160,7 @@ const Navigation = () => {
               </DropdownMenuTrigger>
               <DropdownMenuContent 
                 align="start" 
-                className="w-80 bg-background/95 backdrop-blur-md border border-border/50 shadow-2xl rounded-xl p-2 mt-2"
+                className="w-80 max-w-[calc(100vw-2rem)] bg-background/95 backdrop-blur-md border border-border/50 shadow-2xl rounded-xl p-2 mt-2"
               >
                 <Link to="/services" className="block">
                   <DropdownMenuItem className="cursor-pointer font-semibold text-primary hover:bg-primary/10 rounded-lg px-4 py-3 mb-1 transition-colors">

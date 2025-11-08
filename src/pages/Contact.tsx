@@ -8,6 +8,8 @@ import { toast } from "sonner";
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
+import SEO from "@/components/SEO";
+import { seoConfig } from "@/utils/seoData";
 
 const Contact = () => {
   const formRef = useScrollAnimation();
@@ -40,12 +42,19 @@ const Contact = () => {
 
   return (
     <div className="pt-20 min-h-screen bg-background">
+      <SEO 
+        title={seoConfig.contact.title}
+        description={seoConfig.contact.description}
+        keywords={seoConfig.contact.keywords}
+        structuredData={seoConfig.contact.structuredData}
+        url="https://pristine.ae/contact"
+      />
       {/* Hero Section */}
       <section ref={heroRef} className="relative min-h-[80vh] flex items-center overflow-hidden">
         <div className="absolute inset-0 bg-background" />
         <div className="absolute left-0 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-border to-transparent" />
         
-        <div className="container mx-auto px-6 sm:px-8 lg:px-12 relative z-10 w-full">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 relative z-10 w-full">
           <div className="max-w-[1400px] mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 40 }}
@@ -53,12 +62,12 @@ const Contact = () => {
               transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
               className="max-w-4xl"
             >
-              <div className="flex items-center gap-4 text-sm font-medium tracking-[0.2em] uppercase text-muted-foreground mb-6">
-                <span className="w-12 h-px bg-border" />
+              <div className="flex items-center gap-3 sm:gap-4 text-xs sm:text-sm font-medium tracking-[0.2em] uppercase text-muted-foreground mb-4 sm:mb-6">
+                <span className="w-8 sm:w-12 h-px bg-border" />
                 <span>Contact Us</span>
               </div>
               
-              <h1 className="text-6xl sm:text-7xl lg:text-8xl font-heading font-bold leading-[0.95] tracking-tight mb-8">
+              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-heading font-bold leading-[0.95] tracking-tight mb-6 sm:mb-8">
                 <motion.span
                   initial={{ opacity: 0, y: 30 }}
                   animate={heroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
@@ -81,7 +90,7 @@ const Contact = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={heroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                 transition={{ delay: 0.4, duration: 0.8 }}
-                className="text-xl sm:text-2xl text-muted-foreground leading-relaxed max-w-3xl"
+                className="text-base sm:text-lg md:text-xl lg:text-2xl text-muted-foreground leading-relaxed max-w-3xl"
               >
                 Let's discuss how we can help transform your community. Our team is ready to assist you.
               </motion.p>
@@ -91,10 +100,10 @@ const Contact = () => {
       </section>
 
       {/* Contact Section */}
-      <section className="py-32 lg:py-40 border-t border-border">
-        <div className="container mx-auto px-6 sm:px-8 lg:px-12">
+      <section className="py-12 sm:py-16 lg:py-24 xl:py-32 border-t border-border">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 xl:px-12">
           <div className="max-w-[1400px] mx-auto">
-            <div className="grid lg:grid-cols-2 gap-16 lg:gap-24">
+            <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 xl:gap-24">
               {/* Contact Info */}
               <motion.div 
                 ref={contactInfoRef}

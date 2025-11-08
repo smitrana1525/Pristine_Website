@@ -12,6 +12,8 @@ import teamImage from "@/assets/about-team.jpg";
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
+import SEO from "@/components/SEO";
+import { seoConfig } from "@/utils/seoData";
 
 const Home = () => {
   const statsRef = useScrollAnimation();
@@ -75,6 +77,12 @@ const Home = () => {
 
   return (
     <>
+      <SEO 
+        title={seoConfig.home.title}
+        description={seoConfig.home.description}
+        keywords={seoConfig.home.keywords}
+        structuredData={seoConfig.home.structuredData}
+      />
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
         <div
@@ -84,9 +92,9 @@ const Home = () => {
           <div className="absolute inset-0 bg-gradient-to-r from-primary/95 to-primary/70" />
         </div>
 
-        <div className="relative z-10 container mx-auto px-4 py-32 text-center">
+        <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24 lg:py-32 text-center">
           <motion.h1 
-            className="text-5xl md:text-7xl font-heading font-bold text-primary-foreground mb-6"
+            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-heading font-bold text-primary-foreground mb-4 sm:mb-6"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
@@ -102,7 +110,7 @@ const Home = () => {
             </motion.span>
           </motion.h1>
           <motion.p
-            className="text-xl md:text-2xl text-primary-foreground/90 max-w-3xl mx-auto mb-12"
+            className="text-base sm:text-lg md:text-xl lg:text-2xl text-primary-foreground/90 max-w-3xl mx-auto mb-8 sm:mb-12 px-4"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.5, ease: "easeOut" }}
@@ -147,10 +155,10 @@ const Home = () => {
       </section>
 
       {/* Stats Section */}
-      <section ref={statsRef.ref} className="py-20 bg-gradient-to-br from-muted to-background">
-        <div className="container mx-auto px-4">
+      <section ref={statsRef.ref} className="py-12 sm:py-16 lg:py-20 bg-gradient-to-br from-muted to-background">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div 
-            className="grid grid-cols-2 md:grid-cols-4 gap-8"
+            className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 lg:gap-8"
             variants={staggerContainer}
             initial="hidden"
             animate={statsRef.isVisible ? "visible" : "hidden"}
@@ -163,11 +171,11 @@ const Home = () => {
                   className="text-center"
                   variants={scaleIn}
                 >
-                  <div className="text-5xl md:text-6xl font-heading font-bold text-gradient mb-2">
+                  <div className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-heading font-bold text-gradient mb-1 sm:mb-2">
                     {count}
                     {stat.suffix}
                   </div>
-                  <div className="text-sm md:text-base text-muted-foreground">{stat.label}</div>
+                  <div className="text-xs sm:text-sm md:text-base text-muted-foreground leading-tight">{stat.label}</div>
                 </motion.div>
               );
             })}
@@ -176,22 +184,22 @@ const Home = () => {
       </section>
 
       {/* Features Section */}
-      <section ref={featuresRef} className="py-20">
-        <div className="container mx-auto px-4">
+      <section ref={featuresRef} className="py-12 sm:py-16 lg:py-20">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div 
-            className="text-center mb-16"
+            className="text-center mb-8 sm:mb-12 lg:mb-16"
             initial={{ opacity: 0, y: 30 }}
             animate={featuresInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
             transition={{ duration: 0.6 }}
           >
-            <h2 className="text-4xl md:text-5xl font-heading font-bold mb-4">Why Choose Pristine?</h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-heading font-bold mb-3 sm:mb-4">Why Choose Pristine?</h2>
+            <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto px-4">
               Comprehensive community management solutions backed by decades of excellence
             </p>
           </motion.div>
 
            <motion.div 
-             className="grid md:grid-cols-2 lg:grid-cols-4 gap-6"
+             className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6"
              variants={staggerContainer}
              initial="hidden"
              animate={featuresInView ? "visible" : "hidden"}
@@ -225,10 +233,10 @@ const Home = () => {
                >
                  <Card className="group relative overflow-hidden h-full border-border/50 hover-lift">
                    {/* Image Container */}
-                   <div className="relative h-56 overflow-hidden bg-muted">
+                   <div className="relative h-48 sm:h-56 overflow-hidden bg-muted">
                      <motion.img
                        src={feature.image}
-                       alt={feature.title}
+                       alt={`${feature.title} - ${feature.desc} | Pristine Management Services`}
                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                        initial={{ opacity: 0, scale: 1.05 }}
                        animate={featuresInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 1.05 }}
@@ -255,10 +263,10 @@ const Home = () => {
       </section>
 
       {/* Testimonials */}
-      <section ref={testimonialsRef.ref} className="py-20 bg-gradient-to-br from-primary/5 to-secondary/5">
-        <div className="container mx-auto px-4">
+      <section ref={testimonialsRef.ref} className="py-12 sm:py-16 lg:py-20 bg-gradient-to-br from-primary/5 to-secondary/5">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <motion.h2 
-            className="text-4xl md:text-5xl font-heading font-bold text-center mb-16"
+            className="text-3xl sm:text-4xl md:text-5xl font-heading font-bold text-center mb-8 sm:mb-12 lg:mb-16"
             initial={{ opacity: 0, y: 30 }}
             animate={testimonialsRef.isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
             transition={{ duration: 0.6 }}
@@ -267,7 +275,7 @@ const Home = () => {
           </motion.h2>
 
           <motion.div 
-            className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto"
+            className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 max-w-5xl mx-auto"
             variants={staggerContainer}
             initial="hidden"
             animate={testimonialsRef.isVisible ? "visible" : "hidden"}
@@ -278,8 +286,8 @@ const Home = () => {
                 variants={fadeInUp}
                 whileHover={{ scale: 1.02, transition: { duration: 0.2 } }}
               >
-                <Card className="p-8 h-full">
-                  <p className="text-lg mb-6 italic">"{testimonial.text}"</p>
+                <Card className="p-6 sm:p-8 h-full">
+                  <p className="text-base sm:text-lg mb-4 sm:mb-6 italic">"{testimonial.text}"</p>
                   <div>
                     <div className="font-semibold">{testimonial.author}</div>
                     <div className="text-sm text-muted-foreground">{testimonial.role}</div>
@@ -292,10 +300,10 @@ const Home = () => {
       </section>
 
       {/* CTA Section */}
-      <section ref={ctaRef} className="py-20 bg-white text-foreground border-t border-b border-border">
-        <div className="container mx-auto px-4 text-center">
+      <section ref={ctaRef} className="py-12 sm:py-16 lg:py-20 bg-white text-foreground border-t border-b border-border">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.h2 
-            className="text-4xl md:text-5xl font-heading font-bold mb-6 text-primary"
+            className="text-3xl sm:text-4xl md:text-5xl font-heading font-bold mb-4 sm:mb-6 text-primary"
             initial={{ opacity: 0, y: 30 }}
             animate={ctaInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
             transition={{ duration: 0.6 }}
@@ -303,7 +311,7 @@ const Home = () => {
             Ready to Transform Your Community?
           </motion.h2>
           <motion.p 
-            className="text-xl mb-8 max-w-2xl mx-auto text-muted-foreground"
+            className="text-base sm:text-lg md:text-xl mb-6 sm:mb-8 max-w-2xl mx-auto text-muted-foreground px-4"
             initial={{ opacity: 0, y: 20 }}
             animate={ctaInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.6, delay: 0.2 }}

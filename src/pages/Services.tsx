@@ -15,6 +15,8 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
+import SEO from "@/components/SEO";
+import { seoConfig } from "@/utils/seoData";
 
 const Services = () => {
   const servicesRef = useScrollAnimation();
@@ -137,8 +139,15 @@ const Services = () => {
 
   return (
     <div className="pt-20 min-h-screen bg-background">
+      <SEO 
+        title={seoConfig.services.title}
+        description={seoConfig.services.description}
+        keywords={seoConfig.services.keywords}
+        structuredData={seoConfig.services.structuredData}
+        url="https://pristine.ae/services"
+      />
       {/* Hero Section */}
-      <section ref={heroRef} className="relative py-32 overflow-hidden">
+      <section ref={heroRef} className="relative py-16 sm:py-24 lg:py-32 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-primary/5 via-background to-background" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(120,119,198,0.1),transparent_50%)]" />
         
@@ -148,21 +157,21 @@ const Services = () => {
               initial={{ opacity: 0, y: 40 }}
               animate={heroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
               transition={{ duration: 0.8 }}
-              className="text-center mb-16"
+              className="text-center mb-8 sm:mb-12 lg:mb-16"
             >
-              <div className="inline-block mb-6">
-                <span className="text-sm font-semibold tracking-wider uppercase text-primary px-4 py-2 bg-primary/10 rounded-full">
+              <div className="inline-block mb-4 sm:mb-6">
+                <span className="text-xs sm:text-sm font-semibold tracking-wider uppercase text-primary px-3 sm:px-4 py-1.5 sm:py-2 bg-primary/10 rounded-full">
                   Our Services
                 </span>
               </div>
-              <h1 className="text-5xl sm:text-6xl lg:text-7xl font-heading font-bold mb-8 leading-tight">
+              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-heading font-bold mb-6 sm:mb-8 leading-tight px-4">
                 <span className="bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent">
                   Comprehensive
                 </span>
                 <br />
                 <span className="text-primary">Management Solutions</span>
               </h1>
-              <p className="text-xl sm:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+              <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed px-4">
                 End-to-end services designed to keep communities safe, compliant, and sustainable across the UAE.
               </p>
             </motion.div>
@@ -171,9 +180,9 @@ const Services = () => {
       </section>
 
       {/* Services Section */}
-      <section ref={servicesRef.ref} className="py-20 lg:py-32">
+      <section ref={servicesRef.ref} className="py-12 sm:py-16 lg:py-20 xl:py-32">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="space-y-24 lg:space-y-32">
+          <div className="space-y-16 sm:space-y-20 lg:space-y-24 xl:space-y-32">
             {services.map((service, index) => {
               const isEven = index % 2 === 0;
               const isImageService = !!service.image;

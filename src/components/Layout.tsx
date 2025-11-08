@@ -5,6 +5,7 @@ import Navigation from "./Navigation";
 import Footer from "./Footer";
 import ScrollToTop from "./ScrollToTop";
 import ScrollToTopButton from "./ScrollToTopButton";
+import Breadcrumbs from "./Breadcrumbs";
 
 interface LayoutProps {
   children: ReactNode;
@@ -39,6 +40,7 @@ const Layout = ({ children }: LayoutProps) => {
     <div className="min-h-screen flex flex-col">
       <ScrollToTop />
       <Navigation />
+      <Breadcrumbs />
       <motion.main 
         key={location.pathname}
         className="flex-grow"
