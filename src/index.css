@@ -110,10 +110,16 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground font-body;
+    scroll-behavior: auto;
   }
 
   html {
     scroll-behavior: smooth;
+    scroll-padding-top: 0;
+  }
+
+  html, body {
+    overflow-x: hidden;
   }
 
   h1, h2, h3, h4, h5, h6 {
