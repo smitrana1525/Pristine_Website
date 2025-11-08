@@ -8,6 +8,13 @@ import Layout from "./components/Layout";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Services from "./pages/Services";
+import OwnersAssociationManagement from "./pages/OwnersAssociationManagement";
+import FacilitiesManagement from "./pages/FacilitiesManagement";
+import CommunityEngagement from "./pages/CommunityEngagement";
+import HealthSafetyCompliance from "./pages/HealthSafetyCompliance";
+import TechnologyPortalSolutions from "./pages/TechnologyPortalSolutions";
+import ConsultancyNewDevelopments from "./pages/ConsultancyNewDevelopments";
+import FinancialAdministrativeServices from "./pages/FinancialAdministrativeServices";
 import Communities from "./pages/Communities";
 import WhyUs from "./pages/WhyUs";
 import Blog from "./pages/Blog";
@@ -25,6 +32,13 @@ const AnimatedRoutes = () => {
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/services" element={<Services />} />
+        <Route path="/services/owners-association-management" element={<OwnersAssociationManagement />} />
+        <Route path="/services/facilities-management" element={<FacilitiesManagement />} />
+        <Route path="/services/community-engagement" element={<CommunityEngagement />} />
+        <Route path="/services/health-safety-compliance" element={<HealthSafetyCompliance />} />
+        <Route path="/services/technology-portal-solutions" element={<TechnologyPortalSolutions />} />
+        <Route path="/services/consultancy-new-developments" element={<ConsultancyNewDevelopments />} />
+        <Route path="/services/financial-administrative-services" element={<FinancialAdministrativeServices />} />
         <Route path="/communities" element={<Communities />} />
         <Route path="/why-us" element={<WhyUs />} />
         <Route path="/blog" element={<Blog />} />
