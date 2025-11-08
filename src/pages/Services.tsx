@@ -133,7 +133,7 @@ const Services = () => {
   ];
 
   return (
-    <div className="pt-20 min-h-screen bg-background">
+    <div className="min-h-screen bg-background">
       <SEO 
         title={seoConfig.services.title}
         description={seoConfig.services.description}
@@ -142,33 +142,50 @@ const Services = () => {
         url="https://pristine.ae/services"
       />
       {/* Hero Section */}
-      <section ref={heroRef} className="relative py-16 sm:py-24 lg:py-32 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-primary/5 via-background to-background" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(120,119,198,0.1),transparent_50%)]" />
+      <section ref={heroRef} className="relative min-h-[80vh] flex items-center overflow-hidden pt-16 sm:pt-20">
+        <div className="absolute inset-0 bg-background" />
+        <div className="absolute left-0 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-border to-transparent" />
         
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="max-w-5xl mx-auto">
+        <div className="container mx-auto px-6 sm:px-8 lg:px-12 relative z-10 w-full">
+          <div className="max-w-[1400px] mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 40 }}
               animate={heroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
-              transition={{ duration: 0.8 }}
-              className="text-center mb-8 sm:mb-12 lg:mb-16"
+              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+              className="max-w-4xl"
             >
-              <div className="inline-block mb-4 sm:mb-6">
-                <span className="text-xs sm:text-sm font-semibold tracking-wider uppercase text-primary px-3 sm:px-4 py-1.5 sm:py-2 bg-primary/10 rounded-full">
-                  Our Services
-                </span>
+              <div className="flex items-center gap-4 text-sm font-medium tracking-[0.2em] uppercase text-muted-foreground mb-6">
+                <span className="w-12 h-px bg-border" />
+                <span>Our Services</span>
               </div>
-              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-heading font-bold mb-6 sm:mb-8 leading-tight px-4">
-                <span className="bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent">
+              
+              <h1 className="text-6xl sm:text-7xl lg:text-8xl font-heading font-bold leading-[0.95] tracking-tight mb-8">
+                <motion.span
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={heroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+                  transition={{ delay: 0.2, duration: 0.8 }}
+                  className="block"
+                >
                   Comprehensive
-                </span>
-                <br />
-                <span className="text-primary">Management Solutions</span>
+                </motion.span>
+                <motion.span
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={heroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+                  transition={{ delay: 0.3, duration: 0.8 }}
+                  className="block text-primary"
+                >
+                  Management Solutions
+                </motion.span>
               </h1>
-              <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed px-4">
+
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={heroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                transition={{ delay: 0.4, duration: 0.8 }}
+                className="text-xl sm:text-2xl text-muted-foreground leading-relaxed max-w-3xl"
+              >
                 End-to-end services designed to keep communities safe, compliant, and sustainable across the UAE.
-              </p>
+              </motion.p>
             </motion.div>
           </div>
         </div>

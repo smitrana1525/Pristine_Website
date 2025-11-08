@@ -76,9 +76,9 @@ const Communities = () => {
   ];
 
   return (
-    <div className="pt-20">
+    <div>
       {/* Hero Section */}
-      <section ref={heroRef} className="py-20 bg-gradient-to-br from-primary/10 to-secondary/10">
+      <section ref={heroRef} className="pt-16 sm:pt-20 pb-20 bg-gradient-to-br from-primary/10 to-secondary/10">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <motion.h1 

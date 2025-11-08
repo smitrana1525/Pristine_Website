@@ -41,7 +41,7 @@ const Contact = () => {
   };
 
   return (
-    <div className="pt-20 min-h-screen bg-background">
+    <div className="min-h-screen bg-background">
       <SEO 
         title={seoConfig.contact.title}
         description={seoConfig.contact.description}
@@ -50,7 +50,7 @@ const Contact = () => {
         url="https://pristine.ae/contact"
       />
       {/* Hero Section */}
-      <section ref={heroRef} className="relative min-h-[80vh] flex items-center overflow-hidden">
+      <section ref={heroRef} className="relative min-h-[80vh] flex items-center overflow-hidden pt-16 sm:pt-20">
         <div className="absolute inset-0 bg-background" />
         <div className="absolute left-0 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-border to-transparent" />
         
