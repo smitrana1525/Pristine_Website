@@ -37,6 +37,7 @@ const About = () => {
 
   return (
     <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background">
       <SEO 
         title={seoConfig.about.title}
         description={seoConfig.about.description}
