@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { ArrowRight, ChevronDown, Building2, DollarSign, Wrench, Shield, MessageSquare, Laptop, FileCheck, Calendar, User } from "lucide-react";
+import { ArrowRight, ChevronDown, Building2, DollarSign, Wrench, Shield, MessageSquare, Laptop, FileCheck, Calendar, User, Award } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { useCountUp } from "@/hooks/useCountUp";
 import heroImage from "@/assets/hero-cityscape.jpg";
@@ -69,54 +69,63 @@ const Home = () => {
   const quickServices = [
     {
       icon: Building2,
-      title: "Owners Association Management",
+      title: "Compliance & Governance",
       description: "Complete governance and board support",
       path: "/services/owners-association-management",
-      color: "text-blue-600"
+      gradient: "from-blue-500/10 via-primary/5 to-blue-500/20",
+      accent: "text-blue-600"
     },
     {
       icon: DollarSign,
       title: "Financial Management",
       description: "Budgeting, accounting & compliance",
       path: "/services/financial-administrative-services",
-      color: "text-green-600"
+      gradient: "from-emerald-500/10 via-secondary/5 to-emerald-500/20",
+      accent: "text-emerald-600"
     },
     {
       icon: Wrench,
-      title: "Facilities Management",
+      title: "Facility & Operations Management",
       description: "Maintenance & operations oversight",
       path: "/services/facilities-management",
-      color: "text-orange-600"
+      gradient: "from-orange-500/10 via-primary/5 to-orange-500/20",
+      accent: "text-orange-600"
     },
     {
       icon: Shield,
-      title: "Health & Safety",
+      title: "Health, Safety & Risk Management",
       description: "HSE audits & compliance",
       path: "/services/health-safety-compliance",
-      color: "text-red-600"
+      gradient: "from-rose-500/10 via-secondary/5 to-rose-500/20",
+      accent: "text-rose-600"
     },
   ];
 
   const highlights = [
     {
-      icon: "✓",
-      title: "RERA Registered",
-      description: "Fully compliant with UAE regulations"
+      title: "CAI M-100",
+      description: "The Essentials of Community Association Management",
+      gradient: "from-blue-100/60 via-blue-50/40 to-transparent"
     },
     {
-      icon: "✓",
-      title: "CAI Certified",
-      description: "Industry-recognized expertise"
+      title: "CAI M-201",
+      description: "Facilities Management",
+      gradient: "from-blue-100/60 via-blue-50/40 to-transparent"
     },
     {
-      icon: "✓",
-      title: "20+ Years Experience",
-      description: "Proven track record of excellence"
+      title: "CAI M-202",
+      description: "Association Communications for Jointly-Owned Properties",
+      gradient: "from-amber-100/60 via-amber-50/40 to-transparent"
     },
     {
-      icon: "✓",
-      title: "24/7 Support",
-      description: "Always available when you need us"
+      title: "CAI M-203",
+      description: "Community Leadership",
+      gradient: "from-emerald-100/60 via-emerald-50/40 to-transparent"
+    },
+    {
+      title: "REI Innovation Expert",
+      description: "Excellence in Community Association Management",
+      gradient: "from-blue-100/60 via-blue-50/40 to-transparent"
     },
   ];
 
@@ -179,14 +188,14 @@ const Home = () => {
 
         <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24 lg:py-32 text-center">
           <motion.h1 
-            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-heading font-bold text-primary-foreground mb-4 sm:mb-6"
+            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-heading font-premium font-bold text-primary-foreground mb-4 sm:mb-6 tracking-tight"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
           >
             Building Better Communities,
             <motion.span 
-              className="block text-secondary mt-2"
+              className="block mt-2 text-secondary font-accent text-5xl sm:text-6xl lg:text-7xl leading-tight"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
@@ -200,7 +209,9 @@ const Home = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.5, ease: "easeOut" }}
           >
-            Excellence in owners association management services across UAE. Over 20 years of trusted expertise.
+            <span className="font-accent text-secondary text-2xl md:text-3xl mr-2">Excellence</span>
+            in owners association management services across UAE. Over 20 years of{" "}
+            <span className="font-accent text-secondary text-2xl md:text-3xl">trusted expertise</span>.
           </motion.p>
           <motion.div
             className="flex flex-col sm:flex-row gap-4 justify-center items-center"
@@ -296,7 +307,7 @@ const Home = () => {
                   className="text-center"
                   variants={scaleIn}
                 >
-                  <div className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-heading font-bold text-gradient mb-1 sm:mb-2">
+                  <div className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-heading font-premium font-bold text-gradient mb-1 sm:mb-2 tracking-tight">
                     {count}
                     {stat.suffix}
                   </div>
@@ -322,13 +333,13 @@ const Home = () => {
               <span>Our Services</span>
               <span className="w-8 sm:w-12 h-px bg-border" />
             </div>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-heading font-bold mb-3 sm:mb-4">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-heading font-premium font-bold mb-3 sm:mb-4 tracking-tight">
               Comprehensive Management
               <br />
-              <span className="text-primary">Solutions</span>
+              <span className="text-primary font-accent text-4xl sm:text-5xl lg:text-6xl">Solutions</span>
             </h2>
             <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto px-4">
-              End-to-end services designed to keep communities safe, compliant, and sustainable across the UAE.
+              End-to-end services designed to keep communities <span className="font-accent text-secondary text-xl sm:text-2xl">safe, compliant, and sustainable</span> across the UAE.
             </p>
           </motion.div>
 
@@ -348,49 +359,35 @@ const Home = () => {
                 >
                   <Link to={service.path}>
                     <div className="group relative h-full cursor-pointer">
-                      {/* Main Content Area */}
-                      <div className="relative h-full p-8 border border-border/50 bg-background hover:border-foreground/20 transition-all duration-500 rounded-none">
-                        {/* Top Accent Line */}
-                        <div className="absolute top-0 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-500" />
-                        
-                        {/* Number Badge */}
+                      <div className="relative h-full p-8 rounded-3xl border border-border/40 bg-gradient-to-br from-background via-background/90 to-muted/30 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-500 overflow-hidden">
+                        <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary/40 via-secondary/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                         <div className="absolute top-6 right-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                          <span className="text-6xl font-heading font-bold text-foreground/5 leading-none">
+                          <span className="text-5xl font-heading font-premium font-bold text-foreground/5 leading-none tracking-tight">
                             {String(index + 1).padStart(2, '0')}
                           </span>
                         </div>
 
-                        {/* Icon with Unique Design */}
                         <div className="mb-6 relative">
-                          <div className="relative inline-block">
-                            {/* Background shape */}
-                            <div className="absolute inset-0 bg-foreground/5 group-hover:bg-foreground/10 rounded-sm rotate-3 group-hover:rotate-6 transition-all duration-500" />
-                            {/* Icon container */}
-                            <div className="relative w-14 h-14 flex items-center justify-center bg-background border border-border/50 group-hover:border-foreground/30 transition-all duration-500">
-                              <Icon className={`w-6 h-6 ${service.color} group-hover:scale-110 transition-transform duration-300`} />
-                            </div>
+                          <div
+                            className={`w-16 h-16 rounded-2xl border border-white/40 flex items-center justify-center transition-all duration-500 group-hover:scale-105 shadow-inner bg-gradient-to-br ${service.gradient}`}
+                          >
+                            <Icon className={`w-7 h-7 ${service.accent}`} />
                           </div>
+                          <div className="absolute -bottom-3 left-0 w-12 h-px bg-gradient-to-r from-transparent via-secondary/50 to-transparent" />
                         </div>
 
-                        {/* Content */}
-                        <div className="relative z-10">
-                          <h3 className="text-xl font-heading font-bold mb-3 group-hover:text-primary transition-colors duration-300 leading-tight">
+                        <div className="relative z-10 space-y-4">
+                          <h3 className="text-xl font-heading font-premium font-bold group-hover:text-primary transition-colors duration-300 leading-tight tracking-tight">
                             {service.title}
                           </h3>
-                          <p className="text-sm text-muted-foreground leading-relaxed mb-6 group-hover:text-foreground/80 transition-colors">
+                          <p className="text-sm text-foreground/70 leading-relaxed group-hover:text-foreground/90 transition-colors">
                             {service.description}
                           </p>
-                          
-                          {/* Bottom Link Indicator */}
-                          <div className="flex items-center gap-2 text-sm font-medium text-foreground/60 group-hover:text-primary transition-colors">
-                            <span className="uppercase tracking-wider text-xs">Learn More</span>
-                            <div className="w-8 h-px bg-border group-hover:bg-primary transition-colors" />
+                          <div className="flex items-center gap-2 text-sm font-semibold text-primary group-hover:gap-3 transition-all">
+                            <span className="uppercase tracking-widest text-xs">Learn More</span>
                             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                           </div>
                         </div>
-
-                        {/* Hover Overlay Effect */}
-                        <div className="absolute inset-0 bg-gradient-to-br from-primary/0 via-primary/0 to-primary/0 group-hover:from-primary/2 group-hover:via-primary/1 group-hover:to-primary/2 transition-all duration-500 pointer-events-none" />
                       </div>
                     </div>
                   </Link>
@@ -416,7 +413,7 @@ const Home = () => {
       </section>
 
       {/* Highlights Section */}
-      <section className="py-12 sm:py-16 lg:py-20 bg-gradient-to-br from-primary/5 via-background to-secondary/5 border-t border-border">
+      <section className="py-12 sm:py-16 lg:py-20 bg-white border-t border-border">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -425,16 +422,16 @@ const Home = () => {
             transition={{ duration: 0.6 }}
             className="text-center mb-8 sm:mb-12"
           >
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-heading font-bold mb-3 sm:mb-4">
-              Why Choose <span className="text-primary">Pristine?</span>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-heading font-premium font-bold mb-3 sm:mb-4 tracking-tight">
+              Professional <span className="text-primary font-accent text-4xl sm:text-5xl">Certifications</span>
             </h2>
             <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto">
-              Trusted by communities across the UAE for excellence in management
+              Globally recognized CAI and REI programs that keep our expertise <span className="font-accent text-secondary text-xl sm:text-2xl">ahead of industry standards</span>
             </p>
           </motion.div>
 
           <motion.div
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6"
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 sm:gap-6"
             variants={staggerContainer}
             initial="hidden"
             whileInView="visible"
@@ -444,11 +441,14 @@ const Home = () => {
               <motion.div
                 key={index}
                 variants={fadeInUp}
-                className="text-center p-6 rounded-xl bg-background/50 border border-border/50 hover:border-primary/30 transition-colors"
+                className="p-6 sm:p-8 rounded-2xl bg-white border border-border/30 shadow-sm hover:-translate-y-1 hover:shadow-md transition-all duration-300 text-center"
               >
-                <div className="text-4xl font-bold text-primary mb-3">{highlight.icon}</div>
-                <h3 className="text-lg font-heading font-semibold mb-2">{highlight.title}</h3>
-                <p className="text-sm text-muted-foreground">{highlight.description}</p>
+                <div className={`mx-auto mb-5 w-16 h-16 rounded-xl flex items-center justify-center bg-gradient-to-br ${highlight.gradient} border border-border/20 relative overflow-hidden`}>
+                  <div className="absolute inset-0 bg-gradient-to-br from-amber-400/20 via-yellow-300/10 to-transparent" />
+                  <Award className="w-7 h-7 text-blue-700 relative z-10" strokeWidth={2.5} style={{ filter: 'drop-shadow(0 1px 2px rgba(0,0,0,0.1))' }} />
+                </div>
+                <h3 className="text-base sm:text-lg font-heading font-premium font-semibold mb-3 tracking-tight text-foreground">{highlight.title}</h3>
+                <p className="text-sm text-foreground/70 leading-relaxed">{highlight.description}</p>
               </motion.div>
             ))}
           </motion.div>
@@ -469,13 +469,13 @@ const Home = () => {
               <span>Our Approach</span>
               <span className="w-8 sm:w-12 h-px bg-border" />
             </div>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-heading font-bold mb-3 sm:mb-4">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-heading font-premium font-bold mb-3 sm:mb-4 tracking-tight">
               Building Better
               <br />
-              <span className="text-primary">Communities</span>
+              <span className="text-primary font-accent text-4xl sm:text-5xl lg:text-6xl">Communities</span>
             </h2>
             <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto px-4">
-              Comprehensive community management solutions backed by decades of excellence
+              Comprehensive community management solutions backed by <span className="font-accent text-secondary text-xl sm:text-2xl">decades of excellence</span>
             </p>
           </motion.div>
 
@@ -528,8 +528,8 @@ const Home = () => {
                    </div>
                    
                    {/* Content */}
-                   <div className="p-6">
-                     <h3 className="text-xl font-heading font-semibold mb-2 group-hover:text-primary transition-colors duration-300">
+                    <div className="p-6">
+                      <h3 className="text-xl font-heading font-premium font-semibold mb-2 group-hover:text-primary transition-colors duration-300 tracking-tight">
                        {feature.title}
                      </h3>
                      <p className="text-muted-foreground leading-relaxed text-sm">
@@ -557,8 +557,8 @@ const Home = () => {
               <span>Testimonials</span>
               <span className="w-8 sm:w-12 h-px bg-border" />
             </div>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-heading font-bold mb-3 sm:mb-4">
-              What Our <span className="text-primary">Clients Say</span>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-heading font-premium font-bold mb-3 sm:mb-4 tracking-tight">
+              What Our <span className="text-primary font-accent text-4xl sm:text-5xl lg:text-6xl">Clients Say</span>
             </h2>
             <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto">
               Trusted by communities across the UAE
@@ -584,7 +584,7 @@ const Home = () => {
                       <User className="w-5 h-5 text-primary" />
                     </div>
                     <div>
-                      <div className="font-semibold text-foreground">{testimonial.author}</div>
+                      <div className="font-heading font-premium font-semibold text-foreground tracking-tight">{testimonial.author}</div>
                       <div className="text-sm text-muted-foreground">{testimonial.role}</div>
                     </div>
                   </div>
@@ -609,11 +609,11 @@ const Home = () => {
               <span>Latest News</span>
               <span className="w-8 sm:w-12 h-px bg-border" />
             </div>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-heading font-bold mb-3 sm:mb-4">
-              Insights & <span className="text-primary">Updates</span>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-heading font-premium font-bold mb-3 sm:mb-4 tracking-tight">
+              Insights & <span className="text-primary font-accent text-4xl sm:text-5xl lg:text-6xl">Updates</span>
             </h2>
             <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto">
-              Stay informed with the latest news, insights, and best practices in community management
+              Stay informed with the latest news, insights, and best practices in <span className="font-accent text-secondary text-xl sm:text-2xl">community management</span>
             </p>
           </motion.div>
 
@@ -651,7 +651,7 @@ const Home = () => {
                         <Calendar className="w-3 h-3" />
                         <span>{post.date}</span>
                       </div>
-                      <h3 className="text-lg font-heading font-semibold mb-2 group-hover:text-primary transition-colors line-clamp-2">
+                      <h3 className="text-lg font-heading font-premium font-semibold mb-2 group-hover:text-primary transition-colors line-clamp-2 tracking-tight">
                         {post.title}
                       </h3>
                       <p className="text-sm text-muted-foreground leading-relaxed line-clamp-3 mb-4">
@@ -698,10 +698,10 @@ const Home = () => {
               <span>Get Started</span>
               <span className="w-8 sm:w-12 h-px bg-border" />
             </div>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-heading font-bold mb-4 sm:mb-6">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-heading font-premium font-bold mb-4 sm:mb-6 tracking-tight">
               Ready to Transform
               <br />
-              <span className="text-primary">Your Community?</span>
+              <span className="text-primary font-accent text-4xl sm:text-5xl lg:text-6xl">Your Community?</span>
             </h2>
             <motion.p 
               className="text-base sm:text-lg md:text-xl mb-8 sm:mb-10 max-w-2xl mx-auto text-muted-foreground leading-relaxed"
@@ -709,7 +709,7 @@ const Home = () => {
               animate={ctaInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
-              Let us help you create a thriving, well-managed community that residents love to call home.
+              Let us help you create a <span className="font-premium text-primary text-2xl md:text-3xl">thriving, well-managed community</span> that residents love to call home.
             </motion.p>
             <motion.div
               className="flex flex-col sm:flex-row gap-4 justify-center items-center"

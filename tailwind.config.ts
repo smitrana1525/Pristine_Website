@@ -16,6 +16,8 @@ export default {
       fontFamily: {
         heading: ['Playfair Display', 'serif'],
         body: ['Open Sans', 'sans-serif'],
+        accent: ['"Dancing Script"', 'cursive'],
+        premium: ['"Cormorant Garamond"', 'serif'],
       },
       colors: {
         border: "hsl(var(--border))",

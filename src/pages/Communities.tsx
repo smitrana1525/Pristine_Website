@@ -1,21 +1,19 @@
 import { Card } from "@/components/ui/card";
-import { MapPin } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
-import community1 from "@/assets/community-1.jpg";
-import community2 from "@/assets/community-2.jpg";
-import community3 from "@/assets/community-3.jpg";
+import caseStudyHero from "@/assets/case study.png";
+import caseStudyOne from "@/assets/casestudy.png";
+import caseStudyTwo from "@/assets/cases.png";
+import caseStudyThree from "@/assets/casest.png";
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
 
-const Communities = () => {
-  const communitiesRef = useScrollAnimation();
-  
+const CaseStudies = () => {
+  const statsRef = useScrollAnimation();
+
   // Framer Motion refs
   const heroRef = useRef(null);
   const heroInView = useInView(heroRef, { once: true });
-  const statsRef = useRef(null);
-  const statsInView = useInView(statsRef, { once: true });
 
   const fadeInUp = {
     hidden: { opacity: 0, y: 60 },
@@ -30,124 +28,212 @@ const Communities = () => {
     }
   };
 
-  const communities = [
+  const stats = [
+    { value: "20%+", label: "Average OpEx Reduction" },
+    { value: "30%", label: "Cost Savings Achieved" },
+    { value: "100%", label: "Compliance Success" },
+    { value: "98%", label: "Resident Satisfaction" },
+  ];
+
+  const caseStudies = [
     {
-      name: "Palm Gardens Residence",
-      location: "Dubai Marina",
-      image: community1,
-      units: "450 Units",
-      type: "Residential",
+      id: "01",
+      title: "Case Study 1",
+      headline: "Full Community Transformation Across Compliance, Operations & Resident Satisfaction",
+      overview:
+        "A residential community in Dubai required a complete reset across governance, facility operations, and resident engagement. The community suffered from inconsistent maintenance, regulatory gaps, and rising resident dissatisfaction. Our team was appointed to establish stability and build a long-term management framework.",
+      image: caseStudyOne,
+      challenges: [
+        "Important documents missing in RERA and the Mollak system",
+        "No proper community rules or governance structure",
+        "Poor maintenance of fire systems, swimming pool, and shared facilities",
+        "Cleaning and pest control inconsistencies",
+        "Confusing budgeting and unclear vendor invoices",
+        "Slow communication and frequent resident complaints",
+      ],
+      solutionHighlights: [
+        {
+          title: "Compliance & Governance Reset",
+          description:
+            "Updated all required documentation in RERA and Mollak, developed community rules, maintenance manuals, and instituted structured owners’ committee meetings with transparent reporting.",
+        },
+        {
+          title: "Operational Stabilization",
+          description:
+            "Appointed vetted service providers with clear KPIs, introduced preventive maintenance schedules for fire safety systems, pool care, water tank cleaning, and general hygiene with a full asset register.",
+        },
+        {
+          title: "Financial Transparency",
+          description:
+            "Prepared transparent annual budgets, audited vendor contracts, and renegotiated terms to improve cost efficiency while monitoring performance-based contracts.",
+        },
+        {
+          title: "Resident Engagement",
+          description:
+            "Launched a dedicated communication portal to improve response times, share updates, and manage resident enquiries in real time.",
+        },
+      ],
+      results: [
+        "Full compliance achieved with RERA and Jointly Owned Property Law",
+        "Improved maintenance quality across all shared areas",
+        "Over 20% reduction in operational expenses",
+        "Faster response times and a major drop in resident complaints",
+        "Clear documentation, transparent financial reporting, and stronger governance",
+      ],
+      conclusion:
+        "The community transitioned from instability to a well-organized, safe, and professionally managed environment with significantly higher resident satisfaction.",
     },
     {
-      name: "Azure Heights Tower",
-      location: "Business Bay",
-      image: community2,
-      units: "320 Units",
-      type: "Mixed Use",
+      id: "02",
+      title: "Case Study 2",
+      headline: "Financial Restructuring & Vendor Optimization",
+      overview:
+        "A multi-building residential development in Dubai approached us due to rising service charges, unclear financial reporting, and declining trust from owners. The goal was to bring transparency, reduce unnecessary expenses, and establish a sustainable financial structure.",
+      image: caseStudyTwo,
+      challenges: [
+        "Budgets not aligned with actual community needs",
+        "High service expenses with little justification",
+        "Vendors operating without performance tracking",
+        "Service charges perceived as unfair by owners",
+        "No proper reserve fund planning",
+      ],
+      solutionHighlights: [
+        {
+          title: "Comprehensive Financial Audit",
+          description:
+            "Reviewed historical budgets, vendor costs, and service contracts to create realistic operational and reserve fund budgets tied to long-term planning.",
+        },
+        {
+          title: "Vendor Optimization",
+          description:
+            "Re-tendered major services, negotiated competitive pricing, and introduced KPI-linked contracts to ensure accountable, consistent service delivery.",
+        },
+        {
+          title: "Transparent Reporting",
+          description:
+            "Implemented quarterly financial reporting aligned with RERA and Mollak guidelines, giving owners clear visibility into expenses, income, and fund allocation.",
+        },
+      ],
+      results: [
+        "22–30% yearly cost savings through restructured contracts",
+        "Transparent financial statements shared quarterly",
+        "Improved trust between homeowners and management",
+        "Vendors held accountable through performance monitoring",
+        "Stronger reserve fund planning for long-term infrastructure needs",
+      ],
+      conclusion:
+        "The community achieved financial stability, predictable service charges, and greater owner confidence through clear budgeting and improved vendor management.",
     },
     {
-      name: "Serenity Villas",
-      location: "Arabian Ranches",
-      image: community3,
-      units: "180 Villas",
-      type: "Luxury Villas",
-    },
-    {
-      name: "Marina Plaza",
-      location: "Jumeirah Beach Residence",
-      image: community1,
-      units: "275 Units",
-      type: "Residential",
-    },
-    {
-      name: "Downtown Elite",
-      location: "Downtown Dubai",
-      image: community2,
-      units: "520 Units",
-      type: "High-Rise",
-    },
-    {
-      name: "Green Valley Community",
-      location: "Dubai Hills Estate",
-      image: community3,
-      units: "350 Units",
-      type: "Family Community",
+      id: "03",
+      title: "Case Study 3",
+      headline: "Enhancing Facility Operations & Safety Standards",
+      overview:
+        "A low-rise residential community faced growing concerns about safety, cleanliness, and maintenance quality. The property lacked structured maintenance planning, and residents reported frequent issues with hygiene and facility reliability.",
+      image: caseStudyThree,
+      challenges: [
+        "Irregular cleaning and poor common-area hygiene",
+        "Swimming pool water quality issues",
+        "Fire safety systems overdue for inspection",
+        "Pest control inconsistencies causing resident complaints",
+        "No preventive maintenance plan, only reactive repairs",
+      ],
+      solutionHighlights: [
+        {
+          title: "Preventive Maintenance Program",
+          description:
+            "Introduced scheduled preventive maintenance for all facilities with professional partners for cleaning, pest control, pool care, and fire safety systems.",
+        },
+        {
+          title: "Safety & Compliance Review",
+          description:
+            "Conducted full safety audits including fire alarm testing, emergency lighting checks, water tank cleaning, and safety signage upgrades with monthly inspection reports.",
+        },
+        {
+          title: "Resident Communication",
+          description:
+            "Shared maintenance schedules, safety alerts, and water-quality reports to keep residents informed and confident in facility operations.",
+        },
+      ],
+      results: [
+        "Zero safety violations after implementing updated safety measures",
+        "Noticeable improvement in pool hygiene, shared-area cleanliness, and pest control",
+        "Reduction in unplanned repair costs due to preventive maintenance",
+        "Increased resident satisfaction with facility reliability",
+        "Improved overall safety and comfort levels throughout the community",
+      ],
+      conclusion:
+        "Through structured maintenance planning and upgraded safety standards, the community achieved cleaner spaces, safer facilities, and a more reliable living environment.",
     },
   ];
 
   return (
-    <div className="pt-20">
+    <div className="bg-background">
       {/* Hero Section */}
-      <section ref={heroRef} className="py-20 bg-gradient-to-br from-primary/10 to-secondary/10">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center">
-            <motion.h1 
-              className="text-5xl md:text-6xl font-heading font-bold mb-6"
-              initial={{ opacity: 0, y: 30 }}
-              animate={heroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-              transition={{ duration: 0.6 }}
+      <section ref={heroRef} className="relative pt-28 pb-20 lg:pt-32 lg:pb-28 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-secondary/10 to-background" />
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <motion.div
+              initial={{ opacity: 0, x: -40 }}
+              animate={heroInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -40 }}
+              transition={{ duration: 0.8 }}
             >
-              Our Communities
-            </motion.h1>
-            <motion.p 
-              className="text-xl text-muted-foreground"
-              initial={{ opacity: 0, y: 20 }}
-              animate={heroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
+              <span className="inline-flex items-center px-4 py-1.5 rounded-full bg-primary/10 text-primary text-sm font-semibold tracking-wide mb-4">
+                Proven Impact
+              </span>
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-heading font-premium font-bold mb-6 leading-tight">
+                Case Studies <span className="text-primary font-accent text-5xl">from the UAE</span>
+              </h1>
+              <p className="text-lg sm:text-xl text-muted-foreground leading-relaxed mb-8">
+                Real examples of how we stabilize communities, elevate operations, and restore resident confidence through
+                data-driven management.
+              </p>
+              <div className="grid sm:grid-cols-2 gap-4">
+                {stats.slice(0, 2).map((stat, index) => (
+                  <Card key={index} className="p-5 border-border/50 bg-white/80 backdrop-blur-sm hover-lift">
+                    <div className="text-3xl font-heading font-bold text-primary mb-1">{stat.value}</div>
+                    <div className="text-sm text-muted-foreground">{stat.label}</div>
+                  </Card>
+                ))}
+              </div>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, x: 40 }}
+              animate={heroInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 40 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
             >
-              Proudly managing over 100 thriving communities across the UAE
-            </motion.p>
+              <div className="grid grid-cols-2 gap-4 max-w-xl mx-auto">
+                {[caseStudyHero, caseStudyOne, caseStudyTwo, caseStudyThree].map((image, index) => (
+                  <div
+                    key={index}
+                    className={`rounded-2xl overflow-hidden shadow-2xl border border-white/40 ${
+                      index % 2 === 0 ? "translate-y-4" : "-translate-y-4"
+                    }`}
+                  >
+                    <img src={image} alt="Case Study collage" className="w-full h-full object-cover" />
+                  </div>
+                ))}
+              </div>
+            </motion.div>
           </div>
         </div>
       </section>
 
-      {/* Communities Grid */}
-      <section ref={communitiesRef.ref} className="py-20">
+      {/* Snapshot Stats */}
+      <section ref={statsRef.ref} className="py-16 bg-muted/40">
         <div className="container mx-auto px-4">
-          <motion.div 
-            className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
+          <motion.div
+            className="grid grid-cols-2 md:grid-cols-4 gap-6"
             variants={staggerContainer}
             initial="hidden"
-            animate={communitiesRef.isVisible ? "visible" : "hidden"}
+            animate={statsRef.isVisible ? "visible" : "hidden"}
           >
-            {communities.map((community, index) => (
-              <motion.div
-                key={index}
-                variants={fadeInUp}
-                whileHover={{ y: -8, transition: { duration: 0.2 } }}
-              >
-                <Card className="overflow-hidden hover-lift group h-full">
-                  <div className="relative h-64 overflow-hidden">
-                    <motion.img
-                      src={community.image}
-                      alt={community.name}
-                      className="w-full h-full object-cover"
-                      whileHover={{ scale: 1.1 }}
-                      transition={{ duration: 0.5 }}
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent" />
-                    <div className="absolute bottom-0 left-0 right-0 p-6 text-primary-foreground">
-                      <h3 className="text-2xl font-heading font-bold mb-2">{community.name}</h3>
-                      <div className="flex items-center text-sm">
-                        <div className="w-6 h-6 bg-primary-foreground/20 rounded-md flex items-center justify-center mr-2">
-                          <MapPin className="w-3.5 h-3.5 text-primary-foreground" />
-                        </div>
-                        {community.location}
-                      </div>
-                    </div>
-                  </div>
-                  <div className="p-6">
-                    <div className="flex justify-between items-center">
-                      <div>
-                        <div className="text-sm text-muted-foreground">Size</div>
-                        <div className="font-semibold">{community.units}</div>
-                      </div>
-                      <div className="text-right">
-                        <div className="text-sm text-muted-foreground">Type</div>
-                        <div className="font-semibold">{community.type}</div>
-                      </div>
-                    </div>
-                  </div>
+            {stats.map((stat, index) => (
+              <motion.div key={index} variants={fadeInUp}>
+                <Card className="p-6 text-center bg-white border border-border/50 shadow-sm">
+                  <div className="text-3xl font-heading font-premium font-bold text-primary mb-1">{stat.value}</div>
+                  <div className="text-sm text-muted-foreground leading-tight">{stat.label}</div>
                 </Card>
               </motion.div>
             ))}
@@ -155,45 +241,91 @@ const Communities = () => {
         </div>
       </section>
 
-      {/* Stats Section */}
-      <section ref={statsRef} className="py-20 bg-gradient-to-br from-primary to-primary-hover text-primary-foreground">
-        <div className="container mx-auto px-4">
-          <motion.div 
-            className="max-w-4xl mx-auto text-center"
-            initial={{ opacity: 0, y: 30 }}
-            animate={statsInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-            transition={{ duration: 0.6 }}
-          >
-            <h2 className="text-4xl font-heading font-bold mb-6">
-              Trusted by Communities Across the UAE
-            </h2>
-            <p className="text-lg opacity-90 mb-12">
-              From luxury high-rises to family villa communities, we provide exceptional management services that
-              residents love.
-            </p>
-            <motion.div 
-              className="grid grid-cols-2 md:grid-cols-4 gap-8"
-              variants={staggerContainer}
-              initial="hidden"
-              animate={statsInView ? "visible" : "hidden"}
-            >
-              {[
-                { value: "100+", label: "Communities" },
-                { value: "12", label: "Emirates" },
-                { value: "5K+", label: "Residents" },
-                { value: "98%", label: "Satisfaction" },
-              ].map((stat, index) => (
-                <motion.div key={index} variants={fadeInUp}>
-                  <div className="text-5xl font-bold mb-2">{stat.value}</div>
-                  <div className="text-sm opacity-80">{stat.label}</div>
-                </motion.div>
-              ))}
-            </motion.div>
-          </motion.div>
-        </div>
-      </section>
+      {/* Case Studies */}
+      {caseStudies.map((study, index) => (
+        <section
+          key={study.id}
+          className={`py-16 lg:py-20 ${index % 2 !== 0 ? "bg-gradient-to-br from-background via-muted/40 to-background" : "bg-background"}`}
+        >
+          <div className="container mx-auto px-4">
+            <div className={`grid lg:grid-cols-2 gap-12 items-start ${index % 2 !== 0 ? "lg:grid-flow-dense" : ""}`}>
+              <motion.div
+                initial={{ opacity: 0, x: index % 2 === 0 ? -40 : 40 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, margin: "-100px" }}
+                transition={{ duration: 0.7 }}
+              >
+                <div className="inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.2em] text-muted-foreground mb-4">
+                  <span className="w-8 h-px bg-border" />
+                  {study.title}
+                  <span className="w-8 h-px bg-border" />
+                </div>
+                <h2 className="text-3xl md:text-4xl font-heading font-premium font-bold mb-4 leading-tight">{study.headline}</h2>
+                <p className="text-lg text-muted-foreground leading-relaxed mb-8">{study.overview}</p>
+
+                <div className="space-y-6">
+                  <div>
+                    <h3 className="text-xl font-heading font-premium font-semibold mb-3">Challenges</h3>
+                    <ul className="space-y-3">
+                      {study.challenges.map((challenge, idx) => (
+                        <li key={idx} className="flex items-start gap-3 text-muted-foreground">
+                          <span className="mt-2 w-2 h-2 rounded-full bg-primary flex-shrink-0" />
+                          <span>{challenge}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <div>
+                    <h3 className="text-xl font-heading font-premium font-semibold mb-3">Solutions Implemented</h3>
+                    <div className="grid sm:grid-cols-2 gap-4">
+                      {study.solutionHighlights.map((solution, idx) => (
+                        <Card key={idx} className="p-5 h-full bg-white border border-border/40 shadow-sm">
+                          <h4 className="text-base font-premium font-semibold mb-2 text-foreground">{solution.title}</h4>
+                          <p className="text-sm text-muted-foreground leading-relaxed">{solution.description}</p>
+                        </Card>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div>
+                    <h3 className="text-xl font-heading font-premium font-semibold mb-3">Results</h3>
+                    <ul className="space-y-3">
+                      {study.results.map((result, idx) => (
+                        <li key={idx} className="flex items-start gap-3 text-muted-foreground">
+                          <span className="mt-2 w-2 h-2 rounded-full bg-secondary flex-shrink-0" />
+                          <span>{result}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <Card className="p-6 bg-gradient-to-r from-primary/10 via-secondary/10 to-primary/5 border-none shadow-lg">
+                    <p className="text-base text-foreground leading-relaxed font-premium font-semibold">{study.conclusion}</p>
+                  </Card>
+                </div>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, x: index % 2 === 0 ? 40 : -40 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, margin: "-100px" }}
+                transition={{ duration: 0.7, delay: 0.1 }}
+              >
+                <div className="relative rounded-3xl overflow-hidden shadow-2xl border border-white/30">
+                  <img src={study.image} alt={study.headline} className="w-full h-full object-cover" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+                  <div className="absolute bottom-4 left-4 bg-white/90 backdrop-blur px-4 py-2 rounded-full text-sm font-semibold text-primary">
+                    Impact Delivered
+                  </div>
+                </div>
+              </motion.div>
+            </div>
+          </div>
+        </section>
+      ))}
     </div>
   );
 };
 
-export default Communities;
+export default CaseStudies;

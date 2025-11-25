@@ -36,7 +36,7 @@ const About = () => {
   };
 
   return (
-    <div className="pt-20 min-h-screen bg-background">
+    <div className="min-h-screen bg-background">
       <SEO 
         title={seoConfig.about.title}
         description={seoConfig.about.description}
@@ -45,7 +45,7 @@ const About = () => {
         url="https://pristine.ae/about"
       />
       {/* Hero Section - Editorial Style */}
-      <section ref={heroRef} className="relative min-h-[90vh] flex items-center overflow-hidden">
+      <section ref={heroRef} className="relative min-h-[90vh] flex items-center overflow-hidden pt-28 pb-16 lg:pt-32">
         <div className="absolute inset-0 bg-background" />
         <div className="absolute left-0 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-border to-transparent" />
         
@@ -70,7 +70,7 @@ const About = () => {
                     <span>Established 2004</span>
                   </motion.div>
                   
-                  <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-heading font-bold leading-[0.95] tracking-tight">
+                  <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-heading font-premium font-bold leading-[0.95] tracking-tight">
                     <motion.span
                       initial={{ opacity: 0, y: 30 }}
                       animate={heroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
@@ -83,7 +83,7 @@ const About = () => {
                       initial={{ opacity: 0, y: 30 }}
                       animate={heroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
                       transition={{ delay: 0.4, duration: 0.8 }}
-                      className="block text-primary"
+                      className="block text-primary font-accent text-[1.05em]"
                     >
                       of Excellence
                     </motion.span>
@@ -113,14 +113,14 @@ const About = () => {
                   transition={{ delay: 0.6, duration: 0.8 }}
                   className="flex flex-wrap gap-8 pt-8 border-t border-border"
                 >
-                  {[
-                    { value: "20+", label: "Years" },
-                    { value: "100+", label: "Communities" },
-                    { value: "5000+", label: "Residents" },
-                    { value: "98%", label: "Satisfaction" },
-                  ].map((stat, idx) => (
+                    {[
+                      { value: "20+", label: "Years" },
+                      { value: "100+", label: "Communities" },
+                      { value: "5000+", label: "Residents" },
+                      { value: "98%", label: "Satisfaction" },
+                    ].map((stat, idx) => (
                     <div key={idx} className="flex flex-col">
-                      <span className="text-4xl font-heading font-bold text-foreground leading-none mb-1">
+                      <span className="text-4xl font-heading font-premium font-bold text-foreground leading-none mb-1">
                         {stat.value}
                       </span>
                       <span className="text-xs font-medium tracking-wider uppercase text-muted-foreground">
@@ -210,7 +210,7 @@ const About = () => {
                   <span className="w-12 h-px bg-border" />
                   <span>01</span>
                 </div>
-                <h2 className="text-5xl sm:text-6xl lg:text-7xl font-heading font-bold leading-[0.95] tracking-tight">
+                <h2 className="text-5xl sm:text-6xl lg:text-7xl font-heading font-premium font-bold leading-[0.95] tracking-tight">
                   Our Mission
                 </h2>
                 <div className="pt-4">
@@ -233,8 +233,8 @@ const About = () => {
                   <span className="w-12 h-px bg-border" />
                   <span>02</span>
                 </div>
-                <h2 className="text-5xl sm:text-6xl lg:text-7xl font-heading font-bold leading-[0.95] tracking-tight text-primary">
-                  Our Vision
+                <h2 className="text-5xl sm:text-6xl lg:text-7xl font-heading font-premium font-bold leading-[0.95] tracking-tight text-primary">
+                  Our <span className="font-accent text-secondary">Vision</span>
                 </h2>
                 <div className="pt-4">
                   <p className="text-xl sm:text-2xl text-muted-foreground leading-relaxed">
@@ -263,7 +263,7 @@ const About = () => {
                 <span className="w-12 h-px bg-border" />
                 <span>Our Foundation</span>
               </div>
-              <h2 className="text-5xl sm:text-6xl lg:text-7xl font-heading font-bold leading-[0.95] tracking-tight max-w-3xl">
+              <h2 className="text-5xl sm:text-6xl lg:text-7xl font-heading font-premium font-bold leading-[0.95] tracking-tight max-w-3xl">
                 Core Values
               </h2>
             </motion.div>
@@ -314,7 +314,7 @@ const About = () => {
                       <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
                         <value.icon className="w-6 h-6 text-primary" strokeWidth={2} />
                       </div>
-                      <h3 className="text-2xl font-heading font-bold">
+                      <h3 className="text-2xl font-heading font-premium font-bold">
                         {value.title}
                       </h3>
                     </div>
@@ -343,10 +343,10 @@ const About = () => {
                 <span className="w-12 h-px bg-border" />
                 <span>Get Started</span>
               </div>
-              <h2 className="text-5xl sm:text-6xl lg:text-7xl font-heading font-bold leading-[0.95] tracking-tight mb-8">
+              <h2 className="text-5xl sm:text-6xl lg:text-7xl font-heading font-premium font-bold leading-[0.95] tracking-tight mb-8">
                 Ready to Experience
                 <br />
-                <span className="text-primary">Excellence?</span>
+                <span className="text-primary font-accent text-[1.1em]">Excellence?</span>
               </h2>
               <p className="text-xl sm:text-2xl text-muted-foreground mb-12 leading-relaxed max-w-2xl">
                 Join the communities that trust Pristine for exceptional management services.

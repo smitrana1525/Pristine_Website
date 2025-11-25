@@ -1,7 +1,7 @@
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { Building2, FileCheck, TrendingUp, Handshake, Users, Heart, ArrowRight, Award, Clock, BarChart3, CheckCircle2, Target } from "lucide-react";
+import { Building2, FileCheck, TrendingUp, Handshake, Users, Heart, ArrowRight, Award, Clock, BarChart3, CheckCircle2, Target, ClipboardCheck, Shield, DollarSign, Search, FileText, AlertCircle } from "lucide-react";
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
@@ -38,65 +38,73 @@ const ConsultancyNewDevelopments = () => {
 
   const services = [
     {
-      icon: Building2,
-      title: "Pre-Development Planning",
-      description: "We work with developers to design efficient, resident-friendly layouts and community spaces that support easy management and daily use.",
+      icon: Search,
+      title: "Vendor Tendering & Qualification",
+      description: "Tendering and appointment of qualified vendors for key services including pool maintenance, lifeguard services, cleaning, pest control, water tank cleaning, waste management, fire system maintenance, and landscaping.",
       bgGradient: "from-teal-500 to-teal-600",
       shadowColor: "shadow-teal-500/30",
-      features: ["Layout Design", "Resident-Friendly Planning", "Community Space Design", "Management Planning"]
+      features: ["Pool Maintenance", "Cleaning & Hygiene", "Pest Control", "Waste Management", "Fire System Maintenance", "Landscaping"]
     },
     {
       icon: FileCheck,
-      title: "RERA & DLD Compliance",
-      description: "We guide you through documentation, registration, and association setup to meet all UAE regulations smoothly.",
+      title: "Vendor Due Diligence",
+      description: "Comprehensive vendor due diligence including license, insurance, and regulatory compliance checks to ensure all vendors meet the highest standards.",
       bgGradient: "from-blue-500 to-blue-600",
       shadowColor: "shadow-blue-500/30",
-      features: ["Documentation Support", "Registration Assistance", "Association Setup", "UAE Regulations"]
+      features: ["License Verification", "Insurance Checks", "Regulatory Compliance", "Quality Assurance"]
     },
     {
-      icon: TrendingUp,
-      title: "Service Charge Forecasting",
-      description: "Our experts prepare accurate cost projections and budgets to maintain financial transparency from launch to occupancy.",
+      icon: FileText,
+      title: "Contract Negotiation & KPI Structuring",
+      description: "Contract negotiation, award, and clear KPI/SLA structuring to ensure transparent agreements and measurable performance standards.",
       bgGradient: "from-green-500 to-green-600",
       shadowColor: "shadow-green-500/30",
-      features: ["Cost Projections", "Budget Planning", "Financial Transparency", "Launch to Occupancy"]
+      features: ["Contract Negotiation", "KPI Development", "SLA Structuring", "Performance Metrics"]
     },
     {
-      icon: Handshake,
-      title: "Handover Management",
-      description: "We manage the handover process — from snag inspections to resident communication — ensuring a seamless transition between developers and owners.",
+      icon: ClipboardCheck,
+      title: "Performance Monitoring",
+      description: "Regular performance monitoring, inspections, and service quality reviews to maintain exceptional standards across all operations.",
       bgGradient: "from-amber-500 to-amber-600",
       shadowColor: "shadow-amber-500/30",
-      features: ["Snag Inspections", "Resident Communication", "Seamless Transition", "Handover Coordination"]
+      features: ["Regular Inspections", "Quality Reviews", "Performance Tracking", "Service Standards"]
     },
     {
-      icon: Users,
-      title: "Community Governance Setup",
-      description: "We establish rules, structures, and frameworks to support transparent, efficient, and long-term association management.",
+      icon: DollarSign,
+      title: "Cost Optimization",
+      description: "Cost optimization without compromising safety or service standards, ensuring competitive pricing and cost-efficiency for your community.",
       bgGradient: "from-purple-500 to-purple-600",
       shadowColor: "shadow-purple-500/30",
-      features: ["Governance Rules", "Structure Development", "Management Frameworks", "Long-term Planning"]
+      features: ["Cost Analysis", "Budget Optimization", "Competitive Pricing", "Value Management"]
+    },
+    {
+      icon: Shield,
+      title: "AMC & Compliance Management",
+      description: "AMC and statutory compliance management with renewal tracking and documentation to ensure all maintenance contracts and regulations are up to date.",
+      bgGradient: "from-rose-500 to-rose-600",
+      shadowColor: "shadow-rose-500/30",
+      features: ["AMC Management", "Renewal Tracking", "Compliance Documentation", "Statutory Requirements"]
     },
   ];
 
   const stats = [
-    { icon: Building2, value: "50+", label: "Developments", color: "from-teal-500 to-teal-600" },
+    { icon: Building2, value: "100+", label: "Vendors Managed", color: "from-teal-500 to-teal-600" },
     { icon: Award, value: "20+", label: "Years Experience", color: "from-blue-500 to-blue-600" },
-    { icon: BarChart3, value: "100%", label: "Compliance Rate", color: "from-green-500 to-green-600" },
-    { icon: Target, value: "95%", label: "Success Rate", color: "from-amber-500 to-amber-600" },
+    { icon: BarChart3, value: "98%", label: "Satisfaction Rate", color: "from-green-500 to-green-600" },
+    { icon: Target, value: "100%", label: "Compliance Rate", color: "from-amber-500 to-amber-600" },
   ];
 
   const processSteps = [
-    { number: "01", title: "Project Consultation", description: "We assess your development project, understand your vision, and identify key requirements for successful community management." },
-    { number: "02", title: "Planning & Design", description: "Our experts work with you to design efficient layouts, plan service charges, and ensure RERA compliance from the start." },
-    { number: "03", title: "Documentation & Setup", description: "We handle all documentation, registration, and association setup to meet UAE regulations and prepare for handover." },
-    { number: "04", title: "Handover & Launch", description: "Seamless handover management, resident onboarding, and launch support to ensure your development starts strong." },
+    { number: "01", title: "Vendor Tendering", description: "We identify service needs and conduct comprehensive tendering processes to source qualified vendors for all key services." },
+    { number: "02", title: "Due Diligence & Selection", description: "Thorough verification of licenses, insurance, and regulatory compliance to ensure only qualified vendors are selected." },
+    { number: "03", title: "Contract Negotiation", description: "Expert contract negotiation with clear KPI/SLA structuring to establish transparent agreements and performance standards." },
+    { number: "04", title: "Ongoing Management", description: "Continuous performance monitoring, inspections, and issue resolution to maintain high service standards and compliance." },
   ];
 
   return (
-    <div className="pt-20">
+    <div className="bg-background">
       {/* Hero Section - Modern Split Layout */}
-      <section ref={heroRef} className="relative py-24 md:py-32 overflow-hidden">
+      <section ref={heroRef} className="relative pt-28 pb-20 md:pt-32 md:pb-24 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-secondary/5 to-background" />
         <div className="container mx-auto px-4 relative z-10">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
@@ -107,15 +115,15 @@ const ConsultancyNewDevelopments = () => {
             >
               <div className="inline-block mb-4">
                 <span className="text-sm font-semibold text-primary px-4 py-2 bg-primary/10 rounded-full">
-                  Consultancy for New Developments
+                  Vendor & Contract Management
                 </span>
               </div>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-heading font-bold mb-6 leading-tight">
-                Building Strong Communities{" "}
-                <span className="text-gradient">from the Start</span>
+                Reliable Vendor Management{" "}
+                <span className="text-gradient">for Quality Services</span>
               </h1>
               <p className="text-lg md:text-xl text-muted-foreground mb-8 leading-relaxed">
-                At POAM, we help developers create communities that last. Our Consultancy for New Developments service offers expert guidance from the planning stage to handover — ensuring your project is well-structured, compliant, and ready for successful management.
+                We ensure your community receives reliable, high-quality services by managing every aspect of vendor selection, contracting, and performance oversight. Our approach focuses on value, compliance, and accountability to maintain exceptional standards across all operations.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <Button size="lg" asChild className="group">
@@ -168,17 +176,17 @@ const ConsultancyNewDevelopments = () => {
               transition={{ duration: 0.6 }}
             >
               <h2 className="text-3xl md:text-4xl font-heading font-bold mb-6">
-                Expert Guidance for Successful Developments
+                Our Vendor & Contract Management Services
               </h2>
               <p className="text-lg text-muted-foreground leading-relaxed mb-6">
-                From the planning stage to handover, we ensure your project is well-structured, compliant, and ready for successful management.
+                We manage every aspect of vendor relationships to ensure your community receives consistent, high-quality services from trusted partners.
               </p>
               <div className="space-y-4">
                 {[
-                  "Expert Planning & Design Input",
-                  "RERA & DLD Compliance Support",
-                  "Service Charge Forecasting",
-                  "Seamless Handover Management"
+                  "Tendering & Vendor Qualification",
+                  "Comprehensive Due Diligence",
+                  "Contract Negotiation & KPI Structuring",
+                  "Performance Monitoring & Quality Reviews"
                 ].map((item, index) => (
                   <motion.div
                     key={index}
@@ -206,18 +214,18 @@ const ConsultancyNewDevelopments = () => {
                     <div className="w-14 h-14 bg-gradient-to-br from-primary to-secondary rounded-xl flex items-center justify-center mb-4">
                       <Building2 className="w-7 h-7 text-primary-foreground" />
                     </div>
-                    <h3 className="text-xl font-heading font-bold mb-2">Strategic Planning</h3>
+                    <h3 className="text-xl font-heading font-bold mb-2">Vendor Qualification</h3>
                     <p className="text-muted-foreground">
-                      We work with developers to design efficient, resident-friendly layouts and community spaces that support easy management.
+                      Comprehensive tendering and qualification processes to identify and select the best vendors for all key community services.
                     </p>
                   </div>
                   <div>
                     <div className="w-14 h-14 bg-gradient-to-br from-secondary to-secondary-hover rounded-xl flex items-center justify-center mb-4">
-                      <FileCheck className="w-7 h-7 text-secondary-foreground" />
+                      <Shield className="w-7 h-7 text-secondary-foreground" />
                     </div>
-                    <h3 className="text-xl font-heading font-bold mb-2">Full Compliance</h3>
+                    <h3 className="text-xl font-heading font-bold mb-2">Compliance & Quality</h3>
                     <p className="text-muted-foreground">
-                      Expert guidance through documentation, registration, and association setup to meet all UAE regulations smoothly.
+                      Rigorous due diligence, compliance checks, and performance monitoring to ensure all vendors meet the highest standards.
                     </p>
                   </div>
                 </div>
@@ -238,7 +246,7 @@ const ConsultancyNewDevelopments = () => {
           >
             <h2 className="text-4xl md:text-5xl font-heading font-bold mb-4">What We Offer</h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Comprehensive consultancy services designed to set your development up for success
+              Comprehensive vendor and contract management services designed to ensure quality, compliance, and cost-effectiveness
             </p>
           </motion.div>
 
@@ -294,7 +302,7 @@ const ConsultancyNewDevelopments = () => {
           >
             <h2 className="text-4xl md:text-5xl font-heading font-bold mb-4">Our Process</h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              A structured approach to development consultancy excellence
+              A structured approach to vendor and contract management excellence
             </p>
           </motion.div>
           <div className="max-w-4xl mx-auto">
@@ -339,24 +347,27 @@ const ConsultancyNewDevelopments = () => {
           >
             <div className="grid md:grid-cols-2 gap-8 items-center">
               <div>
-                <h2 className="text-4xl md:text-5xl font-heading font-bold mb-6">Why It Matters</h2>
+                <h2 className="text-4xl md:text-5xl font-heading font-bold mb-6">Why This Matters</h2>
                 <div className="space-y-4">
                   <Card className="p-6 bg-white/80 backdrop-blur-sm">
                     <p className="text-lg text-foreground leading-relaxed font-medium mb-2">
-                      Good planning today builds strong communities tomorrow.
+                      Every community depends on reliable external partners to maintain its facilities and services.
+                    </p>
+                    <p className="text-muted-foreground leading-relaxed mb-4">
+                      Effective vendor management ensures that every contractor delivers consistent quality, operates safely, and adheres to regulatory requirements.
                     </p>
                     <p className="text-muted-foreground leading-relaxed">
-                      By involving POAM early, developers ensure their projects are compliant, sustainable, and community-ready from day one.
+                      By managing vendor relationships professionally, we maintain high service standards, protect the community from non-compliant vendors, ensure competitive pricing, and enhance overall resident satisfaction.
                     </p>
                   </Card>
                 </div>
               </div>
               <div className="grid grid-cols-2 gap-4">
                 {[
-                  { icon: Building2, label: "Expert Planning", color: "from-teal-500 to-teal-600" },
-                  { icon: FileCheck, label: "Full Compliance", color: "from-blue-500 to-blue-600" },
-                  { icon: TrendingUp, label: "Financial Planning", color: "from-green-500 to-green-600" },
-                  { icon: Handshake, label: "Seamless Handover", color: "from-amber-500 to-amber-600" },
+                  { icon: Shield, label: "High Service Standards", color: "from-teal-500 to-teal-600" },
+                  { icon: AlertCircle, label: "Risk Protection", color: "from-blue-500 to-blue-600" },
+                  { icon: DollarSign, label: "Cost Efficiency", color: "from-green-500 to-green-600" },
+                  { icon: Heart, label: "Resident Satisfaction", color: "from-amber-500 to-amber-600" },
                 ].map((item, index) => (
                   <motion.div
                     key={index}
@@ -398,10 +409,10 @@ const ConsultancyNewDevelopments = () => {
             <h2 className="text-4xl md:text-5xl font-heading font-bold mb-6">Our Promise</h2>
             <Card className="p-10 md:p-12 bg-gradient-to-br from-primary/5 via-secondary/5 to-background border-2 border-primary/20">
               <p className="text-2xl md:text-3xl text-foreground leading-relaxed font-semibold mb-6">
-                We don't just advise — we create lasting communities.
+                Trusted vendors, transparent contracting, and consistently high-quality services.
               </p>
               <p className="text-lg md:text-xl text-muted-foreground leading-relaxed">
-                With POAM, your development stands on the pillars of planning, compliance, and enduring value.
+                With us, your community benefits from trusted vendors, transparent contracting, and consistently high-quality services that support a premium living experience.
               </p>
             </Card>
           </motion.div>
@@ -417,7 +428,7 @@ const ConsultancyNewDevelopments = () => {
             animate={ctaInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
             transition={{ duration: 0.6 }}
           >
-            Ready to Build a Successful Development?
+            Ready to Optimize Your Vendor Management?
           </motion.h2>
           <motion.p 
             className="text-xl mb-8 max-w-2xl mx-auto opacity-90"
@@ -425,7 +436,7 @@ const ConsultancyNewDevelopments = () => {
             animate={ctaInView ? { opacity: 0.9, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            Let's work together to create a development that's built for long-term success.
+            Let's work together to ensure your community receives reliable, high-quality services from trusted vendors.
           </motion.p>
           <motion.div
             initial={{ opacity: 0, y: 20 }}

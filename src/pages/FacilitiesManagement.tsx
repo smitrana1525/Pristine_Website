@@ -94,9 +94,9 @@ const FacilitiesManagement = () => {
   ];
 
   return (
-    <div className="pt-20">
+    <div className="bg-background">
       {/* Hero Section - Modern Split Layout */}
-      <section ref={heroRef} className="relative py-24 md:py-32 overflow-hidden">
+      <section ref={heroRef} className="relative pt-28 pb-20 md:pt-32 md:pb-24 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-secondary/5 to-background" />
         <div className="container mx-auto px-4 relative z-10">
           <div className="grid lg:grid-cols-2 gap-12 items-center">

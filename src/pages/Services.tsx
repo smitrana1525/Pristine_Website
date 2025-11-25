@@ -6,7 +6,6 @@ import {
   Wrench,
   MessageSquare,
   Shield,
-  Laptop,
   Phone,
 } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
@@ -19,7 +18,6 @@ import SEO from "@/components/SEO";
 import { seoConfig } from "@/utils/seoData";
 import facilitiesImage from "@/assets/Facilities & Operations Management.png";
 import communityEngagementImage from "@/assets/Community Engagement.png";
-import technologyImage from "@/assets/Technology & Portal Solutions.png";
 import healthSafetyImage from "@/assets/Health, Safety & Compliance.png";
 import consultancyImage from "@/assets/Consultancy for New Developments.png";
 
@@ -48,7 +46,7 @@ const Services = () => {
   const services = [
     {
       image: "/Services Images/Owner Association Management.png",
-      title: "Owners Association Management",
+      title: "Compliance & Governance",
       description:
         "Tailored governance frameworks that keep boards supported, communication transparent, and communities running smoothly.",
       features: [
@@ -84,7 +82,7 @@ const Services = () => {
     },
     {
       image: healthSafetyImage,
-      title: "Health, Safety & Compliance",
+      title: "Health, Safety & Risk Management",
       description:
         "Regular audits, emergency response planning, and UAE HSE compliance to safeguard residents and assets.",
       features: [
@@ -96,7 +94,7 @@ const Services = () => {
     },
     {
       image: communityEngagementImage,
-      title: "Community Engagement",
+      title: "Community & Resident Relations",
       description:
         "Resident-first programs that build trust through events, surveys, and consistent communication channels.",
       features: [
@@ -107,33 +105,21 @@ const Services = () => {
       ],
     },
     {
-      image: technologyImage,
-      title: "Technology & Portal Solutions",
-      description:
-        "Smart platforms for payments, service requests, and real-time community updates accessible anywhere.",
-      features: [
-        "Resident portal & mobile app",
-        "Online payments & billing",
-        "Service request automation",
-        "Real-time announcement center",
-      ],
-    },
-    {
       image: consultancyImage,
-      title: "Consultancy for New Developments",
+      title: "Vendor & Contract Management",
       description:
-        "Guiding developers with design input, community setup, and RERA documentation for seamless handovers.",
+        "Strategic vendor selection, contract negotiation, and performance oversight that ensure quality services and regulatory compliance.",
       features: [
-        "Design & operational review",
-        "Service charge modelling",
-        "Community launch playbooks",
-        "RERA documentation support",
+        "Vendor tendering & qualification",
+        "Contract negotiation & KPI structuring",
+        "Performance monitoring & inspections",
+        "AMC & compliance management",
       ],
     },
   ];
 
   return (
-    <div className="pt-20 min-h-screen bg-background">
+    <div className="min-h-screen bg-background">
       <SEO 
         title={seoConfig.services.title}
         description={seoConfig.services.description}
@@ -142,7 +128,7 @@ const Services = () => {
         url="https://pristine.ae/services"
       />
       {/* Hero Section */}
-      <section ref={heroRef} className="relative py-16 sm:py-24 lg:py-32 overflow-hidden">
+      <section ref={heroRef} className="relative pt-24 pb-16 sm:pt-28 sm:pb-20 lg:pt-32 lg:pb-24 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-primary/5 via-background to-background" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(120,119,198,0.1),transparent_50%)]" />
         
@@ -200,7 +186,7 @@ const Services = () => {
                       animate={servicesRef.isVisible ? { opacity: 1, x: 0 } : { opacity: 0, x: isEven ? -50 : 50 }}
                       transition={{ delay: index * 0.15 + 0.2, duration: 0.8 }}
                     >
-                      {isImageService ? (
+                      {isImageService && (
                         <div className="relative aspect-[4/3] rounded-2xl overflow-hidden bg-muted shadow-2xl group">
                           <motion.img
                             src={service.image}
@@ -212,19 +198,6 @@ const Services = () => {
                           />
                           <div className="absolute inset-0 bg-gradient-to-t from-background/60 via-transparent to-transparent" />
                           <div className="absolute top-6 right-6 w-3 h-3 rounded-full bg-primary/30 backdrop-blur-sm border border-primary/50" />
-                        </div>
-                      ) : (
-                        <div className="relative aspect-[4/3] rounded-2xl overflow-hidden bg-gradient-to-br from-muted via-muted/50 to-background flex items-center justify-center shadow-2xl">
-                          <motion.div
-                            initial={{ opacity: 0, scale: 0.5, rotate: -10 }}
-                            animate={servicesRef.isVisible ? { opacity: 1, scale: 1, rotate: 0 } : { opacity: 0, scale: 0.5, rotate: -10 }}
-                            transition={{ delay: index * 0.15 + 0.3, duration: 0.8, type: "spring" }}
-                            className={`relative w-32 h-32 bg-gradient-to-br ${service.bgGradient} rounded-3xl flex items-center justify-center ${service.shadowColor} shadow-2xl`}
-                          >
-                            <div className="absolute inset-0 rounded-3xl border-2 border-white/40" />
-                            <service.icon className="w-16 h-16 text-white relative z-10" strokeWidth={2} />
-                          </motion.div>
-                          <div className="absolute inset-0 bg-gradient-to-t from-background/40 via-transparent to-transparent" />
                         </div>
                       )}
                     </motion.div>

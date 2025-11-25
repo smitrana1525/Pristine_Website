@@ -27,7 +27,7 @@ const Navigation = () => {
 
   const services = [
     { 
-      name: "Owners Association Management", 
+      name: "Compliance & Governance", 
       path: "/services/owners-association-management",
       color: "bg-blue-500"
     },
@@ -42,22 +42,17 @@ const Navigation = () => {
       color: "bg-orange-500"
     },
     { 
-      name: "Health, Safety & Compliance", 
+      name: "Health, Safety & Risk Management", 
       path: "/services/health-safety-compliance",
       color: "bg-red-500"
     },
     { 
-      name: "Community Engagement", 
+      name: "Community & Resident Relations", 
       path: "/services/community-engagement",
       color: "bg-purple-500"
     },
     { 
-      name: "Technology & Portal Solutions", 
-      path: "/services/technology-portal-solutions",
-      color: "bg-cyan-500"
-    },
-    { 
-      name: "Consultancy for New Developments", 
+      name: "Vendor & Contract Management", 
       path: "/services/consultancy-new-developments",
       color: "bg-teal-500"
     },
@@ -66,7 +61,7 @@ const Navigation = () => {
   const navLinks = [
     { name: "Home", path: "/" },
     { name: "About Us", path: "/about" },
-    { name: "Communities", path: "/communities" },
+    { name: "Case Studies", path: "/communities" },
     { name: "Why Choose Us", path: "/why-us" },
     { name: "Blog", path: "/blog" },
     { name: "Contact", path: "/contact" },
