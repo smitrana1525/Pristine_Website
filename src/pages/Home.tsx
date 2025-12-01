@@ -11,9 +11,10 @@ import community3Image from "@/assets/community-3.jpg";
 import teamImage from "@/assets/about-team.jpg";
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import SEO from "@/components/SEO";
 import { seoConfig } from "@/utils/seoData";
+import { fetchBlogs, BlogApiItem } from "@/api/blog";
 
 const Home = () => {
   const statsRef = useScrollAnimation();
@@ -28,6 +29,28 @@ const Home = () => {
   const blogInView = useInView(blogRef, { once: true, margin: "-100px" });
   const ctaRef = useRef(null);
   const ctaInView = useInView(ctaRef, { once: true });
+
+  type LatestBlogCard = {
+    title: string;
+    excerpt: string;
+    date: string;
+    category: string;
+    image: string;
+    path: string;
+  };
+
+  const formatBlogDate = (isoDate?: string | null) => {
+    if (!isoDate) return "";
+    const date = new Date(isoDate);
+    if (Number.isNaN(date.getTime())) return "";
+    return date.toLocaleDateString("en-US", {
+      month: "long",
+      day: "numeric",
+      year: "numeric",
+    });
+  };
+
+  const [latestBlogPosts, setLatestBlogPosts] = useState<LatestBlogCard[]>([]);
 
   // Animation variants
   const fadeInUp = {
@@ -142,32 +165,49 @@ const Home = () => {
     },
   ];
 
-  const latestBlogPosts = [
-    {
-      title: "Understanding RERA Regulations for Community Management",
-      excerpt: "A comprehensive guide to navigating UAE real estate regulations and ensuring your community stays compliant.",
-      date: "March 15, 2024",
-      category: "Legal & Compliance",
-      image: community1Image,
-      path: "/blog"
-    },
-    {
-      title: "5 Ways to Increase Property Values in Your Community",
-      excerpt: "Expert strategies for enhancing your community's appeal and boosting property values for all residents.",
-      date: "March 10, 2024",
-      category: "Property Management",
-      image: community2Image,
-      path: "/blog"
-    },
-    {
-      title: "The Importance of Preventive Maintenance",
-      excerpt: "How regular maintenance schedules can save costs and prevent major issues in your community.",
-      date: "March 5, 2024",
-      category: "Maintenance",
-      image: community3Image,
-      path: "/blog"
-    },
-  ];
+  useEffect(() => {
+    let isMounted = true;
+
+    const loadLatestBlogs = async () => {
+      try {
+        const blogs = await fetchBlogs();
+        if (!isMounted) return;
+
+        const sorted = [...blogs].sort((a: BlogApiItem, b: BlogApiItem) => {
+          const aTime = a.dtPublishedOn ? new Date(a.dtPublishedOn).getTime() : 0;
+          const bTime = b.dtPublishedOn ? new Date(b.dtPublishedOn).getTime() : 0;
+          return bTime - aTime;
+        });
+
+        const topThree = sorted.slice(0, 3);
+
+        const mapped: LatestBlogCard[] = topThree.map((blog, index) => ({
+          title: blog.strTitle,
+          excerpt: blog.strDescription,
+          date: formatBlogDate(blog.dtPublishedOn),
+          category: blog.strCategoryName || "",
+          image:
+            blog.strBlogImage ||
+            (index === 0
+              ? community1Image
+              : index === 1
+              ? community2Image
+              : community3Image),
+          path: "/blog",
+        }));
+
+        setLatestBlogPosts(mapped);
+      } catch (error) {
+        console.error("Failed to load latest blogs", error);
+      }
+    };
+
+    void loadLatestBlogs();
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
 
   return (
     <>

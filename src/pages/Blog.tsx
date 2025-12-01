@@ -2,15 +2,36 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Calendar, User, ArrowRight } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
-import community1 from "@/assets/community-1.jpg";
-import community2 from "@/assets/community-2.jpg";
-import community3 from "@/assets/community-3.jpg";
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import { fetchBlogs, BlogApiItem } from "@/api/blog";
+
+type BlogCard = {
+  title: string;
+  excerpt: string;
+  image: string;
+  date: string;
+  author: string;
+  category: string;
+};
+
+const formatBlogDate = (isoDate?: string | null) => {
+  if (!isoDate) return "";
+  const date = new Date(isoDate);
+  if (Number.isNaN(date.getTime())) return "";
+  return date.toLocaleDateString("en-US", {
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+  });
+};
 
 const Blog = () => {
   const postsRef = useScrollAnimation();
+  const [blogPosts, setBlogPosts] = useState<BlogCard[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [hasError, setHasError] = useState(false);
   
   // Framer Motion refs
   const heroRef = useRef(null);
@@ -30,63 +51,53 @@ const Blog = () => {
       transition: { staggerChildren: 0.1, delayChildren: 0.2 }
     }
   };
+  
+  useEffect(() => {
+    let isMounted = true;
 
-  const blogPosts = [
-    {
-      title: "Understanding RERA Regulations for Community Management",
-      excerpt:
-        "A comprehensive guide to navigating UAE real estate regulations and ensuring your community stays compliant.",
-      image: community1,
-      date: "March 15, 2024",
-      author: "Legal Team",
-      category: "Legal & Compliance",
-    },
-    {
-      title: "5 Ways to Increase Property Values in Your Community",
-      excerpt:
-        "Expert strategies for enhancing your community's appeal and boosting property values for all residents.",
-      image: community2,
-      date: "March 10, 2024",
-      author: "Management Team",
-      category: "Property Management",
-    },
-    {
-      title: "The Importance of Preventive Maintenance",
-      excerpt:
-        "How regular maintenance schedules can save costs and prevent major issues in your community.",
-      image: community3,
-      date: "March 5, 2024",
-      author: "Technical Team",
-      category: "Maintenance",
-    },
-    {
-      title: "Building Stronger Community Relationships",
-      excerpt:
-        "Tips and strategies for fostering better communication and engagement among residents.",
-      image: community1,
-      date: "February 28, 2024",
-      author: "Community Relations",
-      category: "Community Building",
-    },
-    {
-      title: "Financial Planning for Owners Associations",
-      excerpt:
-        "Best practices for budgeting, reserve funds, and financial transparency in community management.",
-      image: community2,
-      date: "February 20, 2024",
-      author: "Finance Team",
-      category: "Financial Management",
-    },
-    {
-      title: "Smart Technology in Modern Communities",
-      excerpt:
-        "Exploring how digital solutions are transforming community management and resident experiences.",
-      image: community3,
-      date: "February 15, 2024",
-      author: "Technology Team",
-      category: "Innovation",
-    },
-  ];
+    const loadBlogs = async () => {
+      try {
+        setIsLoading(true);
+        setHasError(false);
+
+        const blogs = await fetchBlogs();
+
+        if (!isMounted) return;
+
+        const sorted = [...blogs].sort((a: BlogApiItem, b: BlogApiItem) => {
+          const aTime = a.dtPublishedOn ? new Date(a.dtPublishedOn).getTime() : 0;
+          const bTime = b.dtPublishedOn ? new Date(b.dtPublishedOn).getTime() : 0;
+          return bTime - aTime;
+        });
+
+        const mapped: BlogCard[] = sorted.map((blog) => ({
+          title: blog.strTitle,
+          excerpt: blog.strDescription,
+          image: blog.strBlogImage || "",
+          date: formatBlogDate(blog.dtPublishedOn),
+          author: blog.strAuthorName || "",
+          category: blog.strCategoryName || "",
+        }));
+
+        setBlogPosts(mapped);
+      } catch (error) {
+        console.error("Failed to load blogs", error);
+        if (isMounted) {
+          setHasError(true);
+        }
+      } finally {
+        if (isMounted) {
+          setIsLoading(false);
+        }
+      }
+    };
+
+    void loadBlogs();
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
 
   return (
     <div className="min-h-screen bg-background">
@@ -161,6 +172,11 @@ const Blog = () => {
             </motion.div>
 
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
+              {!isLoading && hasError && blogPosts.length === 0 && (
+                <div className="col-span-full text-center text-muted-foreground">
+                  Unable to load blog posts. Please try again later.
+                </div>
+              )}
               {blogPosts.map((post, index) => (
                 <motion.div
                   key={index}
