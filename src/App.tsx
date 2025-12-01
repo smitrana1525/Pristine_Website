@@ -18,6 +18,7 @@ import FinancialAdministrativeServices from "./pages/FinancialAdministrativeServ
 import Communities from "./pages/Communities";
 import WhyUs from "./pages/WhyUs";
 import Blog from "./pages/Blog";
+import BlogDetail from "./pages/BlogDetail";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
 
@@ -42,6 +43,7 @@ const AnimatedRoutes = () => {
         <Route path="/communities" element={<Communities />} />
         <Route path="/why-us" element={<WhyUs />} />
         <Route path="/blog" element={<Blog />} />
+        <Route path="/blog/:slug" element={<BlogDetail />} />
         <Route path="/contact" element={<Contact />} />
         {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
         <Route path="*" element={<NotFound />} />

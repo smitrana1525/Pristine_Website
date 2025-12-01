@@ -5,6 +5,7 @@ import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 import { fetchBlogs, BlogApiItem } from "@/api/blog";
 
 type BlogCard = {
@@ -14,6 +15,7 @@ type BlogCard = {
   date: string;
   author: string;
   category: string;
+  slug: string;
 };
 
 const formatBlogDate = (isoDate?: string | null) => {
@@ -51,7 +53,7 @@ const Blog = () => {
       transition: { staggerChildren: 0.1, delayChildren: 0.2 }
     }
   };
-  
+
   useEffect(() => {
     let isMounted = true;
 
@@ -77,6 +79,7 @@ const Blog = () => {
           date: formatBlogDate(blog.dtPublishedOn),
           author: blog.strAuthorName || "",
           category: blog.strCategoryName || "",
+          slug: blog.strSlug || blog.strBlogGUID,
         }));
 
         setBlogPosts(mapped);
@@ -225,9 +228,12 @@ const Blog = () => {
                       <Button 
                         variant="ghost" 
                         className="group/btn p-0 h-auto w-fit text-foreground hover:text-primary"
+                        asChild
                       >
+                        <Link to={`/blog/${post.slug}`}>
                         Read More
                         <ArrowRight className="w-4 h-4 ml-2 group-hover/btn:translate-x-1 transition-transform" />
+                        </Link>
                       </Button>
                     </div>
                   </article>

@@ -193,6 +193,50 @@ const Home = () => {
               : index === 1
               ? community2Image
               : community3Image),
+          path: blog.strSlug ? `/blog/${blog.strSlug}` : "/blog",
+        }));
+
+        setLatestBlogPosts(mapped);
+      } catch (error) {
+        console.error("Failed to load latest blogs", error);
+      }
+    };
+
+    void loadLatestBlogs();
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
+  useEffect(() => {
+    let isMounted = true;
+
+    const loadLatestBlogs = async () => {
+      try {
+        const blogs = await fetchBlogs();
+        if (!isMounted) return;
+
+        const sorted = [...blogs].sort((a: BlogApiItem, b: BlogApiItem) => {
+          const aTime = a.dtPublishedOn ? new Date(a.dtPublishedOn).getTime() : 0;
+          const bTime = b.dtPublishedOn ? new Date(b.dtPublishedOn).getTime() : 0;
+          return bTime - aTime;
+        });
+
+        const topThree = sorted.slice(0, 3);
+
+        const mapped: LatestBlogCard[] = topThree.map((blog, index) => ({
+          title: blog.strTitle,
+          excerpt: blog.strDescription,
+          date: formatBlogDate(blog.dtPublishedOn),
+          category: blog.strCategoryName || "",
+          image:
+            blog.strBlogImage ||
+            (index === 0
+              ? community1Image
+              : index === 1
+              ? community2Image
+              : community3Image),
           path: "/blog",
         }));
 
