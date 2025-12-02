@@ -122,7 +122,7 @@ const BlogDetail = () => {
       <div className="container mx-auto px-6 sm:px-8 lg:px-12">
         <div className="max-w-5xl mx-auto">
           <div className="mb-8">
-            <Button variant="ghost" className="px-0" asChild>
+            <Button variant="ghost" className="px-3" asChild>
               <Link to="/blog" className="inline-flex items-center text-sm">
                 <ArrowLeft className="w-4 h-4 mr-2" />
                 Back to all articles

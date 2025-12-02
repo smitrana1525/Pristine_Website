@@ -2,17 +2,25 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { MapPin, Phone, Mail, Clock } from "lucide-react";
+import { MapPin, Clock } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { toast } from "sonner";
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import SEO from "@/components/SEO";
 import { seoConfig } from "@/utils/seoData";
+import { submitContact } from "@/api/contact";
 
 const Contact = () => {
   const formRef = useScrollAnimation();
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [subject, setSubject] = useState("");
+  const [message, setMessage] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
   
   // Framer Motion refs
   const heroRef = useRef(null);
@@ -35,9 +43,35 @@ const Contact = () => {
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    toast.success("Thank you for your message! We'll get back to you soon.");
+
+    if (isSubmitting) return;
+
+    try {
+      setIsSubmitting(true);
+      await submitContact({
+        strFirstName: firstName,
+        strLastName: lastName,
+        strEmail: email,
+        strPhone: phone || undefined,
+        strSubject: subject,
+        strMessage: message,
+      });
+
+      toast.success("Thank you for your message! Our team will contact you within 24 hours.");
+
+      setFirstName("");
+      setLastName("");
+      setEmail("");
+      setPhone("");
+      setSubject("");
+      setMessage("");
+    } catch (error) {
+      toast.error("Something went wrong while sending your message. Please try again later.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -128,8 +162,6 @@ const Contact = () => {
                 <div className="space-y-8">
                   {[
                     { icon: MapPin, title: "Office Location", content: "Dubai, United Arab Emirates\nBusiness Bay Area" },
-                    { icon: Phone, title: "Phone", content: "+971 XX XXX XXXX\n+971 XX XXX XXXX (Emergency)" },
-                    { icon: Mail, title: "Email", content: "info@pristine.ae\nsupport@pristine.ae" },
                     { icon: Clock, title: "Business Hours", content: "Saturday - Thursday: 8:00 AM - 6:00 PM\nFriday: Closed\nEmergency Support: 24/7" },
                   ].map((item, index) => (
                     <motion.div
@@ -183,6 +215,8 @@ const Contact = () => {
                         <Input 
                           placeholder="John" 
                           required 
+                          value={firstName}
+                          onChange={(e) => setFirstName(e.target.value)}
                           className="h-12 rounded-xl border-border focus:ring-2 focus:ring-primary"
                         />
                       </div>
@@ -191,6 +225,8 @@ const Contact = () => {
                         <Input 
                           placeholder="Doe" 
                           required 
+                          value={lastName}
+                          onChange={(e) => setLastName(e.target.value)}
                           className="h-12 rounded-xl border-border focus:ring-2 focus:ring-primary"
                         />
                       </div>
@@ -202,6 +238,8 @@ const Contact = () => {
                         type="email" 
                         placeholder="john@example.com" 
                         required 
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
                         className="h-12 rounded-xl border-border focus:ring-2 focus:ring-primary"
                       />
                     </div>
@@ -211,7 +249,8 @@ const Contact = () => {
                       <Input 
                         type="tel" 
                         placeholder="+971 XX XXX XXXX" 
-                        required 
+                        value={phone}
+                        onChange={(e) => setPhone(e.target.value)}
                         className="h-12 rounded-xl border-border focus:ring-2 focus:ring-primary"
                       />
                     </div>
@@ -221,6 +260,8 @@ const Contact = () => {
                       <Input 
                         placeholder="How can we help you?" 
                         required 
+                        value={subject}
+                        onChange={(e) => setSubject(e.target.value)}
                         className="h-12 rounded-xl border-border focus:ring-2 focus:ring-primary"
                       />
                     </div>
@@ -231,6 +272,8 @@ const Contact = () => {
                         placeholder="Tell us more about your community management needs..."
                         rows={6}
                         required
+                        value={message}
+                        onChange={(e) => setMessage(e.target.value)}
                         className="rounded-xl border-border focus:ring-2 focus:ring-primary resize-none"
                       />
                     </div>
@@ -240,8 +283,8 @@ const Contact = () => {
                       whileTap={{ scale: 0.98 }}
                       className="pt-4"
                     >
-                      <Button type="submit" size="lg" className="w-full text-lg px-8 py-6 h-auto rounded-xl">
-                        Send Message
+                      <Button type="submit" size="lg" className="w-full text-lg px-8 py-6 h-auto rounded-xl" disabled={isSubmitting}>
+                        {isSubmitting ? "Sending..." : "Send Message"}
                       </Button>
                     </motion.div>
                   </form>

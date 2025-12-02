@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { MapPin, Facebook, Twitter, Linkedin, Instagram } from "lucide-react";
-import logo from "@/assets/pristine-logo.png";
+import logo from "@/assets/pristine-new-logo.png";
 
 const Footer = () => {
   return (

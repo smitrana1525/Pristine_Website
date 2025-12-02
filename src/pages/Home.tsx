@@ -15,6 +15,36 @@ import { useEffect, useRef, useState } from "react";
 import SEO from "@/components/SEO";
 import { seoConfig } from "@/utils/seoData";
 import { fetchBlogs, BlogApiItem } from "@/api/blog";
+import { fetchTestimonials, TestimonialApiItem } from "@/api/testimonial";
+import {
+  type CarouselApi,
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
+
+type LatestBlogCard = {
+  title: string;
+  excerpt: string;
+  date: string;
+  category: string;
+  image: string;
+  path: string;
+};
+
+type TestimonialCard = {
+  text: string;
+  author: string;
+  role?: string;
+};
+
+type Stat = {
+  value: number;
+  label: string;
+  suffix: string;
+};
 
 const Home = () => {
   const statsRef = useScrollAnimation();
@@ -30,15 +60,6 @@ const Home = () => {
   const ctaRef = useRef(null);
   const ctaInView = useInView(ctaRef, { once: true });
 
-  type LatestBlogCard = {
-    title: string;
-    excerpt: string;
-    date: string;
-    category: string;
-    image: string;
-    path: string;
-  };
-
   const formatBlogDate = (isoDate?: string | null) => {
     if (!isoDate) return "";
     const date = new Date(isoDate);
@@ -51,6 +72,8 @@ const Home = () => {
   };
 
   const [latestBlogPosts, setLatestBlogPosts] = useState<LatestBlogCard[]>([]);
+  const [testimonials, setTestimonials] = useState<TestimonialCard[]>([]);
+  const [testimonialCarouselApi, setTestimonialCarouselApi] = useState<CarouselApi | null>(null);
 
   // Animation variants
   const fadeInUp = {
@@ -73,6 +96,17 @@ const Home = () => {
     }
   };
 
+  // Auto-slide testimonials carousel
+  useEffect(() => {
+    if (!testimonialCarouselApi || testimonials.length === 0) return;
+
+    const interval = setInterval(() => {
+      testimonialCarouselApi.scrollNext();
+    }, 5000); // 5 seconds
+
+    return () => clearInterval(interval);
+  }, [testimonialCarouselApi, testimonials.length]);
+
   const scaleIn = {
     hidden: { opacity: 0, scale: 0.8 },
     visible: { 
@@ -82,7 +116,26 @@ const Home = () => {
     }
   };
 
-  const stats = [
+  const StatCard = ({ stat, isVisible }: { stat: Stat; isVisible: boolean }) => {
+    const count = useCountUp(stat.value, 2000, isVisible);
+  
+    return (
+      <motion.div
+        className="text-center"
+        variants={scaleIn}
+      >
+        <div className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-heading font-bold text-gradient mb-1 sm:mb-2 tracking-tight">
+          {count}
+          {stat.suffix}
+        </div>
+        <div className="text-xs sm:text-sm md:text-base text-muted-foreground leading-tight">
+          {stat.label}
+        </div>
+      </motion.div>
+    );
+  };
+
+  const stats: Stat[] = [
     { value: 20, label: "Years of Experience", suffix: "+" },
     { value: 100, label: "Communities Managed", suffix: "+" },
     { value: 5000, label: "Happy Residents", suffix: "+" },
@@ -152,19 +205,6 @@ const Home = () => {
     },
   ];
 
-  const testimonials = [
-    {
-      text: "Pristine has transformed our community management. Their professionalism and attention to detail is unmatched.",
-      author: "Ahmed Al Mansouri",
-      role: "Community Board Chairman",
-    },
-    {
-      text: "Outstanding service and transparent communication. They truly care about building better communities.",
-      author: "Sarah Johnson",
-      role: "Property Owner",
-    },
-  ];
-
   useEffect(() => {
     let isMounted = true;
 
@@ -212,41 +252,24 @@ const Home = () => {
   useEffect(() => {
     let isMounted = true;
 
-    const loadLatestBlogs = async () => {
+    const loadTestimonials = async () => {
       try {
-        const blogs = await fetchBlogs();
+        const items = await fetchTestimonials();
         if (!isMounted) return;
 
-        const sorted = [...blogs].sort((a: BlogApiItem, b: BlogApiItem) => {
-          const aTime = a.dtPublishedOn ? new Date(a.dtPublishedOn).getTime() : 0;
-          const bTime = b.dtPublishedOn ? new Date(b.dtPublishedOn).getTime() : 0;
-          return bTime - aTime;
-        });
-
-        const topThree = sorted.slice(0, 3);
-
-        const mapped: LatestBlogCard[] = topThree.map((blog, index) => ({
-          title: blog.strTitle,
-          excerpt: blog.strDescription,
-          date: formatBlogDate(blog.dtPublishedOn),
-          category: blog.strCategoryName || "",
-          image:
-            blog.strBlogImage ||
-            (index === 0
-              ? community1Image
-              : index === 1
-              ? community2Image
-              : community3Image),
-          path: "/blog",
+        const mapped: TestimonialCard[] = items.map((t: TestimonialApiItem) => ({
+          text: t.strTestimonialContent,
+          author: t.strPersonName,
+          role: t.strPersonDesignation || t.strCompanyName || "",
         }));
 
-        setLatestBlogPosts(mapped);
+        setTestimonials(mapped);
       } catch (error) {
-        console.error("Failed to load latest blogs", error);
+        console.error("Failed to load testimonials", error);
       }
     };
 
-    void loadLatestBlogs();
+    void loadTestimonials();
 
     return () => {
       isMounted = false;
@@ -272,7 +295,7 @@ const Home = () => {
 
         <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24 lg:py-32 text-center">
           <motion.h1 
-            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-heading font-premium font-bold text-primary-foreground mb-4 sm:mb-6 tracking-tight"
+            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-heading font-bold text-primary-foreground mb-4 sm:mb-6 tracking-tight"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
@@ -383,22 +406,9 @@ const Home = () => {
             initial="hidden"
             animate={statsRef.isVisible ? "visible" : "hidden"}
           >
-            {stats.map((stat, index) => {
-              const count = useCountUp(stat.value, 2000, statsRef.isVisible);
-              return (
-                <motion.div
-                  key={index}
-                  className="text-center"
-                  variants={scaleIn}
-                >
-                  <div className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-heading font-premium font-bold text-gradient mb-1 sm:mb-2 tracking-tight">
-                    {count}
-                    {stat.suffix}
-                  </div>
-                  <div className="text-xs sm:text-sm md:text-base text-muted-foreground leading-tight">{stat.label}</div>
-                </motion.div>
-              );
-            })}
+            {stats.map((stat, index) => (
+              <StatCard key={index} stat={stat} isVisible={statsRef.isVisible} />
+            ))}
           </motion.div>
         </div>
       </section>
@@ -417,7 +427,7 @@ const Home = () => {
               <span>Our Services</span>
               <span className="w-8 sm:w-12 h-px bg-border" />
             </div>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-heading font-premium font-bold mb-3 sm:mb-4 tracking-tight">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-heading font-bold mb-3 sm:mb-4 tracking-tight">
               Comprehensive Management
               <br />
               <span className="text-primary font-accent text-4xl sm:text-5xl lg:text-6xl">Solutions</span>
@@ -446,7 +456,7 @@ const Home = () => {
                       <div className="relative h-full p-8 rounded-3xl border border-border/40 bg-gradient-to-br from-background via-background/90 to-muted/30 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-500 overflow-hidden">
                         <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary/40 via-secondary/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                         <div className="absolute top-6 right-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                          <span className="text-5xl font-heading font-premium font-bold text-foreground/5 leading-none tracking-tight">
+                          <span className="text-5xl font-heading font-bold text-foreground/5 leading-none tracking-tight">
                             {String(index + 1).padStart(2, '0')}
                           </span>
                         </div>
@@ -461,7 +471,7 @@ const Home = () => {
                         </div>
 
                         <div className="relative z-10 space-y-4">
-                          <h3 className="text-xl font-heading font-premium font-bold group-hover:text-primary transition-colors duration-300 leading-tight tracking-tight">
+                          <h3 className="text-xl font-heading font-bold group-hover:text-primary transition-colors duration-300 leading-tight tracking-tight">
                             {service.title}
                           </h3>
                           <p className="text-sm text-foreground/70 leading-relaxed group-hover:text-foreground/90 transition-colors">
@@ -506,7 +516,7 @@ const Home = () => {
             transition={{ duration: 0.6 }}
             className="text-center mb-8 sm:mb-12"
           >
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-heading font-premium font-bold mb-3 sm:mb-4 tracking-tight">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-heading font-bold mb-3 sm:mb-4 tracking-tight">
               Professional <span className="text-primary font-accent text-4xl sm:text-5xl">Certifications</span>
             </h2>
             <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto">
@@ -531,7 +541,7 @@ const Home = () => {
                   <div className="absolute inset-0 bg-gradient-to-br from-amber-400/20 via-yellow-300/10 to-transparent" />
                   <Award className="w-7 h-7 text-blue-700 relative z-10" strokeWidth={2.5} style={{ filter: 'drop-shadow(0 1px 2px rgba(0,0,0,0.1))' }} />
                 </div>
-                <h3 className="text-base sm:text-lg font-heading font-premium font-semibold mb-3 tracking-tight text-foreground">{highlight.title}</h3>
+                <h3 className="text-base sm:text-lg font-heading font-semibold mb-3 tracking-tight text-foreground">{highlight.title}</h3>
                 <p className="text-sm text-foreground/70 leading-relaxed">{highlight.description}</p>
               </motion.div>
             ))}
@@ -553,7 +563,7 @@ const Home = () => {
               <span>Our Approach</span>
               <span className="w-8 sm:w-12 h-px bg-border" />
             </div>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-heading font-premium font-bold mb-3 sm:mb-4 tracking-tight">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-heading font-bold mb-3 sm:mb-4 tracking-tight">
               Building Better
               <br />
               <span className="text-primary font-accent text-4xl sm:text-5xl lg:text-6xl">Communities</span>
@@ -613,7 +623,7 @@ const Home = () => {
                    
                    {/* Content */}
                     <div className="p-6">
-                      <h3 className="text-xl font-heading font-premium font-semibold mb-2 group-hover:text-primary transition-colors duration-300 tracking-tight">
+                      <h3 className="text-xl font-heading font-semibold mb-2 group-hover:text-primary transition-colors duration-300 tracking-tight">
                        {feature.title}
                      </h3>
                      <p className="text-muted-foreground leading-relaxed text-sm">
@@ -641,7 +651,7 @@ const Home = () => {
               <span>Testimonials</span>
               <span className="w-8 sm:w-12 h-px bg-border" />
             </div>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-heading font-premium font-bold mb-3 sm:mb-4 tracking-tight">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-heading font-bold mb-3 sm:mb-4 tracking-tight">
               What Our <span className="text-primary font-accent text-4xl sm:text-5xl lg:text-6xl">Clients Say</span>
             </h2>
             <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto">
@@ -649,32 +659,47 @@ const Home = () => {
             </p>
           </motion.div>
 
-          <motion.div 
-            className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 max-w-5xl mx-auto"
-            variants={staggerContainer}
-            initial="hidden"
-            animate={testimonialsRef.isVisible ? "visible" : "hidden"}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={testimonialsRef.isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+            transition={{ duration: 0.6 }}
           >
-            {testimonials.map((testimonial, index) => (
-              <motion.div
-                key={index}
-                variants={fadeInUp}
-                whileHover={{ scale: 1.02, transition: { duration: 0.2 } }}
-              >
-                <Card className="p-6 sm:p-8 h-full border-border/50">
-                  <p className="text-base sm:text-lg mb-4 sm:mb-6 italic text-foreground/90">"{testimonial.text}"</p>
-                  <div className="flex items-center gap-3 pt-4 border-t border-border/50">
-                    <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
-                      <User className="w-5 h-5 text-primary" />
-                    </div>
-                    <div>
-                      <div className="font-heading font-premium font-semibold text-foreground tracking-tight">{testimonial.author}</div>
-                      <div className="text-sm text-muted-foreground">{testimonial.role}</div>
-                    </div>
-                  </div>
-                </Card>
-              </motion.div>
-            ))}
+            <Carousel
+              className="max-w-6xl mx-auto"
+              opts={{ loop: true, align: "start" }}
+              setApi={setTestimonialCarouselApi}
+            >
+              <CarouselContent className="md:-ml-4">
+                {testimonials.map((testimonial, index) => (
+                  <CarouselItem key={index} className="md:basis-1/2 flex">
+                    <motion.div
+                      className="w-full"
+                      variants={fadeInUp}
+                      whileHover={{ scale: 1.02, transition: { duration: 0.2 } }}
+                    >
+                      <Card className="p-6 sm:p-8 h-full flex flex-col justify-between border-border/50">
+                        <p className="text-base sm:text-lg mb-4 sm:mb-6 italic text-foreground/90 line-clamp-4">
+                          "{testimonial.text}"
+                        </p>
+                        <div className="flex items-center gap-3 pt-4 border-t border-border/50">
+                          <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
+                            <User className="w-5 h-5 text-primary" />
+                          </div>
+                          <div>
+                            <div className="font-heading font-semibold text-foreground tracking-tight">
+                              {testimonial.author}
+                            </div>
+                            <div className="text-sm text-muted-foreground">{testimonial.role}</div>
+                          </div>
+                        </div>
+                      </Card>
+                    </motion.div>
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+              <CarouselPrevious className="hidden md:flex" />
+              <CarouselNext className="hidden md:flex" />
+            </Carousel>
           </motion.div>
         </div>
       </section>
@@ -693,7 +718,7 @@ const Home = () => {
               <span>Latest News</span>
               <span className="w-8 sm:w-12 h-px bg-border" />
             </div>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-heading font-premium font-bold mb-3 sm:mb-4 tracking-tight">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-heading font-bold mb-3 sm:mb-4 tracking-tight">
               Insights & <span className="text-primary font-accent text-4xl sm:text-5xl lg:text-6xl">Updates</span>
             </h2>
             <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto">
@@ -714,7 +739,7 @@ const Home = () => {
                 whileHover={{ y: -4, transition: { duration: 0.2 } }}
               >
                 <Link to={post.path}>
-                  <Card className="group h-full overflow-hidden border-border/50 hover:border-primary/50 transition-all duration-300 cursor-pointer">
+                  <Card className="group h-full flex flex-col overflow-hidden border-border/50 hover:border-primary/50 transition-all duration-300 cursor-pointer">
                     <div className="relative h-48 overflow-hidden bg-muted">
                       <motion.img
                         src={post.image}
@@ -730,18 +755,18 @@ const Home = () => {
                         </span>
                       </div>
                     </div>
-                    <div className="p-6">
+                    <div className="p-6 flex flex-col flex-1">
                       <div className="flex items-center gap-2 text-xs text-muted-foreground mb-3">
                         <Calendar className="w-3 h-3" />
                         <span>{post.date}</span>
                       </div>
-                      <h3 className="text-lg font-heading font-premium font-semibold mb-2 group-hover:text-primary transition-colors line-clamp-2 tracking-tight">
+                    <h3 className="text-lg font-heading font-semibold mb-2 group-hover:text-primary transition-colors line-clamp-2 tracking-tight">
                         {post.title}
                       </h3>
                       <p className="text-sm text-muted-foreground leading-relaxed line-clamp-3 mb-4">
                         {post.excerpt}
                       </p>
-                      <div className="flex items-center gap-2 text-sm font-medium text-primary group-hover:gap-3 transition-all">
+                      <div className="mt-auto flex items-center gap-2 text-sm font-medium text-primary group-hover:gap-3 transition-all">
                         <span>Read More</span>
                         <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                       </div>
@@ -782,7 +807,7 @@ const Home = () => {
               <span>Get Started</span>
               <span className="w-8 sm:w-12 h-px bg-border" />
             </div>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-heading font-premium font-bold mb-4 sm:mb-6 tracking-tight">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-heading font-bold mb-4 sm:mb-6 tracking-tight">
               Ready to Transform
               <br />
               <span className="text-primary font-accent text-4xl sm:text-5xl lg:text-6xl">Your Community?</span>

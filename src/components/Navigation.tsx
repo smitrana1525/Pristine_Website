@@ -8,7 +8,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import logo from "@/assets/pristine-logo.png";
+import logo from "@/assets/pristine-new-logo.png";
 
 const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
