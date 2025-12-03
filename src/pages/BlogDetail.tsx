@@ -46,6 +46,33 @@ const renderLexicalNodes = (nodes: any[], keyPrefix = ""): JSX.Element[] =>
           </TagName>,
         ];
       }
+      // Support Lexical image nodes so inline images from the editor
+      // appear on the public website detail page.
+      case "image": {
+        const altText = node.altText ?? "";
+        const src = node.src ?? "";
+        const width = typeof node.width === "number" && node.width > 0 ? node.width : undefined;
+        const height = typeof node.height === "number" && node.height > 0 ? node.height : undefined;
+        if (!src) return [];
+
+        // Use the width/height captured from the editor so that resized images
+        // render at (approximately) the same size on the public website.
+        // We keep the image left‑aligned, matching the admin editor behaviour.
+        return [
+          <div key={key} className="my-6">
+            <img
+              src={src}
+              alt={altText}
+              className="rounded-xl shadow-sm"
+              style={{
+                maxWidth: "100%",
+                height: height ? `${height}px` : "auto",
+                width: width ? `${width}px` : "auto",
+              }}
+            />
+          </div>,
+        ];
+      }
       default:
         if (node.children) {
           return renderLexicalNodes(node.children, key);
