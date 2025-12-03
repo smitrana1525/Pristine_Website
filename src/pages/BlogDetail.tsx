@@ -4,6 +4,7 @@ import { Calendar, User, ArrowLeft, Tag } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { BlogApiItem, fetchBlogBySlug } from "@/api/blog";
+import { LexicalContent } from "@/components/lexical-content";
 
 const formatBlogDate = (isoDate?: string | null) => {
   if (!isoDate) return "";
@@ -15,71 +16,6 @@ const formatBlogDate = (isoDate?: string | null) => {
     year: "numeric",
   });
 };
-
-// Very lightweight renderer for Lexical JSON -> basic HTML structure
-// This avoids pulling in the full editor while still showing readable content.
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const renderLexicalNodes = (nodes: any[], keyPrefix = ""): JSX.Element[] =>
-  nodes.flatMap((node, index) => {
-    const key = `${keyPrefix}-${index}`;
-    if (!node) return [];
-
-    switch (node.type) {
-      case "text":
-        return [<span key={key}>{node.text}</span>];
-      case "linebreak":
-        return [<br key={key} />];
-      case "paragraph":
-        return [
-          <p key={key} className="mb-4 leading-relaxed text-muted-foreground">
-            {node.children ? renderLexicalNodes(node.children, key) : null}
-          </p>,
-        ];
-      case "heading": {
-        const TagName = (node.tag || "h2") as keyof JSX.IntrinsicElements;
-        return [
-          <TagName
-            key={key}
-            className="mt-8 mb-3 text-2xl sm:text-3xl font-heading font-bold tracking-tight"
-          >
-            {node.children ? renderLexicalNodes(node.children, key) : null}
-          </TagName>,
-        ];
-      }
-      // Support Lexical image nodes so inline images from the editor
-      // appear on the public website detail page.
-      case "image": {
-        const altText = node.altText ?? "";
-        const src = node.src ?? "";
-        const width = typeof node.width === "number" && node.width > 0 ? node.width : undefined;
-        const height = typeof node.height === "number" && node.height > 0 ? node.height : undefined;
-        if (!src) return [];
-
-        // Use the width/height captured from the editor so that resized images
-        // render at (approximately) the same size on the public website.
-        // We keep the image left‑aligned, matching the admin editor behaviour.
-        return [
-          <div key={key} className="my-6">
-            <img
-              src={src}
-              alt={altText}
-              className="rounded-xl shadow-sm"
-              style={{
-                maxWidth: "100%",
-                height: height ? `${height}px` : "auto",
-                width: width ? `${width}px` : "auto",
-              }}
-            />
-          </div>,
-        ];
-      }
-      default:
-        if (node.children) {
-          return renderLexicalNodes(node.children, key);
-        }
-        return [];
-    }
-  });
 
 const BlogDetail = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -120,29 +56,6 @@ const BlogDetail = () => {
       isMounted = false;
     };
   }, [slug]);
-
-  let content: JSX.Element | null = null;
-
-  if (blog?.strBlogContent) {
-    try {
-      const parsed = JSON.parse(blog.strBlogContent);
-      const rootChildren = parsed?.root?.children ?? [];
-      const nodes = renderLexicalNodes(rootChildren, "root");
-      content = <div className="mt-8 text-base sm:text-lg">{nodes}</div>;
-    } catch {
-      content = (
-        <p className="mt-8 text-muted-foreground whitespace-pre-line">
-          {blog.strDescription}
-        </p>
-      );
-    }
-  } else if (blog?.strDescription) {
-    content = (
-      <p className="mt-8 text-muted-foreground whitespace-pre-line">
-        {blog.strDescription}
-      </p>
-    );
-  }
 
   return (
     <div className="min-h-screen bg-background pt-20 pb-24">
@@ -232,7 +145,10 @@ const BlogDetail = () => {
                 </div>
               )}
 
-              {content}
+              <LexicalContent
+                serializedContent={blog.strBlogContent}
+                fallbackText={blog.strDescription}
+              />
             </article>
           )}
         </div>

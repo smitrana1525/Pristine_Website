@@ -92,7 +92,7 @@ const CaseStudies = () => {
       image: caseStudyTwo,
       challenges: [
         "Budgets not aligned with actual community needs",
-        "High service expenses with little justification",
+        "High service expenses with little justification",  
         "Vendors operating without performance tracking",
         "Service charges perceived as unfair by owners",
         "No proper reserve fund planning",
