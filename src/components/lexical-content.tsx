@@ -1,5 +1,41 @@
 import type { CSSProperties, JSX } from "react";
 
+// Map Lexical alignment (format/align) to Tailwind text alignment
+const getAlignClass = (format?: string): string => {
+  switch (format) {
+    case "center":
+      return "text-center";
+    case "right":
+      return "text-right";
+    case "justify":
+      return "text-justify";
+    default:
+      return "text-left";
+  }
+};
+
+// Parse Lexical style string (e.g. "background-color: #fff; color: red;") into a CSSProperties object
+const parseStyleString = (styleString?: string | null): CSSProperties => {
+  const style: CSSProperties = {};
+  if (!styleString || typeof styleString !== "string") return style;
+
+  styleString
+    .split(";")
+    .map((pair) => pair.trim())
+    .filter(Boolean)
+    .forEach((pair) => {
+      const [prop, value] = pair.split(":").map((p) => p.trim());
+      if (!prop || !value) return;
+      const camelProp = prop.replace(/-([a-z])/g, (_, c) =>
+        c ? c.toUpperCase() : "",
+      );
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (style as any)[camelProp] = value;
+    });
+
+  return style;
+};
+
 // Very lightweight renderer for Lexical JSON -> semantic HTML structure
 // without pulling the full editor runtime on the public site.
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -19,22 +55,7 @@ export const renderLexicalNodes = (nodes: any[], keyPrefix = ""): JSX.Element[] 
         const isSubscript = (format & 32) !== 0;
         const isSuperscript = (format & 64) !== 0;
 
-        const style: CSSProperties = {};
-        if (typeof node.style === "string" && node.style.trim().length > 0) {
-          node.style
-            .split(";")
-            .map((pair: string) => pair.trim())
-            .filter(Boolean)
-            .forEach((pair: string) => {
-              const [prop, value] = pair.split(":").map((p) => p.trim());
-              if (!prop || !value) return;
-              const camelProp = prop.replace(/-([a-z])/g, (_, c) =>
-                c ? c.toUpperCase() : "",
-              );
-              // eslint-disable-next-line @typescript-eslint/no-explicit-any
-              (style as any)[camelProp] = value;
-            });
-        }
+        const style: CSSProperties = parseStyleString(node.style);
 
         let element: JSX.Element = (
           <span key={key} style={style}>
@@ -84,18 +105,35 @@ export const renderLexicalNodes = (nodes: any[], keyPrefix = ""): JSX.Element[] 
       }
       case "linebreak":
         return [<br key={key} />];
-      case "paragraph":
+      case "paragraph": {
+        const alignClass = getAlignClass(
+          typeof node.format === "string" ? node.format : (node.align as string | undefined),
+        );
+        const blockStyle = parseStyleString(node.textStyle);
+
         return [
-          <p key={key} className="mb-4 leading-relaxed text-muted-foreground">
+          <p
+            key={key}
+            className={`mb-4 leading-relaxed text-muted-foreground ${alignClass}`.trim()}
+            style={blockStyle}
+          >
             {node.children ? renderLexicalNodes(node.children, key) : null}
           </p>,
         ];
+      }
       case "heading": {
         const TagName = (node.tag || "h2") as keyof JSX.IntrinsicElements;
+
+        const alignClass = getAlignClass(
+          typeof node.format === "string" ? node.format : (node.align as string | undefined),
+        );
+        const blockStyle = parseStyleString(node.textStyle);
+
         return [
           <TagName
             key={key}
-            className="mt-8 mb-3 text-2xl sm:text-3xl font-heading font-bold tracking-tight"
+            className={`mt-8 mb-3 text-2xl sm:text-3xl font-heading font-bold tracking-tight ${alignClass}`.trim()}
+            style={blockStyle}
           >
             {node.children ? renderLexicalNodes(node.children, key) : null}
           </TagName>,
@@ -115,17 +153,38 @@ export const renderLexicalNodes = (nodes: any[], keyPrefix = ""): JSX.Element[] 
           (node.tag === "ol" ? "ol" : node.tag === "ul" ? "ul" : "ul") as
             | "ul"
             | "ol";
-        const className =
-          TagName === "ol"
+        // For checklists, we render a styled list but the checkbox itself is part of list items
+        const isCheckList = node.listType === "check";
+        const className = isCheckList
+          ? "mb-4 ml-6 space-y-1"
+          : TagName === "ol"
             ? "mb-4 ml-6 list-decimal space-y-1"
             : "mb-4 ml-6 list-disc space-y-1";
+        const blockStyle = parseStyleString(node.textStyle);
         return [
-          <TagName key={key} className={className}>
+          <TagName key={key} className={className} style={blockStyle}>
             {node.children ? renderLexicalNodes(node.children, key) : null}
           </TagName>,
         ];
       }
       case "listitem":
+        // Support checklist items created by the CheckListPlugin
+        if (node.checked === true || node.checked === false) {
+          return [
+            <li key={key} className="flex items-start gap-2">
+              <input
+                type="checkbox"
+                checked={!!node.checked}
+                readOnly
+                className="mt-1 h-4 w-4 rounded border-muted-foreground/40"
+              />
+              <div className="flex-1">
+                {node.children ? renderLexicalNodes(node.children, key) : null}
+              </div>
+            </li>,
+          ];
+        }
+
         return [
           <li key={key}>
             {node.children ? renderLexicalNodes(node.children, key) : null}
@@ -158,18 +217,147 @@ export const renderLexicalNodes = (nodes: any[], keyPrefix = ""): JSX.Element[] 
             : undefined;
         if (!src) return [];
 
+        // Images are usually wrapped inside a paragraph node which carries the block alignment
+        // (left/center/right) and background styles. To preserve that behavior, we render the
+        // image inline and let the parent paragraph's text alignment control positioning.
+        const inlineStyle: CSSProperties = {
+          maxWidth: "100%",
+          height: height ? `${height}px` : "auto",
+          width: width ? `${width}px` : "auto",
+        };
+
         return [
-          <div key={key} className="my-6">
-            <img
-              src={src}
-              alt={altText}
-              className="rounded-xl shadow-sm"
-              style={{
-                maxWidth: "100%",
-                height: height ? `${height}px` : "auto",
-                width: width ? `${width}px` : "auto",
-              }}
+          <img
+            key={key}
+            src={src}
+            alt={altText}
+            className="my-6 rounded-xl shadow-sm inline-block"
+            style={inlineStyle}
+          />,
+        ];
+      }
+      case "code": {
+        const language =
+          typeof node.language === "string" && node.language.length > 0
+            ? node.language
+            : undefined;
+        return [
+          <pre
+            key={key}
+            className="my-4 overflow-x-auto rounded-md bg-muted px-4 py-3 text-sm font-mono"
+          >
+            <code data-language={language}>
+              {node.children ? renderLexicalNodes(node.children, key) : null}
+            </code>
+          </pre>,
+        ];
+      }
+      case "horizontalrule":
+      case "horizontal-rule":
+        return [<hr key={key} className="my-6 border-border/60" />];
+      case "table":
+        return [
+          <div key={key} className="my-6 overflow-x-auto">
+            <table className="w-full border-collapse text-sm">
+              <tbody>{node.children ? renderLexicalNodes(node.children, key) : null}</tbody>
+            </table>
+          </div>,
+        ];
+      case "tablerow":
+      case "tableRow":
+        return [
+          <tr key={key}>
+            {node.children ? renderLexicalNodes(node.children, key) : null}
+          </tr>,
+        ];
+      case "tablecell":
+      case "tableCell":
+      case "tableCellHeader": {
+        const isHeader = node.type === "tableCellHeader" || node.header === true;
+        const CellTag = (isHeader ? "th" : "td") as "th" | "td";
+        return [
+          <CellTag
+            key={key}
+            className="border border-border/60 px-3 py-2 align-top"
+          >
+            {node.children ? renderLexicalNodes(node.children, key) : null}
+          </CellTag>,
+        ];
+      }
+      // Layout columns created by the LayoutPlugin
+      case "layout-container":
+        return [
+          <div
+            key={key}
+            className="my-6 grid gap-6 md:grid-cols-2"
+          >
+            {node.children ? renderLexicalNodes(node.children, key) : null}
+          </div>,
+        ];
+      case "layout-item":
+        return [
+          <div key={key}>
+            {node.children ? renderLexicalNodes(node.children, key) : null}
+          </div>,
+        ];
+      // Embeds (Twitter / YouTube) created by AutoEmbed/Twitter/YouTube plugins.
+      // We render them as responsive iframes when URL is available, otherwise as links.
+      case "tweet": {
+        const url = typeof node.url === "string" ? node.url : "";
+        if (!url) {
+          return [];
+        }
+        const alignClass = getAlignClass(
+          typeof node.format === "string" ? node.format : (node.align as string | undefined),
+        );
+        const justify =
+          alignClass === "text-center"
+            ? "justify-center"
+            : alignClass === "text-right"
+              ? "justify-end"
+              : "justify-start";
+        return [
+          <div key={key} className={`my-6 flex ${justify}`}>
+            <blockquote className="twitter-tweet">
+              <a href={url}>{url}</a>
+            </blockquote>
+          </div>,
+        ];
+      }
+      case "youtube": // generic name
+      case "youtube-video": {
+        // Editor X YouTube node may store either url or videoID; normalise to embed URL
+        let url: string | undefined =
+          typeof node.url === "string" && node.url.length > 0 ? node.url : undefined;
+        if (!url && typeof node.videoID === "string" && node.videoID.length > 0) {
+          url = `https://www.youtube.com/embed/${node.videoID}`;
+        }
+        if (!url) return [];
+
+        const alignClass = getAlignClass(
+          typeof node.format === "string" ? node.format : (node.align as string | undefined),
+        );
+        const justify =
+          alignClass === "text-center"
+            ? "justify-center"
+            : alignClass === "text-right"
+              ? "justify-end"
+              : "justify-start";
+
+        return [
+          <div
+            key={key}
+            className={`my-6 flex ${justify}`}
+          >
+            <div className="aspect-video w-full max-w-3xl overflow-hidden rounded-xl">
+            <iframe
+              src={url}
+              title="YouTube video"
+              className="h-full w-full"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
             />
+            </div>
           </div>,
         ];
       }

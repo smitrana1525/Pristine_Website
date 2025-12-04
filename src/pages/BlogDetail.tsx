@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { BlogApiItem, fetchBlogBySlug } from "@/api/blog";
 import { LexicalContent } from "@/components/lexical-content";
+import SEO from "@/components/SEO";
 
 const formatBlogDate = (isoDate?: string | null) => {
   if (!isoDate) return "";
@@ -57,7 +58,39 @@ const BlogDetail = () => {
     };
   }, [slug]);
 
+  // Extract metadata with fallbacks
+  const metaTitle = blog?.strMetaTitle || blog?.strTitle || "";
+  const metaDescription = blog?.strMetaDescription || blog?.strDescription || "";
+  const metaKeywords = blog?.strMetaKeywords || "";
+  
+  // Extract relative path from blog image URL for SEO component
+  // (SEO component expects relative path and will prepend siteUrl)
+  const getImagePath = (imageUrl?: string | null): string | undefined => {
+    if (!imageUrl) return undefined;
+    try {
+      const url = new URL(imageUrl);
+      return url.pathname; // Returns path like "/Uploads/Blogs/..."
+    } catch {
+      // If it's already a relative path, return as is
+      return imageUrl.startsWith("/") ? imageUrl : `/${imageUrl}`;
+    }
+  };
+  
+  const ogImage = getImagePath(blog?.strBlogImage);
+  const blogUrl = blog?.strSlug ? `/blog/${blog.strSlug}` : undefined;
+
   return (
+    <>
+      {blog && (
+        <SEO
+          title={metaTitle}
+          description={metaDescription}
+          keywords={metaKeywords}
+          image={ogImage}
+          url={blogUrl}
+          type="article"
+        />
+      )}
     <div className="min-h-screen bg-background pt-20 pb-24">
       <div className="container mx-auto px-6 sm:px-8 lg:px-12">
         <div className="max-w-5xl mx-auto">
@@ -84,7 +117,7 @@ const BlogDetail = () => {
                 Blog not found
               </h1>
               <p className="text-muted-foreground mb-4">
-                The article you’re looking for may have been moved or unpublished.
+                  The article you're looking for may have been moved or unpublished.
               </p>
               <Button asChild>
                 <Link to="/blog">View all articles</Link>
@@ -154,6 +187,7 @@ const BlogDetail = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 
