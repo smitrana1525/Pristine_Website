@@ -1,7 +1,7 @@
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { CheckCircle2, Shield, Users, FileText, TrendingUp, MessageSquare, Heart, ArrowRight, Award, Clock, BarChart3, Building2 } from "lucide-react";
+import { CheckCircle2, Shield, Users, FileText, TrendingUp, MessageSquare, ArrowRight, ClipboardCheck, BookOpen, Gavel, FileCheck } from "lucide-react";
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
@@ -14,14 +14,8 @@ const OwnersAssociationManagement = () => {
   const introInView = useInView(introRef, { once: true, margin: "-100px" });
   const servicesRef = useRef(null);
   const servicesInView = useInView(servicesRef, { once: true, margin: "-100px" });
-  const statsRef = useRef(null);
-  const statsInView = useInView(statsRef, { once: true });
-  const processRef = useRef(null);
-  const processInView = useInView(processRef, { once: true });
   const whyRef = useRef(null);
   const whyInView = useInView(whyRef, { once: true });
-  const promiseRef = useRef(null);
-  const promiseInView = useInView(promiseRef, { once: true });
   const ctaRef = useRef(null);
   const ctaInView = useInView(ctaRef, { once: true });
 
@@ -41,85 +35,89 @@ const OwnersAssociationManagement = () => {
   const services = [
     {
       icon: Shield,
-      title: "Compliance & Governance",
-      description: "We take care of all legal and regulatory requirements — including RERA and DLD Mollak compliance — keeping your community's records, reports, and documents accurate and up to date.",
+      title: "Full registration and compliance with RERA & Mollak",
+      description: "Complete registration and ongoing compliance management with RERA and Mollak regulatory requirements.",
       bgGradient: "from-blue-500 to-blue-600",
-      shadowColor: "shadow-blue-500/30",
-      features: ["RERA Compliance", "DLD Mollak Integration", "Legal Documentation", "Regulatory Reporting"]
+      shadowColor: "shadow-blue-500/30"
     },
     {
-      icon: Users,
-      title: "Board Support & Administration",
-      description: "Our team helps your Board with planning, budgeting, and organizing meetings, so every decision is clear, confident, and well-informed.",
+      icon: Gavel,
+      title: "Implementation of JOP Law and community regulations",
+      description: "Expert implementation and adherence to Jointly Owned Property (JOP) Law and all community regulations.",
       bgGradient: "from-emerald-500 to-emerald-600",
-      shadowColor: "shadow-emerald-500/30",
-      features: ["Strategic Planning", "Budget Development", "Meeting Coordination", "Board Advisory"]
+      shadowColor: "shadow-emerald-500/30"
     },
     {
       icon: FileText,
-      title: "Policies & Procedures",
-      description: "We design simple and fair guidelines to help your community operate smoothly and consistently every day.",
+      title: "Preparation and maintenance of key governing documents",
+      description: "Comprehensive documentation including Community Rules, BMS records, facility operation manuals, and service contracts.",
       bgGradient: "from-amber-500 to-amber-600",
       shadowColor: "shadow-amber-500/30",
-      features: ["Policy Development", "Procedure Documentation", "Guideline Implementation", "Compliance Monitoring"]
+      subFeatures: ["Community Rules", "Building Management System (BMS) records", "Facility operation manuals & service contracts"]
     },
     {
-      icon: TrendingUp,
-      title: "Financial & Risk Management",
-      description: "We keep an eye on financial health and possible risks, making sure your community stays secure and well-managed at all times.",
+      icon: Users,
+      title: "Formation and ongoing support of the Owners Committee",
+      description: "Complete support for forming and maintaining an effective Owners Committee structure.",
       bgGradient: "from-purple-500 to-purple-600",
-      shadowColor: "shadow-purple-500/30",
-      features: ["Financial Oversight", "Risk Assessment", "Budget Management", "Financial Reporting"]
+      shadowColor: "shadow-purple-500/30"
     },
     {
       icon: MessageSquare,
-      title: "Meetings & Reporting",
-      description: "From AGMs and EGMs to minutes and official reports, we manage all communication and paperwork carefully and professionally.",
+      title: "Coordination and facilitation of all committee meetings",
+      description: "Professional coordination and facilitation services for all committee meetings and proceedings.",
       bgGradient: "from-rose-500 to-rose-600",
-      shadowColor: "shadow-rose-500/30",
-      features: ["AGM/EGM Management", "Minutes & Documentation", "Official Reporting", "Stakeholder Communication"]
+      shadowColor: "shadow-rose-500/30"
+    },
+    {
+      icon: ClipboardCheck,
+      title: "Managing community notices, minutes, regulatory submissions, and follow-ups",
+      description: "Comprehensive management of all community communications, documentation, and regulatory follow-ups.",
+      bgGradient: "from-indigo-500 to-indigo-600",
+      shadowColor: "shadow-indigo-500/30"
+    },
+    {
+      icon: BookOpen,
+      title: "Attendance at RERA workshops to stay aligned with regulatory updates",
+      description: "Active participation in RERA workshops to ensure your community stays current with all regulatory changes.",
+      bgGradient: "from-teal-500 to-teal-600",
+      shadowColor: "shadow-teal-500/30"
+    },
+    {
+      icon: FileCheck,
+      title: "Maintaining accurate compliance documentation within the Mollak system",
+      description: "Precise and up-to-date compliance documentation management within the Mollak system.",
+      bgGradient: "from-cyan-500 to-cyan-600",
+      shadowColor: "shadow-cyan-500/30"
     },
   ];
 
-  const stats = [
-    { icon: Building2, value: "100+", label: "Communities Managed", color: "from-blue-500 to-blue-600" },
-    { icon: Award, value: "20+", label: "Years of Excellence", color: "from-emerald-500 to-emerald-600" },
-    { icon: BarChart3, value: "98%", label: "Client Satisfaction", color: "from-amber-500 to-amber-600" },
-    { icon: Clock, value: "24/7", label: "Support Available", color: "from-purple-500 to-purple-600" },
-  ];
-
-  const processSteps = [
-    { number: "01", title: "Initial Assessment", description: "We evaluate your community's current state, needs, and goals to create a customized management plan." },
-    { number: "02", title: "Strategic Planning", description: "Our team develops comprehensive strategies for governance, compliance, and operational excellence." },
-    { number: "03", title: "Implementation", description: "We seamlessly integrate our management systems and processes into your community operations." },
-    { number: "04", title: "Ongoing Support", description: "Continuous monitoring, reporting, and optimization to ensure long-term success and growth." },
-  ];
 
   return (
     <div className="bg-background">
       {/* Hero Section - Modern Split Layout */}
-      <section ref={heroRef} className="relative pt-28 pb-20 md:pt-32 md:pb-24 overflow-hidden">
+      <section ref={heroRef} className="relative pt-28 pb-12 sm:pb-16 md:pt-32 md:pb-20 lg:pb-24 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-secondary/5 to-background" />
         <div className="container mx-auto px-4 relative z-10">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+          <div className="max-w-4xl mx-auto text-center">
             <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              animate={heroInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
+              initial={{ opacity: 0, y: 30 }}
+              animate={heroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
               transition={{ duration: 0.8 }}
             >
               <div className="inline-block mb-4">
-                <span className="text-sm font-semibold text-primary px-4 py-2 bg-primary/10 rounded-full">
-                  Owners Association Management
+                <span className="text-xs sm:text-sm font-medium tracking-[0.2em] uppercase text-primary px-4 py-2 bg-primary/10 rounded-full">
+                  Compliance & Governance
                 </span>
               </div>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-heading font-bold mb-6 leading-tight">
-                Helping Communities Grow with{" "}
-                <span className="text-gradient">Trust and Transparency</span>
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-heading font-bold mb-6 leading-tight tracking-tight">
+                Complete Confidence and{" "}
+                <span className="text-gradient font-accent">Full Legal Compliance</span>
               </h1>
-              <p className="text-lg md:text-xl text-muted-foreground mb-8 leading-relaxed">
-                At Pristine Owner Association Management Services (POAM), we believe a strong community starts with good management. Our Owners Association Management service makes sure your community runs smoothly, stays transparent, and follows all UAE RERA and DLD Mollak rules.
+              <p className="text-base sm:text-lg md:text-xl text-muted-foreground mb-8 leading-relaxed max-w-3xl mx-auto">
+                We ensure your community operates with complete confidence and full legal compliance. Our team manages all regulatory requirements under RERA, Mollak, and the Jointly Owned Property (JOP) Law, safeguarding your property and protecting owner interests.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4">
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button size="lg" asChild className="group">
                   <Link to="/contact">
                     Get Started
@@ -131,71 +129,25 @@ const OwnersAssociationManagement = () => {
                 </Button>
               </div>
             </motion.div>
-            <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              animate={heroInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="relative"
-            >
-              <div className="grid grid-cols-2 gap-4">
-                {stats.slice(0, 4).map((stat, index) => (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    animate={heroInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
-                    transition={{ delay: 0.4 + index * 0.1, duration: 0.5 }}
-                  >
-                    <Card className="p-6 text-center hover-lift">
-                      <div className={`w-12 h-12 bg-gradient-to-br ${stat.color} rounded-xl flex items-center justify-center mx-auto mb-3`}>
-                        <stat.icon className="w-6 h-6 text-white" />
-                      </div>
-                      <div className="text-2xl md:text-3xl font-heading font-bold text-gradient mb-1">{stat.value}</div>
-                      <div className="text-xs md:text-sm text-muted-foreground">{stat.label}</div>
-                    </Card>
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div>
           </div>
         </div>
       </section>
 
       {/* Introduction Section - Split Layout */}
-      <section ref={introRef} className="py-20 bg-white">
-        <div className="container mx-auto px-4">
+      <section ref={introRef} className="py-12 sm:py-16 lg:py-20 bg-white border-t border-border">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
             <motion.div
               initial={{ opacity: 0, x: -30 }}
               animate={introInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
               transition={{ duration: 0.6 }}
             >
-              <h2 className="text-3xl md:text-4xl font-heading font-bold mb-6">
-                Expert Management for Your Community
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-heading font-bold mb-6 tracking-tight">
+                Compliance & Governance
               </h2>
-              <p className="text-lg text-muted-foreground leading-relaxed mb-6">
-                We work closely with your Board of Directors to handle day-to-day operations, provide expert advice, and maintain a positive, well-managed environment for everyone.
+              <p className="text-base sm:text-lg text-muted-foreground leading-relaxed mb-6">
+                We ensure your community operates with complete confidence and full legal compliance. Our team manages all regulatory requirements under RERA, Mollak, and the Jointly Owned Property (JOP) Law, safeguarding your property and protecting owner interests.
               </p>
-              <div className="space-y-4">
-                {[
-                  "Full RERA & DLD Mollak Compliance",
-                  "Transparent Communication & Reporting",
-                  "Expert Board Advisory & Support",
-                  "Professional Day-to-Day Operations"
-                ].map((item, index) => (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={introInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
-                    transition={{ delay: 0.3 + index * 0.1, duration: 0.5 }}
-                    className="flex items-center space-x-3"
-                  >
-                    <div className="w-6 h-6 bg-gradient-to-br from-secondary to-secondary-hover rounded-lg flex items-center justify-center flex-shrink-0">
-                      <CheckCircle2 className="w-4 h-4 text-secondary-foreground" />
-                    </div>
-                    <span className="text-foreground font-medium">{item}</span>
-                  </motion.div>
-                ))}
-              </div>
             </motion.div>
             <motion.div
               initial={{ opacity: 0, x: 30 }}
@@ -208,18 +160,18 @@ const OwnersAssociationManagement = () => {
                     <div className="w-14 h-14 bg-gradient-to-br from-primary to-secondary rounded-xl flex items-center justify-center mb-4">
                       <Shield className="w-7 h-7 text-primary-foreground" />
                     </div>
-                    <h3 className="text-xl font-heading font-bold mb-2">Regulatory Excellence</h3>
-                    <p className="text-muted-foreground">
-                      Complete adherence to UAE regulations ensuring your community stays compliant and protected.
+                    <h3 className="text-xl font-heading font-bold mb-2 tracking-tight">RERA & Mollak Compliance</h3>
+                    <p className="text-sm text-muted-foreground leading-relaxed">
+                      Full registration and ongoing compliance with RERA and Mollak regulatory requirements.
                     </p>
                   </div>
                   <div>
                     <div className="w-14 h-14 bg-gradient-to-br from-secondary to-secondary-hover rounded-xl flex items-center justify-center mb-4">
-                      <Users className="w-7 h-7 text-secondary-foreground" />
+                      <Gavel className="w-7 h-7 text-secondary-foreground" />
                     </div>
-                    <h3 className="text-xl font-heading font-bold mb-2">Board Partnership</h3>
-                    <p className="text-muted-foreground">
-                      Collaborative approach working alongside your Board to achieve community goals.
+                    <h3 className="text-xl font-heading font-bold mb-2 tracking-tight">JOP Law Implementation</h3>
+                    <p className="text-sm text-muted-foreground leading-relaxed">
+                      Expert implementation and adherence to Jointly Owned Property (JOP) Law and community regulations.
                     </p>
                   </div>
                 </div>
@@ -230,22 +182,30 @@ const OwnersAssociationManagement = () => {
       </section>
 
       {/* What We Offer Section - Enhanced */}
-      <section ref={servicesRef} className="py-20 bg-gradient-to-br from-muted/50 to-background">
-        <div className="container mx-auto px-4">
+      <section ref={servicesRef} className="py-12 sm:py-16 lg:py-20 bg-gradient-to-br from-muted/50 to-background border-t border-border">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div 
-            className="text-center mb-16"
+            className="text-center mb-8 sm:mb-12 lg:mb-16"
             initial={{ opacity: 0, y: 30 }}
             animate={servicesInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
             transition={{ duration: 0.6 }}
           >
-            <h2 className="text-4xl md:text-5xl font-heading font-bold mb-4">What We Offer</h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Comprehensive services designed to keep your community running smoothly
+            <div className="flex items-center justify-center gap-3 sm:gap-4 text-xs sm:text-sm font-medium tracking-[0.2em] uppercase text-muted-foreground mb-4 sm:mb-6">
+              <span className="w-8 sm:w-12 h-px bg-border" />
+              <span>Our Services</span>
+              <span className="w-8 sm:w-12 h-px bg-border" />
+            </div>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-heading font-bold mb-3 sm:mb-4 tracking-tight">
+              Our Compliance &{" "}
+              <span className="text-primary font-accent text-4xl sm:text-5xl lg:text-6xl">Governance Services</span>
+            </h2>
+            <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto px-4">
+              Comprehensive compliance services designed to keep your community <span className="font-accent text-secondary text-xl sm:text-2xl">fully compliant and protected</span>
             </p>
           </motion.div>
 
           <motion.div 
-            className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
+            className="grid md:grid-cols-2 lg:grid-cols-4 gap-6"
             variants={staggerContainer}
             initial="hidden"
             animate={servicesInView ? "visible" : "hidden"}
@@ -268,16 +228,18 @@ const OwnersAssociationManagement = () => {
                       <service.icon className="w-8 h-8 text-white relative z-10 drop-shadow-sm" strokeWidth={2.5} />
                     </div>
                   </motion.div>
-                  <h3 className="text-xl font-heading font-semibold mb-3 group-hover:text-primary transition-colors duration-300">{service.title}</h3>
-                  <p className="text-muted-foreground leading-relaxed mb-4">{service.description}</p>
-                  <ul className="space-y-2">
-                    {service.features.map((feature, idx) => (
-                      <li key={idx} className="flex items-center text-sm text-muted-foreground">
-                        <div className="w-1.5 h-1.5 bg-secondary rounded-full mr-2 flex-shrink-0" />
-                        {feature}
-                      </li>
-                    ))}
-                  </ul>
+                  <h3 className="text-xl font-heading font-semibold mb-3 group-hover:text-primary transition-colors duration-300 tracking-tight leading-tight">{service.title}</h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed mb-4">{service.description}</p>
+                  {service.subFeatures && (
+                    <ul className="space-y-2">
+                      {service.subFeatures.map((feature, idx) => (
+                        <li key={idx} className="flex items-center text-sm text-muted-foreground">
+                          <div className="w-1.5 h-1.5 bg-secondary rounded-full mr-2 flex-shrink-0" />
+                          {feature}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
                 </Card>
               </motion.div>
             ))}
@@ -285,54 +247,9 @@ const OwnersAssociationManagement = () => {
         </div>
       </section>
 
-      {/* Process Section - Modern Timeline */}
-      <section ref={processRef} className="py-20 bg-white">
-        <div className="container mx-auto px-4">
-          <motion.div
-            className="text-center mb-16"
-            initial={{ opacity: 0, y: 30 }}
-            animate={processInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-            transition={{ duration: 0.6 }}
-          >
-            <h2 className="text-4xl md:text-5xl font-heading font-bold mb-4">Our Process</h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              A structured approach to community management excellence
-            </p>
-          </motion.div>
-          <div className="max-w-4xl mx-auto">
-            <div className="space-y-8">
-              {processSteps.map((step, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, x: -30 }}
-                  animate={processInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
-                  transition={{ delay: index * 0.2, duration: 0.6 }}
-                  className="flex gap-6"
-                >
-                  <div className="flex flex-col items-center">
-                    <div className="w-16 h-16 bg-gradient-to-br from-primary to-secondary rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg">
-                      <span className="text-2xl font-heading font-bold text-primary-foreground">{step.number}</span>
-                    </div>
-                    {index < processSteps.length - 1 && (
-                      <div className="w-0.5 h-full bg-gradient-to-b from-secondary to-primary/20 my-2" />
-                    )}
-                  </div>
-                  <div className="flex-1 pb-8">
-                    <Card className="p-6 hover-lift">
-                      <h3 className="text-xl font-heading font-bold mb-2">{step.title}</h3>
-                      <p className="text-muted-foreground leading-relaxed">{step.description}</p>
-                    </Card>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Why It Matters Section - Enhanced */}
-      <section ref={whyRef} className="py-20 bg-gradient-to-br from-primary/5 via-secondary/5 to-background">
-        <div className="container mx-auto px-4">
+      <section ref={whyRef} className="py-12 sm:py-16 lg:py-20 bg-gradient-to-br from-primary/5 via-secondary/5 to-background border-t border-border">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             className="max-w-5xl mx-auto"
             initial={{ opacity: 0, y: 30 }}
@@ -341,29 +258,50 @@ const OwnersAssociationManagement = () => {
           >
             <div className="grid md:grid-cols-2 gap-8 items-center">
               <div>
-                <h2 className="text-4xl md:text-5xl font-heading font-bold mb-6">Why It Matters</h2>
-                <div className="space-y-4">
-                  <Card className="p-6 bg-white/80 backdrop-blur-sm">
-                    <p className="text-lg text-foreground leading-relaxed font-medium mb-2">
-                      When a community is well-managed, everyone benefits.
-                    </p>
-                    <p className="text-muted-foreground leading-relaxed">
-                      Clear communication, transparency, and trust bring peace of mind to both owners and residents.
-                    </p>
-                  </Card>
-                  <Card className="p-6 bg-white/80 backdrop-blur-sm">
-                    <p className="text-muted-foreground leading-relaxed">
-                      At POAM, we make sure your community feels connected, confident, and cared for.
-                    </p>
-                  </Card>
-                </div>
+                <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-heading font-bold mb-6 tracking-tight">
+                  Why This <span className="text-primary font-accent text-4xl sm:text-5xl lg:text-6xl">Matters</span>
+                </h2>
+                <Card className="p-6 bg-white/80 backdrop-blur-sm mb-4">
+                  <p className="text-base sm:text-lg text-foreground leading-relaxed font-medium mb-4">
+                    Dubai's evolving regulatory landscape demands strict adherence to JOP Law and RERA standards. Strong governance is more than a requirement—it's the backbone of a secure, transparent, and professionally managed community.
+                  </p>
+                  <p className="text-sm sm:text-base text-muted-foreground leading-relaxed mb-4">
+                    By ensuring full compliance, we:
+                  </p>
+                  <ul className="space-y-3">
+                    {[
+                      "Protect owner rights and long-term investment value",
+                      "Maintain transparent and accountable operations",
+                      "Prevent legal or regulatory penalties",
+                      "Strengthen trust between owners, committees, developers, and management"
+                    ].map((item, index) => (
+                      <motion.li
+                        key={index}
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={whyInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
+                        transition={{ delay: 0.2 + index * 0.1, duration: 0.5 }}
+                        className="flex items-start space-x-3"
+                      >
+                        <div className="w-5 h-5 bg-gradient-to-br from-secondary to-secondary-hover rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5">
+                          <CheckCircle2 className="w-3 h-3 text-secondary-foreground" />
+                        </div>
+                        <span className="text-sm sm:text-base text-foreground">{item}</span>
+                      </motion.li>
+                    ))}
+                  </ul>
+                </Card>
+                <Card className="p-6 bg-white/80 backdrop-blur-sm">
+                  <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
+                    With us, your community enjoys a smooth, compliant, and professionally governed environment that supports stability, confidence, and harmonious living.
+                  </p>
+                </Card>
               </div>
               <div className="grid grid-cols-2 gap-4">
                 {[
                   { icon: Shield, label: "100% Compliance", color: "from-blue-500 to-blue-600" },
-                  { icon: Users, label: "Expert Support", color: "from-emerald-500 to-emerald-600" },
-                  { icon: FileText, label: "Transparent Reporting", color: "from-amber-500 to-amber-600" },
-                  { icon: TrendingUp, label: "Long-term Growth", color: "from-purple-500 to-purple-600" },
+                  { icon: Gavel, label: "JOP Law Adherence", color: "from-emerald-500 to-emerald-600" },
+                  { icon: FileText, label: "Regulatory Protection", color: "from-amber-500 to-amber-600" },
+                  { icon: TrendingUp, label: "Owner Rights Protection", color: "from-purple-500 to-purple-600" },
                 ].map((item, index) => (
                   <motion.div
                     key={index}
@@ -375,7 +313,7 @@ const OwnersAssociationManagement = () => {
                       <div className={`w-12 h-12 bg-gradient-to-br ${item.color} rounded-xl flex items-center justify-center mx-auto mb-3`}>
                         <item.icon className="w-6 h-6 text-white" />
                       </div>
-                      <p className="text-sm font-semibold text-foreground">{item.label}</p>
+                      <p className="text-sm font-semibold text-foreground tracking-tight">{item.label}</p>
                     </Card>
                   </motion.div>
                 ))}
@@ -385,68 +323,53 @@ const OwnersAssociationManagement = () => {
         </div>
       </section>
 
-      {/* Our Promise Section - Enhanced */}
-      <section ref={promiseRef} className="py-20 bg-white">
-        <div className="container mx-auto px-4">
-          <motion.div
-            className="max-w-4xl mx-auto text-center"
-            initial={{ opacity: 0, y: 30 }}
-            animate={promiseInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-            transition={{ duration: 0.6 }}
-          >
-            <motion.div
-              initial={{ scale: 0 }}
-              animate={promiseInView ? { scale: 1 } : { scale: 0 }}
-              transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
-              className="w-24 h-24 bg-gradient-to-br from-secondary to-secondary-hover rounded-2xl flex items-center justify-center mx-auto mb-8 shadow-xl"
-            >
-              <Heart className="w-12 h-12 text-secondary-foreground" />
-            </motion.div>
-            <h2 className="text-4xl md:text-5xl font-heading font-bold mb-6">Our Promise</h2>
-            <Card className="p-10 md:p-12 bg-gradient-to-br from-primary/5 via-secondary/5 to-background border-2 border-primary/20">
-              <p className="text-2xl md:text-3xl text-foreground leading-relaxed font-semibold mb-6">
-                We do more than just manage communities — we help them thrive.
-              </p>
-              <p className="text-lg md:text-xl text-muted-foreground leading-relaxed">
-                With POAM, your community is built on honesty, transparency, and professionalism, ensuring every decision adds value and builds trust.
-              </p>
-            </Card>
-          </motion.div>
-        </div>
-      </section>
-
       {/* CTA Section */}
-      <section ref={ctaRef} className="py-20 bg-gradient-to-r from-primary to-primary-hover text-primary-foreground">
-        <div className="container mx-auto px-4 text-center">
-          <motion.h2 
-            className="text-4xl md:text-5xl font-heading font-bold mb-6"
+      <section ref={ctaRef} className="py-12 sm:py-16 lg:py-20 bg-gradient-to-r from-primary to-primary-hover text-primary-foreground border-t border-primary-foreground/20">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={ctaInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
             transition={{ duration: 0.6 }}
+            className="max-w-4xl mx-auto"
           >
-            Ready to Transform Your Community?
-          </motion.h2>
-          <motion.p 
-            className="text-xl mb-8 max-w-2xl mx-auto opacity-90"
-            initial={{ opacity: 0, y: 20 }}
-            animate={ctaInView ? { opacity: 0.9, y: 0 } : { opacity: 0, y: 20 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
-            Let's work together to build a thriving, well-managed community that everyone is proud to call home.
-          </motion.p>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={ctaInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <Button size="lg" variant="secondary" asChild className="group">
-              <Link to="/contact">
-                Get Started Today
-                <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
-              </Link>
-            </Button>
+            <div className="flex items-center justify-center gap-3 sm:gap-4 text-xs sm:text-sm font-medium tracking-[0.2em] uppercase text-primary-foreground/70 mb-4 sm:mb-6">
+              <span className="w-8 sm:w-12 h-px bg-primary-foreground/30" />
+              <span>Get Started</span>
+              <span className="w-8 sm:w-12 h-px bg-primary-foreground/30" />
+            </div>
+            <motion.h2 
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-heading font-bold mb-4 sm:mb-6 tracking-tight"
+              initial={{ opacity: 0, y: 30 }}
+              animate={ctaInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+              transition={{ duration: 0.6 }}
+            >
+              Ready to Ensure{" "}
+              <span className="text-secondary font-accent text-4xl sm:text-5xl lg:text-6xl">Full Compliance?</span>
+            </motion.h2>
+            <motion.p 
+              className="text-base sm:text-lg md:text-xl mb-8 sm:mb-10 max-w-2xl mx-auto opacity-90 leading-relaxed"
+              initial={{ opacity: 0, y: 20 }}
+              animate={ctaInView ? { opacity: 0.9, y: 0 } : { opacity: 0, y: 20 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+            >
+              Let's work together to ensure your community operates with <span className="font-accent text-secondary text-xl sm:text-2xl">complete confidence</span>, full legal compliance, and professional governance.
+            </motion.p>
+            <motion.div
+              className="flex flex-col sm:flex-row gap-4 justify-center items-center"
+              initial={{ opacity: 0, y: 20 }}
+              animate={ctaInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+            >
+              <Button size="lg" variant="secondary" asChild className="group">
+                <Link to="/contact">
+                  Get Started Today
+                  <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
+                </Link>
+              </Button>
+              <Button size="lg" variant="outline" className="bg-primary-foreground/10 border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary" asChild>
+                <Link to="/services">Explore Our Services</Link>
+              </Button>
+            </motion.div>
           </motion.div>
         </div>
       </section>

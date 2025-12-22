@@ -1,7 +1,7 @@
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { Shield, FileCheck, AlertTriangle, TrendingDown, GraduationCap, Heart, ArrowRight, Award, Clock, BarChart3, Building2, CheckCircle2 } from "lucide-react";
+import { Shield, FileCheck, AlertTriangle, Flame, ClipboardList, FileText, Users, Zap, ArrowRight, CheckCircle2 } from "lucide-react";
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
@@ -14,12 +14,8 @@ const HealthSafetyCompliance = () => {
   const introInView = useInView(introRef, { once: true, margin: "-100px" });
   const servicesRef = useRef(null);
   const servicesInView = useInView(servicesRef, { once: true, margin: "-100px" });
-  const processRef = useRef(null);
-  const processInView = useInView(processRef, { once: true });
   const whyRef = useRef(null);
   const whyInView = useInView(whyRef, { once: true });
-  const promiseRef = useRef(null);
-  const promiseInView = useInView(promiseRef, { once: true });
   const ctaRef = useRef(null);
   const ctaInView = useInView(ctaRef, { once: true });
 
@@ -38,86 +34,89 @@ const HealthSafetyCompliance = () => {
 
   const services = [
     {
-      icon: Shield,
-      title: "Full Regulatory Compliance",
-      description: "We ensure your community follows UAE HSE laws, Dubai Civil Defense, and Municipality standards, maintaining a safe and compliant environment.",
+      icon: FileText,
+      title: "Development and implementation of community-wide HSE policies",
+      description: "Comprehensive development and implementation of health, safety, and environment policies across your entire community.",
       bgGradient: "from-red-500 to-red-600",
-      shadowColor: "shadow-red-500/30",
-      features: ["UAE HSE Compliance", "Dubai Civil Defense", "Municipality Standards", "Regulatory Adherence"]
-    },
-    {
-      icon: FileCheck,
-      title: "Regular Safety Audits",
-      description: "Our team conducts inspections and risk assessments to identify and fix issues before they become problems.",
-      bgGradient: "from-amber-500 to-amber-600",
-      shadowColor: "shadow-amber-500/30",
-      features: ["Safety Inspections", "Risk Assessments", "Issue Identification", "Preventive Action"]
+      shadowColor: "shadow-red-500/30"
     },
     {
       icon: AlertTriangle,
-      title: "Emergency Preparedness",
-      description: "We create custom emergency plans, including fire drills, evacuation routes, and staff training — ensuring your community is always ready.",
+      title: "Regular risk assessments for all common areas and facilities",
+      description: "Systematic risk assessments conducted regularly for all common areas and facilities to identify and mitigate potential hazards.",
+      bgGradient: "from-amber-500 to-amber-600",
+      shadowColor: "shadow-amber-500/30"
+    },
+    {
+      icon: Flame,
+      title: "Fire safety and emergency preparedness planning, including evacuation and fire drills",
+      description: "Complete fire safety planning and emergency preparedness including evacuation procedures and regular fire drills.",
       bgGradient: "from-orange-500 to-orange-600",
-      shadowColor: "shadow-orange-500/30",
-      features: ["Emergency Plans", "Fire Drills", "Evacuation Routes", "Staff Training"]
+      shadowColor: "shadow-orange-500/30"
     },
     {
-      icon: TrendingDown,
-      title: "Risk Management",
-      description: "We evaluate all operational and environmental risks and implement smart strategies to keep people and property protected.",
+      icon: ClipboardList,
+      title: "Monitoring and maintaining certifications, inspections, and safety logbooks",
+      description: "Continuous monitoring and maintenance of all certifications, inspections, and comprehensive safety logbooks.",
       bgGradient: "from-indigo-500 to-indigo-600",
-      shadowColor: "shadow-indigo-500/30",
-      features: ["Risk Evaluation", "Operational Risk Assessment", "Environmental Risk Analysis", "Protection Strategies"]
+      shadowColor: "shadow-indigo-500/30"
     },
     {
-      icon: GraduationCap,
-      title: "Safety Awareness & Training",
-      description: "We conduct interactive safety workshops and awareness programs to help residents and staff understand their safety roles.",
+      icon: FileCheck,
+      title: "Reporting and managing incidents, near misses, and corrective actions",
+      description: "Professional reporting and management of incidents, near misses, and implementation of corrective actions.",
       bgGradient: "from-teal-500 to-teal-600",
-      shadowColor: "shadow-teal-500/30",
-      features: ["Safety Workshops", "Awareness Programs", "Resident Training", "Staff Education"]
+      shadowColor: "shadow-teal-500/30"
+    },
+    {
+      icon: Users,
+      title: "Ensuring all contractors follow safety protocols, permits to work, and insurance requirements",
+      description: "Strict oversight ensuring all contractors comply with safety protocols, work permits, and insurance requirements.",
+      bgGradient: "from-cyan-500 to-cyan-600",
+      shadowColor: "shadow-cyan-500/30"
+    },
+    {
+      icon: Shield,
+      title: "Compliance checks for fire systems, electrical installations, and safety equipment",
+      description: "Regular compliance checks for fire systems, electrical installations, and all safety equipment to ensure full regulatory adherence.",
+      bgGradient: "from-blue-500 to-blue-600",
+      shadowColor: "shadow-blue-500/30"
+    },
+    {
+      icon: Zap,
+      title: "Coordination with Dubai Civil Defense, Municipality, and regulatory bodies for inspections and approvals",
+      description: "Seamless coordination with Dubai Civil Defense, Municipality, and all regulatory bodies for inspections and approvals.",
+      bgGradient: "from-purple-500 to-purple-600",
+      shadowColor: "shadow-purple-500/30"
     },
   ];
 
-  const stats = [
-    { icon: Shield, value: "100%", label: "Compliance Rate", color: "from-red-500 to-red-600" },
-    { icon: Award, value: "20+", label: "Years Experience", color: "from-amber-500 to-amber-600" },
-    { icon: BarChart3, value: "99%", label: "Safety Record", color: "from-orange-500 to-orange-600" },
-    { icon: Clock, value: "24/7", label: "Emergency Support", color: "from-indigo-500 to-indigo-600" },
-  ];
-
-  const processSteps = [
-    { number: "01", title: "Safety Assessment", description: "We conduct comprehensive safety audits and risk assessments to identify potential hazards and compliance gaps." },
-    { number: "02", title: "Compliance Planning", description: "Our team develops custom safety plans and compliance strategies aligned with UAE HSE, DCD, and DLD guidelines." },
-    { number: "03", title: "Implementation", description: "We implement safety protocols, emergency procedures, and training programs across your community." },
-    { number: "04", title: "Ongoing Monitoring", description: "Continuous safety monitoring, regular audits, and proactive risk management to ensure long-term protection." },
-  ];
 
   return (
     <div className="bg-background">
       {/* Hero Section - Modern Split Layout */}
-      <section ref={heroRef} className="relative pt-28 pb-20 md:pt-32 md:pb-24 overflow-hidden">
+      <section ref={heroRef} className="relative pt-28 pb-12 sm:pb-16 md:pt-32 md:pb-20 lg:pb-24 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-secondary/5 to-background" />
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="max-w-4xl mx-auto text-center">
             <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              animate={heroInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
+              initial={{ opacity: 0, y: 30 }}
+              animate={heroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
               transition={{ duration: 0.8 }}
             >
               <div className="inline-block mb-4">
-                <span className="text-sm font-semibold text-primary px-4 py-2 bg-primary/10 rounded-full">
-                  Health, Safety & Compliance
+                <span className="text-xs sm:text-sm font-medium tracking-[0.2em] uppercase text-primary px-4 py-2 bg-primary/10 rounded-full">
+                  Health, Safety & Risk Management
                 </span>
               </div>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-heading font-bold mb-6 leading-tight">
-                Safe. Responsible.{" "}
-                <span className="text-gradient">Always Prepared</span>
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-heading font-bold mb-6 leading-tight tracking-tight">
+                Rigorous Standards for{" "}
+                <span className="text-gradient font-accent">Safety and Well-being</span>
               </h1>
-              <p className="text-lg md:text-xl text-muted-foreground mb-8 leading-relaxed">
-                At POAM, safety isn't just a rule — it's part of our culture. Our Health, Safety & Compliance service protects your community's people, property, and operations through proactive planning and strict safety standards.
+              <p className="text-base sm:text-lg md:text-xl text-muted-foreground mb-8 leading-relaxed max-w-3xl mx-auto">
+                We prioritize the safety and well-being of every resident by implementing rigorous health, safety, and risk management standards. Our approach ensures your community meets all requirements set by Dubai Municipality, Dubai Civil Defense, and RERA, creating a secure and compliant environment at all times.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4">
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button size="lg" asChild className="group">
                   <Link to="/contact">
                     Get Started
@@ -129,71 +128,25 @@ const HealthSafetyCompliance = () => {
                 </Button>
               </div>
             </motion.div>
-            <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              animate={heroInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="relative"
-            >
-              <div className="grid grid-cols-2 gap-4">
-                {stats.map((stat, index) => (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    animate={heroInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
-                    transition={{ delay: 0.4 + index * 0.1, duration: 0.5 }}
-                  >
-                    <Card className="p-6 text-center hover-lift">
-                      <div className={`w-12 h-12 bg-gradient-to-br ${stat.color} rounded-xl flex items-center justify-center mx-auto mb-3`}>
-                        <stat.icon className="w-6 h-6 text-white" />
-                      </div>
-                      <div className="text-2xl md:text-3xl font-heading font-bold text-gradient mb-1">{stat.value}</div>
-                      <div className="text-xs md:text-sm text-muted-foreground">{stat.label}</div>
-                    </Card>
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div>
           </div>
         </div>
       </section>
 
       {/* Introduction Section - Split Layout */}
-      <section ref={introRef} className="py-20 bg-white">
-        <div className="container mx-auto px-4">
+      <section ref={introRef} className="py-12 sm:py-16 lg:py-20 bg-white border-t border-border">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
             <motion.div
               initial={{ opacity: 0, x: -30 }}
               animate={introInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
               transition={{ duration: 0.6 }}
             >
-              <h2 className="text-3xl md:text-4xl font-heading font-bold mb-6">
-                Comprehensive Safety Protection
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-heading font-bold mb-6 tracking-tight">
+                Health, Safety & Risk Management
               </h2>
-              <p className="text-lg text-muted-foreground leading-relaxed mb-6">
-                From emergency preparedness to safety checks, we make sure every aspect of your community meets UAE's HSE, DCD, and DLD guidelines with full confidence.
+              <p className="text-base sm:text-lg text-muted-foreground leading-relaxed mb-6">
+                We prioritize the safety and well-being of every resident by implementing rigorous health, safety, and risk management standards. Our approach ensures your community meets all requirements set by Dubai Municipality, Dubai Civil Defense, and RERA, creating a secure and compliant environment at all times.
               </p>
-              <div className="space-y-4">
-                {[
-                  "UAE HSE, DCD & DLD Compliance",
-                  "Proactive Safety Planning",
-                  "Emergency Preparedness",
-                  "Regular Safety Audits"
-                ].map((item, index) => (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={introInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
-                    transition={{ delay: 0.3 + index * 0.1, duration: 0.5 }}
-                    className="flex items-center space-x-3"
-                  >
-                    <div className="w-6 h-6 bg-gradient-to-br from-secondary to-secondary-hover rounded-lg flex items-center justify-center flex-shrink-0">
-                      <CheckCircle2 className="w-4 h-4 text-secondary-foreground" />
-                    </div>
-                    <span className="text-foreground font-medium">{item}</span>
-                  </motion.div>
-                ))}
-              </div>
             </motion.div>
             <motion.div
               initial={{ opacity: 0, x: 30 }}
@@ -206,18 +159,18 @@ const HealthSafetyCompliance = () => {
                     <div className="w-14 h-14 bg-gradient-to-br from-primary to-secondary rounded-xl flex items-center justify-center mb-4">
                       <Shield className="w-7 h-7 text-primary-foreground" />
                     </div>
-                    <h3 className="text-xl font-heading font-bold mb-2">Safety First Culture</h3>
-                    <p className="text-muted-foreground">
-                      We protect your community's people, property, and operations through proactive planning and strict safety standards.
+                    <h3 className="text-xl font-heading font-bold mb-2 tracking-tight">Regulatory Compliance</h3>
+                    <p className="text-sm text-muted-foreground leading-relaxed">
+                      Full compliance with Dubai Municipality, Dubai Civil Defense, and RERA requirements ensuring a secure and compliant environment.
                     </p>
                   </div>
                   <div>
                     <div className="w-14 h-14 bg-gradient-to-br from-secondary to-secondary-hover rounded-xl flex items-center justify-center mb-4">
                       <AlertTriangle className="w-7 h-7 text-secondary-foreground" />
                     </div>
-                    <h3 className="text-xl font-heading font-bold mb-2">Emergency Ready</h3>
-                    <p className="text-muted-foreground">
-                      Custom emergency plans, fire drills, and evacuation routes ensure your community is always prepared.
+                    <h3 className="text-xl font-heading font-bold mb-2 tracking-tight">Proactive Safety Culture</h3>
+                    <p className="text-sm text-muted-foreground leading-relaxed">
+                      Rigorous health, safety, and risk management standards that prioritize resident safety and well-being.
                     </p>
                   </div>
                 </div>
@@ -228,22 +181,30 @@ const HealthSafetyCompliance = () => {
       </section>
 
       {/* What We Offer Section - Enhanced */}
-      <section ref={servicesRef} className="py-20 bg-gradient-to-br from-muted/50 to-background">
-        <div className="container mx-auto px-4">
+      <section ref={servicesRef} className="py-12 sm:py-16 lg:py-20 bg-gradient-to-br from-muted/50 to-background border-t border-border">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div 
-            className="text-center mb-16"
+            className="text-center mb-8 sm:mb-12 lg:mb-16"
             initial={{ opacity: 0, y: 30 }}
             animate={servicesInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
             transition={{ duration: 0.6 }}
           >
-            <h2 className="text-4xl md:text-5xl font-heading font-bold mb-4">What We Offer</h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Comprehensive safety and compliance services designed to protect your community
+            <div className="flex items-center justify-center gap-3 sm:gap-4 text-xs sm:text-sm font-medium tracking-[0.2em] uppercase text-muted-foreground mb-4 sm:mb-6">
+              <span className="w-8 sm:w-12 h-px bg-border" />
+              <span>Our Services</span>
+              <span className="w-8 sm:w-12 h-px bg-border" />
+            </div>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-heading font-bold mb-3 sm:mb-4 tracking-tight">
+              Our Health, Safety &{" "}
+              <span className="text-primary font-accent text-4xl sm:text-5xl lg:text-6xl">Risk Management Services</span>
+            </h2>
+            <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto px-4">
+              Comprehensive safety services designed to keep your community <span className="font-accent text-secondary text-xl sm:text-2xl">secure and compliant</span>
             </p>
           </motion.div>
 
           <motion.div 
-            className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
+            className="grid md:grid-cols-2 lg:grid-cols-4 gap-6"
             variants={staggerContainer}
             initial="hidden"
             animate={servicesInView ? "visible" : "hidden"}
@@ -266,16 +227,8 @@ const HealthSafetyCompliance = () => {
                       <service.icon className="w-8 h-8 text-white relative z-10 drop-shadow-sm" strokeWidth={2.5} />
                     </div>
                   </motion.div>
-                  <h3 className="text-xl font-heading font-semibold mb-3 group-hover:text-primary transition-colors duration-300">{service.title}</h3>
-                  <p className="text-muted-foreground leading-relaxed mb-4">{service.description}</p>
-                  <ul className="space-y-2">
-                    {service.features.map((feature, idx) => (
-                      <li key={idx} className="flex items-center text-sm text-muted-foreground">
-                        <div className="w-1.5 h-1.5 bg-secondary rounded-full mr-2 flex-shrink-0" />
-                        {feature}
-                      </li>
-                    ))}
-                  </ul>
+                  <h3 className="text-xl font-heading font-semibold mb-3 group-hover:text-primary transition-colors duration-300 tracking-tight leading-tight">{service.title}</h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">{service.description}</p>
                 </Card>
               </motion.div>
             ))}
@@ -283,54 +236,9 @@ const HealthSafetyCompliance = () => {
         </div>
       </section>
 
-      {/* Process Section - Modern Timeline */}
-      <section ref={processRef} className="py-20 bg-white">
-        <div className="container mx-auto px-4">
-          <motion.div
-            className="text-center mb-16"
-            initial={{ opacity: 0, y: 30 }}
-            animate={processInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-            transition={{ duration: 0.6 }}
-          >
-            <h2 className="text-4xl md:text-5xl font-heading font-bold mb-4">Our Process</h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              A structured approach to safety and compliance excellence
-            </p>
-          </motion.div>
-          <div className="max-w-4xl mx-auto">
-            <div className="space-y-8">
-              {processSteps.map((step, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, x: -30 }}
-                  animate={processInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
-                  transition={{ delay: index * 0.2, duration: 0.6 }}
-                  className="flex gap-6"
-                >
-                  <div className="flex flex-col items-center">
-                    <div className="w-16 h-16 bg-gradient-to-br from-primary to-secondary rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg">
-                      <span className="text-2xl font-heading font-bold text-primary-foreground">{step.number}</span>
-                    </div>
-                    {index < processSteps.length - 1 && (
-                      <div className="w-0.5 h-full bg-gradient-to-b from-secondary to-primary/20 my-2" />
-                    )}
-                  </div>
-                  <div className="flex-1 pb-8">
-                    <Card className="p-6 hover-lift">
-                      <h3 className="text-xl font-heading font-bold mb-2">{step.title}</h3>
-                      <p className="text-muted-foreground leading-relaxed">{step.description}</p>
-                    </Card>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Why It Matters Section - Enhanced */}
-      <section ref={whyRef} className="py-20 bg-gradient-to-br from-primary/5 via-secondary/5 to-background">
-        <div className="container mx-auto px-4">
+      <section ref={whyRef} className="py-12 sm:py-16 lg:py-20 bg-gradient-to-br from-primary/5 via-secondary/5 to-background border-t border-border">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             className="max-w-5xl mx-auto"
             initial={{ opacity: 0, y: 30 }}
@@ -339,24 +247,50 @@ const HealthSafetyCompliance = () => {
           >
             <div className="grid md:grid-cols-2 gap-8 items-center">
               <div>
-                <h2 className="text-4xl md:text-5xl font-heading font-bold mb-6">Why It Matters</h2>
-                <div className="space-y-4">
-                  <Card className="p-6 bg-white/80 backdrop-blur-sm">
-                    <p className="text-lg text-foreground leading-relaxed font-medium mb-2">
-                      Safety builds confidence, and confidence builds trust.
-                    </p>
-                    <p className="text-muted-foreground leading-relaxed">
-                      By maintaining high standards and proactive systems, POAM ensures your community is secure, compliant, and cared for.
-                    </p>
-                  </Card>
-                </div>
+                <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-heading font-bold mb-6 tracking-tight">
+                  Why This <span className="text-primary font-accent text-4xl sm:text-5xl lg:text-6xl">Matters</span>
+                </h2>
+                <Card className="p-6 bg-white/80 backdrop-blur-sm mb-4">
+                  <p className="text-base sm:text-lg text-foreground leading-relaxed font-medium mb-4">
+                    Strong safety management protects residents, minimizes risks, and ensures full compliance with local authorities. A proactive safety culture not only prevents incidents—it builds trust and confidence within the community.
+                  </p>
+                  <p className="text-sm sm:text-base text-muted-foreground leading-relaxed mb-4">
+                    By prioritizing health and safety, we:
+                  </p>
+                  <ul className="space-y-3">
+                    {[
+                      "Reduce operational risks and enhance resident security",
+                      "Ensure continuous compliance with local regulations",
+                      "Prevent costly incidents, penalties, and liabilities",
+                      "Promote a safe, well-prepared, and resilient community"
+                    ].map((item, index) => (
+                      <motion.li
+                        key={index}
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={whyInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
+                        transition={{ delay: 0.2 + index * 0.1, duration: 0.5 }}
+                        className="flex items-start space-x-3"
+                      >
+                        <div className="w-5 h-5 bg-gradient-to-br from-secondary to-secondary-hover rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5">
+                          <CheckCircle2 className="w-3 h-3 text-secondary-foreground" />
+                        </div>
+                        <span className="text-sm sm:text-base text-foreground">{item}</span>
+                      </motion.li>
+                    ))}
+                  </ul>
+                </Card>
+                <Card className="p-6 bg-white/80 backdrop-blur-sm">
+                  <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
+                    With us, your community benefits from a robust safety framework that keeps residents protected, facilities compliant, and operations running seamlessly.
+                  </p>
+                </Card>
               </div>
               <div className="grid grid-cols-2 gap-4">
                 {[
-                  { icon: Shield, label: "Full Compliance", color: "from-red-500 to-red-600" },
-                  { icon: AlertTriangle, label: "Emergency Ready", color: "from-orange-500 to-orange-600" },
-                  { icon: FileCheck, label: "Regular Audits", color: "from-amber-500 to-amber-600" },
-                  { icon: GraduationCap, label: "Safety Training", color: "from-teal-500 to-teal-600" },
+                  { icon: Shield, label: "Risk Reduction", color: "from-red-500 to-red-600" },
+                  { icon: FileCheck, label: "Full Compliance", color: "from-orange-500 to-orange-600" },
+                  { icon: AlertTriangle, label: "Incident Prevention", color: "from-amber-500 to-amber-600" },
+                  { icon: Zap, label: "Resilient Community", color: "from-teal-500 to-teal-600" },
                 ].map((item, index) => (
                   <motion.div
                     key={index}
@@ -368,7 +302,7 @@ const HealthSafetyCompliance = () => {
                       <div className={`w-12 h-12 bg-gradient-to-br ${item.color} rounded-xl flex items-center justify-center mx-auto mb-3`}>
                         <item.icon className="w-6 h-6 text-white" />
                       </div>
-                      <p className="text-sm font-semibold text-foreground">{item.label}</p>
+                      <p className="text-sm font-semibold text-foreground tracking-tight">{item.label}</p>
                     </Card>
                   </motion.div>
                 ))}
@@ -378,68 +312,53 @@ const HealthSafetyCompliance = () => {
         </div>
       </section>
 
-      {/* Our Promise Section - Enhanced */}
-      <section ref={promiseRef} className="py-20 bg-white">
-        <div className="container mx-auto px-4">
-          <motion.div
-            className="max-w-4xl mx-auto text-center"
-            initial={{ opacity: 0, y: 30 }}
-            animate={promiseInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-            transition={{ duration: 0.6 }}
-          >
-            <motion.div
-              initial={{ scale: 0 }}
-              animate={promiseInView ? { scale: 1 } : { scale: 0 }}
-              transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
-              className="w-24 h-24 bg-gradient-to-br from-secondary to-secondary-hover rounded-2xl flex items-center justify-center mx-auto mb-8 shadow-xl"
-            >
-              <Heart className="w-12 h-12 text-secondary-foreground" />
-            </motion.div>
-            <h2 className="text-4xl md:text-5xl font-heading font-bold mb-6">Our Promise</h2>
-            <Card className="p-10 md:p-12 bg-gradient-to-br from-primary/5 via-secondary/5 to-background border-2 border-primary/20">
-              <p className="text-2xl md:text-3xl text-foreground leading-relaxed font-semibold mb-6">
-                We don't just protect — we prepare and prevent.
-              </p>
-              <p className="text-lg md:text-xl text-muted-foreground leading-relaxed">
-                With POAM, every precaution shows care, every rule shows integrity, and every community stays safe and strong.
-              </p>
-            </Card>
-          </motion.div>
-        </div>
-      </section>
-
       {/* CTA Section */}
-      <section ref={ctaRef} className="py-20 bg-gradient-to-r from-primary to-primary-hover text-primary-foreground">
-        <div className="container mx-auto px-4 text-center">
-          <motion.h2 
-            className="text-4xl md:text-5xl font-heading font-bold mb-6"
+      <section ref={ctaRef} className="py-12 sm:py-16 lg:py-20 bg-gradient-to-r from-primary to-primary-hover text-primary-foreground border-t border-primary-foreground/20">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={ctaInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
             transition={{ duration: 0.6 }}
+            className="max-w-4xl mx-auto"
           >
-            Ready to Ensure Your Community's Safety?
-          </motion.h2>
-          <motion.p 
-            className="text-xl mb-8 max-w-2xl mx-auto opacity-90"
-            initial={{ opacity: 0, y: 20 }}
-            animate={ctaInView ? { opacity: 0.9, y: 0 } : { opacity: 0, y: 20 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
-            Let's work together to create a safe, compliant, and secure environment for everyone.
-          </motion.p>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={ctaInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <Button size="lg" variant="secondary" asChild className="group">
-              <Link to="/contact">
-                Get Started Today
-                <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
-              </Link>
-            </Button>
+            <div className="flex items-center justify-center gap-3 sm:gap-4 text-xs sm:text-sm font-medium tracking-[0.2em] uppercase text-primary-foreground/70 mb-4 sm:mb-6">
+              <span className="w-8 sm:w-12 h-px bg-primary-foreground/30" />
+              <span>Get Started</span>
+              <span className="w-8 sm:w-12 h-px bg-primary-foreground/30" />
+            </div>
+            <motion.h2 
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-heading font-bold mb-4 sm:mb-6 tracking-tight"
+              initial={{ opacity: 0, y: 30 }}
+              animate={ctaInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+              transition={{ duration: 0.6 }}
+            >
+              Ready to Ensure{" "}
+              <span className="text-secondary font-accent text-4xl sm:text-5xl lg:text-6xl">Your Community's Safety?</span>
+            </motion.h2>
+            <motion.p 
+              className="text-base sm:text-lg md:text-xl mb-8 sm:mb-10 max-w-2xl mx-auto opacity-90 leading-relaxed"
+              initial={{ opacity: 0, y: 20 }}
+              animate={ctaInView ? { opacity: 0.9, y: 0 } : { opacity: 0, y: 20 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+            >
+              Let's work together to create a <span className="font-accent text-secondary text-xl sm:text-2xl">safe, compliant, and secure</span> environment for everyone.
+            </motion.p>
+            <motion.div
+              className="flex flex-col sm:flex-row gap-4 justify-center items-center"
+              initial={{ opacity: 0, y: 20 }}
+              animate={ctaInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+            >
+              <Button size="lg" variant="secondary" asChild className="group">
+                <Link to="/contact">
+                  Get Started Today
+                  <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
+                </Link>
+              </Button>
+              <Button size="lg" variant="outline" className="bg-primary-foreground/10 border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary" asChild>
+                <Link to="/services">Explore Our Services</Link>
+              </Button>
+            </motion.div>
           </motion.div>
         </div>
       </section>

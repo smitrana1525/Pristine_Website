@@ -1,7 +1,7 @@
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { DollarSign, FileText, TrendingUp, FileCheck, PiggyBank, FolderOpen, Heart, ArrowRight, Award, Clock, BarChart3, Building2, CheckCircle2, Shield } from "lucide-react";
+import { DollarSign, FileText, TrendingUp, FileCheck, Receipt, Shield, ArrowRight, CheckCircle2, ClipboardCheck, FileBarChart, ShieldCheck } from "lucide-react";
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
@@ -14,12 +14,8 @@ const FinancialAdministrativeServices = () => {
   const introInView = useInView(introRef, { once: true, margin: "-100px" });
   const servicesRef = useRef(null);
   const servicesInView = useInView(servicesRef, { once: true, margin: "-100px" });
-  const processRef = useRef(null);
-  const processInView = useInView(processRef, { once: true });
   const whyRef = useRef(null);
   const whyInView = useInView(whyRef, { once: true });
-  const promiseRef = useRef(null);
-  const promiseInView = useInView(promiseRef, { once: true });
   const ctaRef = useRef(null);
   const ctaInView = useInView(ctaRef, { once: true });
 
@@ -39,93 +35,95 @@ const FinancialAdministrativeServices = () => {
   const services = [
     {
       icon: TrendingUp,
-      title: "Budgeting & Strategic Financial Planning",
-      description: "Tailored annual budgets aligned with your community's goals — ensuring optimal fund allocation for operations, maintenance, and reserves.",
+      title: "Preparation of annual operational and reserve fund budgets",
+      description: "Comprehensive annual budget planning for both operational expenses and reserve funds, ensuring your community is financially prepared for all needs.",
       bgGradient: "from-green-500 to-green-600",
-      shadowColor: "shadow-green-500/30",
-      features: ["Annual Budget Planning", "Strategic Fund Allocation", "Operations Budgeting", "Reserve Planning"]
-    },
-    {
-      icon: FileText,
-      title: "Accounting, Bookkeeping & Compliance",
-      description: "Accurate, real-time accounting and bookkeeping in full compliance with UAE standards — providing complete visibility of income, expenses, and balances.",
-      bgGradient: "from-blue-500 to-blue-600",
-      shadowColor: "shadow-blue-500/30",
-      features: ["Real-time Accounting", "UAE Standards Compliance", "Income & Expense Tracking", "Balance Management"]
-    },
-    {
-      icon: DollarSign,
-      title: "Collections & Expense Management",
-      description: "Efficient management of service charge collections, payments, and expense tracking — maintaining a healthy cash flow and protecting financial integrity.",
-      bgGradient: "from-emerald-500 to-emerald-600",
-      shadowColor: "shadow-emerald-500/30",
-      features: ["Service Charge Collections", "Payment Processing", "Expense Tracking", "Cash Flow Management"]
+      shadowColor: "shadow-green-500/30"
     },
     {
       icon: FileCheck,
-      title: "Audit Coordination & Transparent Reporting",
-      description: "Comprehensive monthly and annual financial reports with coordinated audits — giving Boards and owners clear insight into every financial activity.",
+      title: "Submission of budgets through Mollak for RERA review and approval",
+      description: "Expert handling of budget submissions via Mollak system for RERA review and approval, ensuring full regulatory compliance.",
+      bgGradient: "from-blue-500 to-blue-600",
+      shadowColor: "shadow-blue-500/30"
+    },
+    {
+      icon: Receipt,
+      title: "Issuance and management of service charge invoices via Mollak",
+      description: "Professional issuance and complete management of service charge invoices through the Mollak platform, ensuring accuracy and compliance.",
+      bgGradient: "from-emerald-500 to-emerald-600",
+      shadowColor: "shadow-emerald-500/30"
+    },
+    {
+      icon: DollarSign,
+      title: "Collection follow-ups to maintain strong community cash flow",
+      description: "Proactive collection follow-ups to ensure timely payments and maintain healthy cash flow for your community operations.",
       bgGradient: "from-amber-500 to-amber-600",
-      shadowColor: "shadow-amber-500/30",
-      features: ["Monthly Reports", "Annual Financial Reports", "Audit Coordination", "Transparent Reporting"]
+      shadowColor: "shadow-amber-500/30"
     },
     {
-      icon: PiggyBank,
-      title: "Reserve Fund Planning & Oversight",
-      description: "Strategic management of reserve funds to ensure your community is prepared for future maintenance, upgrades, and capital improvements.",
+      icon: FileText,
+      title: "Maintaining accurate financial records and trust accounts",
+      description: "Precise maintenance of all financial records and trust accounts, ensuring complete accuracy and transparency in all transactions.",
       bgGradient: "from-purple-500 to-purple-600",
-      shadowColor: "shadow-purple-500/30",
-      features: ["Reserve Fund Strategy", "Future Planning", "Capital Improvement Planning", "Fund Oversight"]
+      shadowColor: "shadow-purple-500/30"
     },
     {
-      icon: FolderOpen,
-      title: "Administrative Support & Documentation",
-      description: "End-to-end administrative services including record maintenance, correspondence, and board meeting coordination — ensuring smooth, compliant operations.",
+      icon: FileBarChart,
+      title: "Transparent quarterly and annual financial reports",
+      description: "Comprehensive quarterly and annual financial reporting providing complete transparency to owners, committees, and stakeholders.",
       bgGradient: "from-indigo-500 to-indigo-600",
-      shadowColor: "shadow-indigo-500/30",
-      features: ["Record Maintenance", "Correspondence Management", "Board Meeting Coordination", "Documentation Services"]
+      shadowColor: "shadow-indigo-500/30"
+    },
+    {
+      icon: ClipboardCheck,
+      title: "Vendor tendering, contract award, and cost oversight",
+      description: "Professional vendor tendering processes, contract award management, and ongoing cost oversight to ensure value and quality.",
+      bgGradient: "from-teal-500 to-teal-600",
+      shadowColor: "shadow-teal-500/30"
+    },
+    {
+      icon: ShieldCheck,
+      title: "Administration of community insurance policies, including building, liability, and common-area coverage",
+      description: "Complete administration of all community insurance policies including building, liability, and common-area coverage for comprehensive protection.",
+      bgGradient: "from-cyan-500 to-cyan-600",
+      shadowColor: "shadow-cyan-500/30"
+    },
+    {
+      icon: Shield,
+      title: "Coordination with RERA-approved auditors for annual audits and compliance reviews",
+      description: "Seamless coordination with RERA-approved auditors for annual audits and compliance reviews, ensuring full regulatory adherence.",
+      bgGradient: "from-rose-500 to-rose-600",
+      shadowColor: "shadow-rose-500/30"
     },
   ];
 
-  const stats = [
-    { icon: DollarSign, value: "100%", label: "Financial Transparency", color: "from-green-500 to-green-600" },
-    { icon: Award, value: "20+", label: "Years Experience", color: "from-blue-500 to-blue-600" },
-    { icon: BarChart3, value: "98%", label: "Client Satisfaction", color: "from-emerald-500 to-emerald-600" },
-    { icon: FileCheck, value: "100%", label: "RERA Compliant", color: "from-amber-500 to-amber-600" },
-  ];
-
-  const processSteps = [
-    { number: "01", title: "Financial Assessment", description: "We evaluate your community's current financial status, identify areas for improvement, and establish baseline metrics." },
-    { number: "02", title: "Strategic Planning", description: "Our certified professionals develop comprehensive financial strategies aligned with your community's goals and RERA requirements." },
-    { number: "03", title: "System Implementation", description: "We implement accounting systems, reporting structures, and administrative processes for seamless operations." },
-    { number: "04", title: "Ongoing Management", description: "Continuous financial oversight, regular reporting, and strategic adjustments to ensure long-term stability and growth." },
-  ];
 
   return (
     <div className="bg-background">
       {/* Hero Section - Modern Split Layout */}
-      <section ref={heroRef} className="relative pt-28 pb-20 md:pt-32 md:pb-24 overflow-hidden">
+      <section ref={heroRef} className="relative pt-28 pb-12 sm:pb-16 md:pt-32 md:pb-20 lg:pb-24 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-secondary/5 to-background" />
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="max-w-4xl mx-auto text-center">
             <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              animate={heroInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
+              initial={{ opacity: 0, y: 30 }}
+              animate={heroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
               transition={{ duration: 0.8 }}
             >
               <div className="inline-block mb-4">
-                <span className="text-sm font-semibold text-primary px-4 py-2 bg-primary/10 rounded-full">
-                  Financial & Administrative Services
+                <span className="text-xs sm:text-sm font-medium tracking-[0.2em] uppercase text-primary px-4 py-2 bg-primary/10 rounded-full">
+                  Financial Management
                 </span>
               </div>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-heading font-bold mb-6 leading-tight">
-                Transparency. Accountability.{" "}
-                <span className="text-gradient">Financial Excellence You Can Trust</span>
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-heading font-bold mb-6 leading-tight tracking-tight">
+                Complete Transparency and{" "}
+                <span className="text-gradient font-accent">Full Compliance</span>
               </h1>
-              <p className="text-lg md:text-xl text-muted-foreground mb-8 leading-relaxed">
-                At Pristine Owner Association Management Services (POAM), we handle your community's financial and administrative affairs with the same integrity, precision, and professionalism that define our brand.
+              <p className="text-base sm:text-lg md:text-xl text-muted-foreground mb-8 leading-relaxed max-w-3xl mx-auto">
+                We manage your community's finances with complete transparency and in full compliance with RERA and Mollak standards. Our goal is to protect your investment by ensuring accurate budgeting, efficient cost control, and responsible financial planning for both operational and long-term needs.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4">
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button size="lg" asChild className="group">
                   <Link to="/contact">
                     Get Started
@@ -137,71 +135,25 @@ const FinancialAdministrativeServices = () => {
                 </Button>
               </div>
             </motion.div>
-            <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              animate={heroInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="relative"
-            >
-              <div className="grid grid-cols-2 gap-4">
-                {stats.map((stat, index) => (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    animate={heroInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
-                    transition={{ delay: 0.4 + index * 0.1, duration: 0.5 }}
-                  >
-                    <Card className="p-6 text-center hover-lift">
-                      <div className={`w-12 h-12 bg-gradient-to-br ${stat.color} rounded-xl flex items-center justify-center mx-auto mb-3`}>
-                        <stat.icon className="w-6 h-6 text-white" />
-                      </div>
-                      <div className="text-2xl md:text-3xl font-heading font-bold text-gradient mb-1">{stat.value}</div>
-                      <div className="text-xs md:text-sm text-muted-foreground">{stat.label}</div>
-                    </Card>
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div>
           </div>
         </div>
       </section>
 
       {/* Introduction Section - Split Layout */}
-      <section ref={introRef} className="py-20 bg-white">
-        <div className="container mx-auto px-4">
+      <section ref={introRef} className="py-12 sm:py-16 lg:py-20 bg-white border-t border-border">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
             <motion.div
               initial={{ opacity: 0, x: -30 }}
               animate={introInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
               transition={{ duration: 0.6 }}
             >
-              <h2 className="text-3xl md:text-4xl font-heading font-bold mb-6">
-                Financial Excellence for Your Community
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-heading font-bold mb-6 tracking-tight">
+                Financial Management
               </h2>
-              <p className="text-lg text-muted-foreground leading-relaxed mb-6">
-                Our Financial & Administrative Services ensure complete transparency, compliance, and control — empowering Owners Associations to achieve long-term financial stability and operational efficiency.
+              <p className="text-base sm:text-lg text-muted-foreground leading-relaxed mb-6">
+                We manage your community's finances with complete transparency and in full compliance with RERA and Mollak standards. Our goal is to protect your investment by ensuring accurate budgeting, efficient cost control, and responsible financial planning for both operational and long-term needs.
               </p>
-              <div className="space-y-4">
-                {[
-                  "Certified Accounting Professionals",
-                  "RERA & DLD Mollak Expertise",
-                  "Complete Financial Transparency",
-                  "Strategic Financial Oversight"
-                ].map((item, index) => (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={introInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
-                    transition={{ delay: 0.3 + index * 0.1, duration: 0.5 }}
-                    className="flex items-center space-x-3"
-                  >
-                    <div className="w-6 h-6 bg-gradient-to-br from-secondary to-secondary-hover rounded-lg flex items-center justify-center flex-shrink-0">
-                      <CheckCircle2 className="w-4 h-4 text-secondary-foreground" />
-                    </div>
-                    <span className="text-foreground font-medium">{item}</span>
-                  </motion.div>
-                ))}
-              </div>
             </motion.div>
             <motion.div
               initial={{ opacity: 0, x: 30 }}
@@ -214,18 +166,18 @@ const FinancialAdministrativeServices = () => {
                     <div className="w-14 h-14 bg-gradient-to-br from-primary to-secondary rounded-xl flex items-center justify-center mb-4">
                       <DollarSign className="w-7 h-7 text-primary-foreground" />
                     </div>
-                    <h3 className="text-xl font-heading font-bold mb-2">Financial Integrity</h3>
-                    <p className="text-muted-foreground">
-                      With certified accounting professionals and deep expertise in RERA regulations and DLD Mollak systems, POAM delivers strategic oversight.
+                    <h3 className="text-xl font-heading font-bold mb-2 tracking-tight">RERA & Mollak Compliance</h3>
+                    <p className="text-sm text-muted-foreground leading-relaxed">
+                      Full compliance with RERA and Mollak standards ensuring your community's finances meet all regulatory requirements.
                     </p>
                   </div>
                   <div>
                     <div className="w-14 h-14 bg-gradient-to-br from-secondary to-secondary-hover rounded-xl flex items-center justify-center mb-4">
                       <Shield className="w-7 h-7 text-secondary-foreground" />
                     </div>
-                    <h3 className="text-xl font-heading font-bold mb-2">Compliance & Trust</h3>
-                    <p className="text-muted-foreground">
-                      Every transaction is transparent, every record is accurate, strengthening community trust and sustainability.
+                    <h3 className="text-xl font-heading font-bold mb-2 tracking-tight">Investment Protection</h3>
+                    <p className="text-sm text-muted-foreground leading-relaxed">
+                      Accurate budgeting, efficient cost control, and responsible financial planning to protect your investment.
                     </p>
                   </div>
                 </div>
@@ -236,22 +188,30 @@ const FinancialAdministrativeServices = () => {
       </section>
 
       {/* What We Offer Section - Enhanced */}
-      <section ref={servicesRef} className="py-20 bg-gradient-to-br from-muted/50 to-background">
-        <div className="container mx-auto px-4">
+      <section ref={servicesRef} className="py-12 sm:py-16 lg:py-20 bg-gradient-to-br from-muted/50 to-background border-t border-border">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div 
-            className="text-center mb-16"
+            className="text-center mb-8 sm:mb-12 lg:mb-16"
             initial={{ opacity: 0, y: 30 }}
             animate={servicesInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
             transition={{ duration: 0.6 }}
           >
-            <h2 className="text-4xl md:text-5xl font-heading font-bold mb-4">What We Offer</h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Comprehensive financial and administrative services designed for excellence
+            <div className="flex items-center justify-center gap-3 sm:gap-4 text-xs sm:text-sm font-medium tracking-[0.2em] uppercase text-muted-foreground mb-4 sm:mb-6">
+              <span className="w-8 sm:w-12 h-px bg-border" />
+              <span>Our Services</span>
+              <span className="w-8 sm:w-12 h-px bg-border" />
+            </div>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-heading font-bold mb-3 sm:mb-4 tracking-tight">
+              Our Financial{" "}
+              <span className="text-primary font-accent text-4xl sm:text-5xl lg:text-6xl">Management Services</span>
+            </h2>
+            <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto px-4">
+              Comprehensive financial services designed to keep your community <span className="font-accent text-secondary text-xl sm:text-2xl">financially secure and compliant</span>
             </p>
           </motion.div>
 
           <motion.div 
-            className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
+            className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
             variants={staggerContainer}
             initial="hidden"
             animate={servicesInView ? "visible" : "hidden"}
@@ -274,16 +234,8 @@ const FinancialAdministrativeServices = () => {
                       <service.icon className="w-8 h-8 text-white relative z-10 drop-shadow-sm" strokeWidth={2.5} />
                     </div>
                   </motion.div>
-                  <h3 className="text-xl font-heading font-semibold mb-3 group-hover:text-primary transition-colors duration-300">{service.title}</h3>
-                  <p className="text-muted-foreground leading-relaxed mb-4">{service.description}</p>
-                  <ul className="space-y-2">
-                    {service.features.map((feature, idx) => (
-                      <li key={idx} className="flex items-center text-sm text-muted-foreground">
-                        <div className="w-1.5 h-1.5 bg-secondary rounded-full mr-2 flex-shrink-0" />
-                        {feature}
-                      </li>
-                    ))}
-                  </ul>
+                  <h3 className="text-xl font-heading font-semibold mb-3 group-hover:text-primary transition-colors duration-300 tracking-tight leading-tight">{service.title}</h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">{service.description}</p>
                 </Card>
               </motion.div>
             ))}
@@ -291,54 +243,9 @@ const FinancialAdministrativeServices = () => {
         </div>
       </section>
 
-      {/* Process Section - Modern Timeline */}
-      <section ref={processRef} className="py-20 bg-white">
-        <div className="container mx-auto px-4">
-          <motion.div
-            className="text-center mb-16"
-            initial={{ opacity: 0, y: 30 }}
-            animate={processInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-            transition={{ duration: 0.6 }}
-          >
-            <h2 className="text-4xl md:text-5xl font-heading font-bold mb-4">Our Process</h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              A structured approach to financial management excellence
-            </p>
-          </motion.div>
-          <div className="max-w-4xl mx-auto">
-            <div className="space-y-8">
-              {processSteps.map((step, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, x: -30 }}
-                  animate={processInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
-                  transition={{ delay: index * 0.2, duration: 0.6 }}
-                  className="flex gap-6"
-                >
-                  <div className="flex flex-col items-center">
-                    <div className="w-16 h-16 bg-gradient-to-br from-primary to-secondary rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg">
-                      <span className="text-2xl font-heading font-bold text-primary-foreground">{step.number}</span>
-                    </div>
-                    {index < processSteps.length - 1 && (
-                      <div className="w-0.5 h-full bg-gradient-to-b from-secondary to-primary/20 my-2" />
-                    )}
-                  </div>
-                  <div className="flex-1 pb-8">
-                    <Card className="p-6 hover-lift">
-                      <h3 className="text-xl font-heading font-bold mb-2">{step.title}</h3>
-                      <p className="text-muted-foreground leading-relaxed">{step.description}</p>
-                    </Card>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Why It Matters Section - Enhanced */}
-      <section ref={whyRef} className="py-20 bg-gradient-to-br from-primary/5 via-secondary/5 to-background">
-        <div className="container mx-auto px-4">
+      <section ref={whyRef} className="py-12 sm:py-16 lg:py-20 bg-gradient-to-br from-primary/5 via-secondary/5 to-background border-t border-border">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             className="max-w-5xl mx-auto"
             initial={{ opacity: 0, y: 30 }}
@@ -347,24 +254,51 @@ const FinancialAdministrativeServices = () => {
           >
             <div className="grid md:grid-cols-2 gap-8 items-center">
               <div>
-                <h2 className="text-4xl md:text-5xl font-heading font-bold mb-6">Why It Matters</h2>
-                <div className="space-y-4">
-                  <Card className="p-6 bg-white/80 backdrop-blur-sm">
-                    <p className="text-lg text-foreground leading-relaxed font-medium mb-2">
-                      Strong financial and administrative governance is the backbone of a successful and trusted community.
-                    </p>
-                    <p className="text-muted-foreground leading-relaxed">
-                      By ensuring accuracy, accountability, and transparency, POAM builds confidence among owners and board members — empowering sound decision-making and long-term growth.
-                    </p>
-                  </Card>
-                </div>
+                <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-heading font-bold mb-6 tracking-tight">
+                  Why This <span className="text-primary font-accent text-4xl sm:text-5xl lg:text-6xl">Matters</span>
+                </h2>
+                <Card className="p-6 bg-white/80 backdrop-blur-sm mb-4">
+                  <p className="text-base sm:text-lg text-foreground leading-relaxed font-medium mb-4">
+                    Dubai's jointly owned property regulations require communities to operate with accountability and financial clarity. Proper budgeting, accurate forecasting, and transparent reporting are essential for maintaining service quality and long-term asset value.
+                  </p>
+                  <p className="text-sm sm:text-base text-muted-foreground leading-relaxed mb-4">
+                    By ensuring strong financial management, we:
+                  </p>
+                  <ul className="space-y-3">
+                    {[
+                      "Keep service charges fair, accurate, and well-justified",
+                      "Maintain financial stability and prevent unexpected costs",
+                      "Protect property value through responsible spending",
+                      "Provide full transparency to owners, committees, and developers",
+                      "Ensure smooth annual audits and continuous regulatory compliance"
+                    ].map((item, index) => (
+                      <motion.li
+                        key={index}
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={whyInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
+                        transition={{ delay: 0.2 + index * 0.1, duration: 0.5 }}
+                        className="flex items-start space-x-3"
+                      >
+                        <div className="w-5 h-5 bg-gradient-to-br from-secondary to-secondary-hover rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5">
+                          <CheckCircle2 className="w-3 h-3 text-secondary-foreground" />
+                        </div>
+                        <span className="text-sm sm:text-base text-foreground">{item}</span>
+                      </motion.li>
+                    ))}
+                  </ul>
+                </Card>
+                <Card className="p-6 bg-white/80 backdrop-blur-sm">
+                  <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
+                    With us, your community benefits from a transparent, well-planned, and financially secure management framework that supports continuous improvement and long-term sustainability.
+                  </p>
+                </Card>
               </div>
               <div className="grid grid-cols-2 gap-4">
                 {[
                   { icon: DollarSign, label: "Financial Transparency", color: "from-green-500 to-green-600" },
-                  { icon: FileCheck, label: "Full Compliance", color: "from-blue-500 to-blue-600" },
-                  { icon: TrendingUp, label: "Long-term Growth", color: "from-emerald-500 to-emerald-600" },
-                  { icon: Shield, label: "Trust & Integrity", color: "from-amber-500 to-amber-600" },
+                  { icon: FileCheck, label: "RERA Compliance", color: "from-blue-500 to-blue-600" },
+                  { icon: TrendingUp, label: "Property Value Protection", color: "from-emerald-500 to-emerald-600" },
+                  { icon: Shield, label: "Regulatory Compliance", color: "from-amber-500 to-amber-600" },
                 ].map((item, index) => (
                   <motion.div
                     key={index}
@@ -376,7 +310,7 @@ const FinancialAdministrativeServices = () => {
                       <div className={`w-12 h-12 bg-gradient-to-br ${item.color} rounded-xl flex items-center justify-center mx-auto mb-3`}>
                         <item.icon className="w-6 h-6 text-white" />
                       </div>
-                      <p className="text-sm font-semibold text-foreground">{item.label}</p>
+                      <p className="text-sm font-semibold text-foreground tracking-tight">{item.label}</p>
                     </Card>
                   </motion.div>
                 ))}
@@ -386,68 +320,53 @@ const FinancialAdministrativeServices = () => {
         </div>
       </section>
 
-      {/* Our Promise Section - Enhanced */}
-      <section ref={promiseRef} className="py-20 bg-white">
-        <div className="container mx-auto px-4">
-          <motion.div
-            className="max-w-4xl mx-auto text-center"
-            initial={{ opacity: 0, y: 30 }}
-            animate={promiseInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-            transition={{ duration: 0.6 }}
-          >
-            <motion.div
-              initial={{ scale: 0 }}
-              animate={promiseInView ? { scale: 1 } : { scale: 0 }}
-              transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
-              className="w-24 h-24 bg-gradient-to-br from-secondary to-secondary-hover rounded-2xl flex items-center justify-center mx-auto mb-8 shadow-xl"
-            >
-              <Heart className="w-12 h-12 text-secondary-foreground" />
-            </motion.div>
-            <h2 className="text-4xl md:text-5xl font-heading font-bold mb-6">Our Promise</h2>
-            <Card className="p-10 md:p-12 bg-gradient-to-br from-primary/5 via-secondary/5 to-background border-2 border-primary/20">
-              <p className="text-2xl md:text-3xl text-foreground leading-relaxed font-semibold mb-6">
-                We don't just manage your finances — we safeguard your community's future.
-              </p>
-              <p className="text-lg md:text-xl text-muted-foreground leading-relaxed">
-                With POAM, every transaction is transparent, every record is accurate, and every action reflects our unwavering commitment to excellence and trust.
-              </p>
-            </Card>
-          </motion.div>
-        </div>
-      </section>
-
       {/* CTA Section */}
-      <section ref={ctaRef} className="py-20 bg-gradient-to-r from-primary to-primary-hover text-primary-foreground">
-        <div className="container mx-auto px-4 text-center">
-          <motion.h2 
-            className="text-4xl md:text-5xl font-heading font-bold mb-6"
+      <section ref={ctaRef} className="py-12 sm:py-16 lg:py-20 bg-gradient-to-r from-primary to-primary-hover text-primary-foreground border-t border-primary-foreground/20">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={ctaInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
             transition={{ duration: 0.6 }}
+            className="max-w-4xl mx-auto"
           >
-            Ready to Strengthen Your Community's Finances?
-          </motion.h2>
-          <motion.p 
-            className="text-xl mb-8 max-w-2xl mx-auto opacity-90"
-            initial={{ opacity: 0, y: 20 }}
-            animate={ctaInView ? { opacity: 0.9, y: 0 } : { opacity: 0, y: 20 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
-            Let's work together to achieve financial excellence and long-term stability for your community.
-          </motion.p>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={ctaInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <Button size="lg" variant="secondary" asChild className="group">
-              <Link to="/contact">
-                Get Started Today
-                <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
-              </Link>
-            </Button>
+            <div className="flex items-center justify-center gap-3 sm:gap-4 text-xs sm:text-sm font-medium tracking-[0.2em] uppercase text-primary-foreground/70 mb-4 sm:mb-6">
+              <span className="w-8 sm:w-12 h-px bg-primary-foreground/30" />
+              <span>Get Started</span>
+              <span className="w-8 sm:w-12 h-px bg-primary-foreground/30" />
+            </div>
+            <motion.h2 
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-heading font-bold mb-4 sm:mb-6 tracking-tight"
+              initial={{ opacity: 0, y: 30 }}
+              animate={ctaInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+              transition={{ duration: 0.6 }}
+            >
+              Ready to Strengthen{" "}
+              <span className="text-secondary font-accent text-4xl sm:text-5xl lg:text-6xl">Your Finances?</span>
+            </motion.h2>
+            <motion.p 
+              className="text-base sm:text-lg md:text-xl mb-8 sm:mb-10 max-w-2xl mx-auto opacity-90 leading-relaxed"
+              initial={{ opacity: 0, y: 20 }}
+              animate={ctaInView ? { opacity: 0.9, y: 0 } : { opacity: 0, y: 20 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+            >
+              Let's work together to achieve <span className="font-accent text-secondary text-xl sm:text-2xl">financial excellence</span> and long-term stability for your community.
+            </motion.p>
+            <motion.div
+              className="flex flex-col sm:flex-row gap-4 justify-center items-center"
+              initial={{ opacity: 0, y: 20 }}
+              animate={ctaInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+            >
+              <Button size="lg" variant="secondary" asChild className="group">
+                <Link to="/contact">
+                  Get Started Today
+                  <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
+                </Link>
+              </Button>
+              <Button size="lg" variant="outline" className="bg-primary-foreground/10 border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary" asChild>
+                <Link to="/services">Explore Our Services</Link>
+              </Button>
+            </motion.div>
           </motion.div>
         </div>
       </section>
