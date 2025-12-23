@@ -1,5 +1,5 @@
 import { Card } from "@/components/ui/card";
-import { CheckCircle2, Award, Users, Clock, Shield, TrendingUp, Heart, Headphones } from "lucide-react";
+import { CheckCircle2, Award, Users, Clock, Shield, TrendingUp, Heart, Headphones, ArrowRight } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
@@ -92,47 +92,32 @@ const WhyUs = () => {
   return (
     <div className="min-h-screen bg-background">
       {/* Hero Section */}
-      <section ref={heroRef} className="relative min-h-[85vh] flex items-center overflow-hidden pt-16 sm:pt-20">
-        <div className="absolute inset-0 bg-background" />
-        <div className="absolute left-0 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-border to-transparent" />
-        
-        <div className="container mx-auto px-6 sm:px-8 lg:px-12 relative z-10 w-full">
-          <div className="max-w-[1400px] mx-auto">
+      <section ref={heroRef} className="relative pt-28 pb-12 sm:pb-16 md:pt-32 md:pb-20 lg:pb-24 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-secondary/5 to-background" />
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="max-w-4xl mx-auto">
             <motion.div
-              initial={{ opacity: 0, y: 40 }}
-              animate={heroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
-              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-              className="max-w-4xl"
+              initial={{ opacity: 0, y: 30 }}
+              animate={heroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+              transition={{ duration: 0.8 }}
             >
-              <div className="flex items-center gap-4 text-sm font-medium tracking-[0.2em] uppercase text-muted-foreground mb-6">
-                <span className="w-12 h-px bg-border" />
+              <div className="flex items-center justify-center gap-3 sm:gap-4 text-xs sm:text-sm font-medium tracking-[0.2em] uppercase text-muted-foreground mb-4 sm:mb-6">
+                <span className="w-8 sm:w-12 h-px bg-border" />
                 <span>Why Choose Us</span>
+                <span className="w-8 sm:w-12 h-px bg-border" />
               </div>
               
-              <h1 className="text-6xl sm:text-7xl lg:text-8xl font-heading font-bold leading-[0.95] tracking-tight mb-8">
-                <motion.span
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={heroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-                  transition={{ delay: 0.2, duration: 0.8 }}
-                  className="block"
-                >
-                  The Difference
-                </motion.span>
-                <motion.span
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={heroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-                  transition={{ delay: 0.3, duration: 0.8 }}
-                  className="block text-primary"
-                >
-                  of Excellence
-                </motion.span>
+              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-heading font-bold mb-6 leading-tight tracking-tight text-center">
+                The Difference
+                <br />
+                <span className="text-primary font-accent text-4xl sm:text-5xl lg:text-6xl">of Excellence</span>
               </h1>
 
               <motion.p
                 initial={{ opacity: 0, y: 20 }}
                 animate={heroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                transition={{ delay: 0.4, duration: 0.8 }}
-                className="text-xl sm:text-2xl text-muted-foreground leading-relaxed max-w-3xl"
+                transition={{ delay: 0.2, duration: 0.8 }}
+                className="text-base sm:text-lg md:text-xl text-muted-foreground leading-relaxed max-w-3xl mx-auto text-center"
               >
                 Experience what sets Pristine apart in community management. Two decades of proven expertise, 
                 unwavering commitment, and results that speak for themselves.
@@ -143,167 +128,184 @@ const WhyUs = () => {
       </section>
 
       {/* Differentiators Section */}
-      <section ref={featuresRef.ref} className="py-32 lg:py-40 border-t border-border">
-        <div className="container mx-auto px-6 sm:px-8 lg:px-12">
-          <div className="max-w-[1400px] mx-auto">
-            <motion.div
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-              className="mb-20"
-            >
-              <div className="flex items-center gap-4 text-sm font-medium tracking-[0.2em] uppercase text-muted-foreground mb-6">
-                <span className="w-12 h-px bg-border" />
-                <span>What Sets Us Apart</span>
-              </div>
-              <h2 className="text-5xl sm:text-6xl lg:text-7xl font-heading font-bold leading-[0.95] tracking-tight max-w-3xl">
-                Our Differentiators
-              </h2>
-            </motion.div>
+      <section ref={featuresRef.ref} className="py-12 sm:py-16 lg:py-20 bg-white border-t border-border">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-12 sm:mb-16"
+          >
+            <div className="flex items-center justify-center gap-3 sm:gap-4 text-xs sm:text-sm font-medium tracking-[0.2em] uppercase text-muted-foreground mb-4 sm:mb-6">
+              <span className="w-8 sm:w-12 h-px bg-border" />
+              <span>What Sets Us Apart</span>
+              <span className="w-8 sm:w-12 h-px bg-border" />
+            </div>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-heading font-bold tracking-tight">
+              Our <span className="text-primary font-accent text-4xl sm:text-5xl lg:text-6xl">Differentiators</span>
+            </h2>
+          </motion.div>
 
-            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
-              {differentiators.map((item, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 40 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-50px" }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  className="group"
-                >
+          <motion.div 
+            className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8"
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+          >
+            {differentiators.map((item, index) => (
+              <motion.div
+                key={index}
+                variants={fadeInUp}
+                className="group"
+              >
+                <Card className="p-6 sm:p-8 hover-lift border-border/50 h-full bg-white">
                   <div className="space-y-4">
-                    <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                      <item.icon className="w-7 h-7 text-primary" strokeWidth={2} />
+                    <div className={`w-16 h-16 bg-gradient-to-br ${item.bgGradient} rounded-2xl flex items-center justify-center ${item.shadowColor} shadow-lg`}>
+                      <item.icon className="w-8 h-8 text-white" strokeWidth={2.5} />
                     </div>
-                    <h3 className="text-xl font-heading font-bold leading-tight">
+                    <h3 className="text-lg sm:text-xl font-heading font-semibold leading-tight tracking-tight">
                       {item.title}
                     </h3>
-                    <p className="text-muted-foreground leading-relaxed">
+                    <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
                       {item.description}
                     </p>
                   </div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
+                </Card>
+              </motion.div>
+            ))}
+          </motion.div>
         </div>
       </section>
 
       {/* Benefits Section */}
-      <section ref={benefitsRef.ref} className="py-32 lg:py-40 border-t border-border">
-        <div className="container mx-auto px-6 sm:px-8 lg:px-12">
-          <div className="max-w-[1400px] mx-auto">
-            <motion.div
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-              className="mb-20"
-            >
-              <div className="flex items-center gap-4 text-sm font-medium tracking-[0.2em] uppercase text-muted-foreground mb-6">
-                <span className="w-12 h-px bg-border" />
-                <span>The Advantage</span>
-              </div>
-              <h2 className="text-5xl sm:text-6xl lg:text-7xl font-heading font-bold leading-[0.95] tracking-tight max-w-3xl">
-                Why It Matters
-              </h2>
-            </motion.div>
+      <section ref={benefitsRef.ref} className="py-12 sm:py-16 lg:py-20 bg-gradient-to-br from-muted/50 to-background border-t border-border">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-12 sm:mb-16"
+          >
+            <div className="flex items-center justify-center gap-3 sm:gap-4 text-xs sm:text-sm font-medium tracking-[0.2em] uppercase text-muted-foreground mb-4 sm:mb-6">
+              <span className="w-8 sm:w-12 h-px bg-border" />
+              <span>The Advantage</span>
+              <span className="w-8 sm:w-12 h-px bg-border" />
+            </div>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-heading font-bold tracking-tight">
+              Why It <span className="text-primary font-accent text-4xl sm:text-5xl lg:text-6xl">Matters</span>
+            </h2>
+          </motion.div>
 
-            <div className="space-y-12 lg:space-y-16">
-              {[
-                {
-                  title: "Enhanced Property Values",
-                  description:
-                    "Our professional management approach consistently leads to increased property values and higher resale prices.",
-                },
-                {
-                  title: "Peace of Mind",
-                  description:
-                    "Sleep easy knowing your community is in expert hands with proactive management and immediate response to issues.",
-                },
-                {
-                  title: "Cost Efficiency",
-                  description:
-                    "Strategic vendor relationships and efficient operations result in significant cost savings for your community.",
-                },
-                {
-                  title: "Harmonious Living",
-                  description:
-                    "Our community-first approach fosters positive relationships and reduces conflicts among residents.",
-                },
-                {
-                  title: "Technology Integration",
-                  description:
-                    "Modern digital platforms for communication, payments, and service requests make management effortless.",
-                },
-                {
-                  title: "Continuous Improvement",
-                  description:
-                    "Regular assessments and upgrades ensure your community stays competitive and well-maintained.",
-                },
-              ].map((benefit, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 40 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-50px" }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  className="flex gap-8 lg:gap-12 group"
-                >
-                  <div className="flex-shrink-0 pt-2">
-                    <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                      <CheckCircle2 className="w-6 h-6 text-primary" strokeWidth={2} />
+          <div className="max-w-4xl mx-auto space-y-6 sm:space-y-8">
+            {[
+              {
+                title: "Enhanced Property Values",
+                description:
+                  "Our professional management approach consistently leads to increased property values and higher resale prices.",
+              },
+              {
+                title: "Peace of Mind",
+                description:
+                  "Sleep easy knowing your community is in expert hands with proactive management and immediate response to issues.",
+              },
+              {
+                title: "Cost Efficiency",
+                description:
+                  "Strategic vendor relationships and efficient operations result in significant cost savings for your community.",
+              },
+              {
+                title: "Harmonious Living",
+                description:
+                  "Our community-first approach fosters positive relationships and reduces conflicts among residents.",
+              },
+              {
+                title: "Technology Integration",
+                description:
+                  "Modern digital platforms for communication, payments, and service requests make management effortless.",
+              },
+              {
+                title: "Continuous Improvement",
+                description:
+                  "Regular assessments and upgrades ensure your community stays competitive and well-maintained.",
+              },
+            ].map((benefit, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+              >
+                <Card className="p-6 sm:p-8 bg-white/80 backdrop-blur-sm hover-lift">
+                  <div className="flex gap-4 sm:gap-6 items-start">
+                    <div className="flex-shrink-0 pt-1">
+                      <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-secondary to-secondary-hover rounded-lg flex items-center justify-center">
+                        <CheckCircle2 className="w-5 h-5 sm:w-6 sm:h-6 text-secondary-foreground" strokeWidth={2.5} />
+                      </div>
+                    </div>
+                    <div className="flex-1 space-y-2">
+                      <h3 className="text-xl sm:text-2xl font-heading font-bold tracking-tight">
+                        {benefit.title}
+                      </h3>
+                      <p className="text-base sm:text-lg text-muted-foreground leading-relaxed">
+                        {benefit.description}
+                      </p>
                     </div>
                   </div>
-                  <div className="flex-1 space-y-3">
-                    <h3 className="text-2xl sm:text-3xl font-heading font-bold">
-                      {benefit.title}
-                    </h3>
-                    <p className="text-lg sm:text-xl text-muted-foreground leading-relaxed max-w-3xl">
-                      {benefit.description}
-                    </p>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
+                </Card>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
 
       {/* CTA Section */}
-      <section ref={ctaRef} className="py-32 lg:py-40 border-t border-border">
-        <div className="container mx-auto px-6 sm:px-8 lg:px-12">
-          <div className="max-w-[1400px] mx-auto">
-            <motion.div
-              initial={{ opacity: 0, y: 40 }}
-              animate={ctaInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
-              transition={{ duration: 0.8 }}
-              className="max-w-4xl"
+      <section ref={ctaRef} className="py-12 sm:py-16 lg:py-20 bg-background border-t border-border">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={ctaInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+            transition={{ duration: 0.6 }}
+            className="text-center max-w-4xl mx-auto"
+          >
+            <div className="flex items-center justify-center gap-3 sm:gap-4 text-xs sm:text-sm font-medium tracking-[0.2em] uppercase text-muted-foreground mb-4 sm:mb-6">
+              <span className="w-8 sm:w-12 h-px bg-border" />
+              <span>Get Started</span>
+              <span className="w-8 sm:w-12 h-px bg-border" />
+            </div>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-heading font-bold mb-4 sm:mb-6 tracking-tight">
+              Ready to Experience
+              <br />
+              <span className="text-primary font-accent text-4xl sm:text-5xl lg:text-6xl">Excellence?</span>
+            </h2>
+            <motion.p 
+              className="text-base sm:text-lg md:text-xl mb-8 sm:mb-10 max-w-2xl mx-auto text-muted-foreground leading-relaxed"
+              initial={{ opacity: 0, y: 20 }}
+              animate={ctaInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
             >
-              <div className="flex items-center gap-4 text-sm font-medium tracking-[0.2em] uppercase text-muted-foreground mb-6">
-                <span className="w-12 h-px bg-border" />
-                <span>Get Started</span>
-              </div>
-              <h2 className="text-5xl sm:text-6xl lg:text-7xl font-heading font-bold leading-[0.95] tracking-tight mb-8">
-                Ready to Experience
-                <br />
-                <span className="text-primary">Excellence?</span>
-              </h2>
-              <p className="text-xl sm:text-2xl text-muted-foreground mb-12 leading-relaxed max-w-2xl">
-                Join over 100 communities who trust Pristine for their management needs.
-              </p>
-              <motion.div
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                className="inline-block"
-              >
-                <Button size="lg" className="text-lg px-10 py-7 h-auto rounded-xl" asChild>
-                  <Link to="/contact">Get Started Today</Link>
-                </Button>
-              </motion.div>
+              Join over 100 communities who trust Pristine for their management needs.
+            </motion.p>
+            <motion.div
+              className="flex flex-col sm:flex-row gap-4 justify-center items-center"
+              initial={{ opacity: 0, y: 20 }}
+              animate={ctaInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+            >
+              <Button size="lg" variant="default" asChild className="group">
+                <Link to="/contact">
+                  Get Started Today
+                  <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
+                </Link>
+              </Button>
+              <Button size="lg" variant="outline" asChild>
+                <Link to="/services">Explore Our Services</Link>
+              </Button>
             </motion.div>
-          </div>
+          </motion.div>
         </div>
       </section>
     </div>

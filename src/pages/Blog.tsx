@@ -105,47 +105,31 @@ const Blog = () => {
   return (
     <div className="min-h-screen bg-background">
       {/* Hero Section */}
-      <section ref={heroRef} className="relative min-h-[80vh] flex items-center overflow-hidden pt-16 sm:pt-20">
-        <div className="absolute inset-0 bg-background" />
-        <div className="absolute left-0 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-border to-transparent" />
-        
-        <div className="container mx-auto px-6 sm:px-8 lg:px-12 relative z-10 w-full">
-          <div className="max-w-[1400px] mx-auto">
+      <section ref={heroRef} className="relative pt-28 pb-12 sm:pb-16 md:pt-32 md:pb-20 lg:pb-24 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-secondary/5 to-background" />
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="max-w-4xl mx-auto text-center">
             <motion.div
-              initial={{ opacity: 0, y: 40 }}
-              animate={heroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
-              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-              className="max-w-4xl"
+              initial={{ opacity: 0, y: 30 }}
+              animate={heroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+              transition={{ duration: 0.8 }}
             >
-              <div className="flex items-center gap-4 text-sm font-medium tracking-[0.2em] uppercase text-muted-foreground mb-6">
-                <span className="w-12 h-px bg-border" />
+              <div className="flex items-center justify-center gap-3 sm:gap-4 text-xs sm:text-sm font-medium tracking-[0.2em] uppercase text-muted-foreground mb-4 sm:mb-6">
+                <span className="w-8 sm:w-12 h-px bg-border" />
                 <span>Blog & News</span>
+                <span className="w-8 sm:w-12 h-px bg-border" />
               </div>
               
-              <h1 className="text-6xl sm:text-7xl lg:text-8xl font-heading font-bold leading-[0.95] tracking-tight mb-8">
-                <motion.span
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={heroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-                  transition={{ delay: 0.2, duration: 0.8 }}
-                  className="block"
-                >
-                  Insights &
-                </motion.span>
-                <motion.span
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={heroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-                  transition={{ delay: 0.3, duration: 0.8 }}
-                  className="block text-primary"
-                >
-                  Updates
-                </motion.span>
+              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-heading font-bold mb-6 leading-tight tracking-tight">
+                Insights &{" "}
+                <span className="text-primary font-accent text-4xl sm:text-5xl lg:text-6xl">Updates</span>
               </h1>
 
               <motion.p
                 initial={{ opacity: 0, y: 20 }}
                 animate={heroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                transition={{ delay: 0.4, duration: 0.8 }}
-                className="text-xl sm:text-2xl text-muted-foreground leading-relaxed max-w-3xl"
+                transition={{ delay: 0.2, duration: 0.8 }}
+                className="text-base sm:text-lg md:text-xl text-muted-foreground leading-relaxed max-w-3xl mx-auto"
               >
                 Expert insights, practical tips, and the latest updates from the world of community management.
               </motion.p>
@@ -155,132 +139,151 @@ const Blog = () => {
       </section>
 
       {/* Blog Posts Grid */}
-      <section ref={postsRef.ref} className="py-32 lg:py-40 border-t border-border">
-        <div className="container mx-auto px-6 sm:px-8 lg:px-12">
-          <div className="max-w-[1400px] mx-auto">
-            <motion.div
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-              className="mb-20"
-            >
-              <div className="flex items-center gap-4 text-sm font-medium tracking-[0.2em] uppercase text-muted-foreground mb-6">
-                <span className="w-12 h-px bg-border" />
-                <span>Latest Articles</span>
-              </div>
-              <h2 className="text-5xl sm:text-6xl lg:text-7xl font-heading font-bold leading-[0.95] tracking-tight max-w-3xl">
-                Featured Posts
-              </h2>
-            </motion.div>
+      <section ref={postsRef.ref} className="py-12 sm:py-16 lg:py-20 bg-white border-t border-border">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-12 sm:mb-16"
+          >
+            <div className="flex items-center justify-center gap-3 sm:gap-4 text-xs sm:text-sm font-medium tracking-[0.2em] uppercase text-muted-foreground mb-4 sm:mb-6">
+              <span className="w-8 sm:w-12 h-px bg-border" />
+              <span>Latest Articles</span>
+              <span className="w-8 sm:w-12 h-px bg-border" />
+            </div>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-heading font-bold tracking-tight">
+              Featured <span className="text-primary font-accent text-4xl sm:text-5xl lg:text-6xl">Posts</span>
+            </h2>
+          </motion.div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
-              {!isLoading && hasError && blogPosts.length === 0 && (
-                <div className="col-span-full text-center text-muted-foreground">
-                  Unable to load blog posts. Please try again later.
-                </div>
-              )}
-              {blogPosts.map((post, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 40 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-50px" }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  className="group"
-                >
-                  <article className="h-full flex flex-col">
-                    <div className="relative aspect-[4/3] overflow-hidden rounded-2xl mb-6 bg-muted">
+          {isLoading && (
+            <div className="col-span-full text-center py-12">
+              <p className="text-muted-foreground">Loading blog posts...</p>
+            </div>
+          )}
+          {!isLoading && hasError && blogPosts.length === 0 && (
+            <div className="col-span-full text-center py-12">
+              <p className="text-muted-foreground">Unable to load blog posts. Please try again later.</p>
+            </div>
+          )}
+          {!isLoading && !hasError && blogPosts.length === 0 && (
+            <div className="col-span-full text-center py-12">
+              <p className="text-muted-foreground">No blog posts available at the moment.</p>
+            </div>
+          )}
+          <motion.div 
+            className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8"
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+          >
+            {blogPosts.map((post, index) => (
+              <motion.div
+                key={index}
+                variants={fadeInUp}
+                whileHover={{ y: -4, transition: { duration: 0.2 } }}
+                className="group"
+              >
+                <Link to={`/blog/${post.slug}`}>
+                  <Card className="group h-full flex flex-col overflow-hidden border-border/50 hover:border-primary/50 transition-all duration-300 cursor-pointer">
+                    <div className="relative aspect-[4/3] overflow-hidden bg-muted">
                       <motion.img
                         src={post.image}
                         alt={post.title}
                         className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                        initial={{ opacity: 0, scale: 1.05 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: index * 0.1 + 0.3, duration: 0.6 }}
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-background/60 via-transparent to-transparent" />
+                      <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300" />
                       <div className="absolute top-4 left-4">
-                        <span className="bg-primary/90 backdrop-blur-sm text-primary-foreground text-xs font-semibold px-3 py-1.5 rounded-full">
+                        <span className="px-3 py-1 text-xs font-medium bg-background/90 backdrop-blur-sm rounded-full border border-border/50">
                           {post.category}
                         </span>
                       </div>
                     </div>
                     
-                    <div className="flex-1 flex flex-col space-y-4">
-                      <div className="flex items-center gap-4 text-sm text-muted-foreground">
-                        <div className="flex items-center gap-2">
-                          <Calendar className="w-4 h-4" />
-                          <span>{post.date}</span>
-                        </div>
-                        <span className="w-1 h-1 rounded-full bg-border" />
-                        <div className="flex items-center gap-2">
-                          <User className="w-4 h-4" />
-                          <span>{post.author}</span>
-                        </div>
+                    <div className="p-6 flex flex-col flex-1">
+                      <div className="flex items-center gap-2 text-xs text-muted-foreground mb-3">
+                        <Calendar className="w-3 h-3" />
+                        <span>{post.date}</span>
+                        {post.author && (
+                          <>
+                            <span className="w-1 h-1 rounded-full bg-border" />
+                            <div className="flex items-center gap-2">
+                              <User className="w-3 h-3" />
+                              <span>{post.author}</span>
+                            </div>
+                          </>
+                        )}
                       </div>
                       
-                      <h3 className="text-2xl font-heading font-bold leading-tight group-hover:text-primary transition-colors">
+                      <h3 className="text-lg font-heading font-semibold mb-2 group-hover:text-primary transition-colors line-clamp-2 tracking-tight">
                         {post.title}
                       </h3>
                       
-                      <p className="text-muted-foreground leading-relaxed flex-1">
+                      <p className="text-sm text-muted-foreground leading-relaxed line-clamp-3 mb-4 flex-1">
                         {post.excerpt}
                       </p>
                       
-                      <Button 
-                        variant="ghost" 
-                        className="group/btn p-0 h-auto w-fit text-foreground hover:text-primary"
-                        asChild
-                      >
-                        <Link to={`/blog/${post.slug}`}>
-                        Read More
-                        <ArrowRight className="w-4 h-4 ml-2 group-hover/btn:translate-x-1 transition-transform" />
-                        </Link>
-                      </Button>
+                      <div className="mt-auto flex items-center gap-2 text-sm font-medium text-primary group-hover:gap-3 transition-all">
+                        <span>Read More</span>
+                        <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                      </div>
                     </div>
-                  </article>
-                </motion.div>
-              ))}
-            </div>
-          </div>
+                  </Card>
+                </Link>
+              </motion.div>
+            ))}
+          </motion.div>
         </div>
       </section>
 
       {/* Newsletter Section */}
-      <section ref={newsletterRef} className="py-32 lg:py-40 border-t border-border">
-        <div className="container mx-auto px-6 sm:px-8 lg:px-12">
-          <div className="max-w-[1400px] mx-auto">
-            <motion.div
-              initial={{ opacity: 0, y: 40 }}
-              animate={newsletterInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
-              transition={{ duration: 0.8 }}
-              className="max-w-4xl"
+      <section ref={newsletterRef} className="py-12 sm:py-16 lg:py-20 bg-gradient-to-br from-primary/5 via-secondary/5 to-background border-t border-border">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={newsletterInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+            transition={{ duration: 0.6 }}
+            className="text-center max-w-4xl mx-auto"
+          >
+            <div className="flex items-center justify-center gap-3 sm:gap-4 text-xs sm:text-sm font-medium tracking-[0.2em] uppercase text-muted-foreground mb-4 sm:mb-6">
+              <span className="w-8 sm:w-12 h-px bg-border" />
+              <span>Stay Connected</span>
+              <span className="w-8 sm:w-12 h-px bg-border" />
+            </div>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-heading font-bold mb-4 sm:mb-6 tracking-tight">
+              Stay <span className="text-primary font-accent text-4xl sm:text-5xl lg:text-6xl">Updated</span>
+            </h2>
+            <motion.p 
+              className="text-base sm:text-lg md:text-xl mb-8 sm:mb-10 max-w-2xl mx-auto text-muted-foreground leading-relaxed"
+              initial={{ opacity: 0, y: 20 }}
+              animate={newsletterInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
             >
-              <div className="flex items-center gap-4 text-sm font-medium tracking-[0.2em] uppercase text-muted-foreground mb-6">
-                <span className="w-12 h-px bg-border" />
-                <span>Stay Connected</span>
-              </div>
-              <h2 className="text-5xl sm:text-6xl lg:text-7xl font-heading font-bold leading-[0.95] tracking-tight mb-8">
-                Stay Updated
-              </h2>
-              <p className="text-xl sm:text-2xl text-muted-foreground mb-12 leading-relaxed max-w-2xl">
-                Subscribe to our newsletter for the latest insights and updates in community management.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 max-w-lg">
-                <input
-                  type="email"
-                  placeholder="Enter your email"
-                  className="flex-1 px-6 py-4 rounded-xl border border-border bg-background focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-base"
-                />
-                <motion.div 
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                >
-                  <Button size="lg" className="text-lg px-8 py-4 h-auto rounded-xl">
-                    Subscribe
-                  </Button>
-                </motion.div>
-              </div>
+              Subscribe to our newsletter for the latest insights and updates in community management.
+            </motion.p>
+            <motion.div 
+              className="flex flex-col sm:flex-row gap-4 max-w-lg mx-auto"
+              initial={{ opacity: 0, y: 20 }}
+              animate={newsletterInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+            >
+              <input
+                type="email"
+                placeholder="Enter your email"
+                className="flex-1 px-4 sm:px-6 py-3 sm:py-4 rounded-xl border border-border bg-background focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-base"
+              />
+              <Button size="lg" className="px-6 sm:px-8">
+                Subscribe
+              </Button>
             </motion.div>
-          </div>
+          </motion.div>
         </div>
       </section>
     </div>

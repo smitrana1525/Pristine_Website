@@ -16,6 +16,8 @@ const FinancialAdministrativeServices = () => {
   const servicesInView = useInView(servicesRef, { once: true, margin: "-100px" });
   const whyRef = useRef(null);
   const whyInView = useInView(whyRef, { once: true });
+  const withUsRef = useRef(null);
+  const withUsInView = useInView(withUsRef, { once: true });
   const ctaRef = useRef(null);
   const ctaInView = useInView(ctaRef, { once: true });
 
@@ -287,11 +289,6 @@ const FinancialAdministrativeServices = () => {
                     ))}
                   </ul>
                 </Card>
-                <Card className="p-6 bg-white/80 backdrop-blur-sm">
-                  <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
-                    With us, your community benefits from a transparent, well-planned, and financially secure management framework that supports continuous improvement and long-term sustainability.
-                  </p>
-                </Card>
               </div>
               <div className="grid grid-cols-2 gap-4">
                 {[
@@ -316,6 +313,37 @@ const FinancialAdministrativeServices = () => {
                 ))}
               </div>
             </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* With Us Section */}
+      <section ref={withUsRef} className="py-12 sm:py-16 lg:py-20 bg-background border-t border-border">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={withUsInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+            transition={{ duration: 0.6 }}
+            className="text-center max-w-4xl mx-auto"
+          >
+            <div className="flex items-center justify-center gap-3 sm:gap-4 text-xs sm:text-sm font-medium tracking-[0.2em] uppercase text-muted-foreground mb-4 sm:mb-6">
+              <span className="w-8 sm:w-12 h-px bg-border" />
+              <span>With Us</span>
+              <span className="w-8 sm:w-12 h-px bg-border" />
+            </div>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-heading font-bold mb-4 sm:mb-6 tracking-tight">
+              Trusted Partners for
+              <br />
+              <span className="text-primary font-accent text-4xl sm:text-5xl lg:text-6xl">Premium Living</span>
+            </h2>
+            <motion.p 
+              className="text-base sm:text-lg md:text-xl mb-8 sm:mb-10 max-w-2xl mx-auto text-muted-foreground leading-relaxed"
+              initial={{ opacity: 0, y: 20 }}
+              animate={withUsInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+            >
+              With us, your community benefits from a <span className="text-primary font-semibold">transparent, well-planned, and financially secure</span> management framework that supports continuous improvement and long-term sustainability.
+            </motion.p>
           </motion.div>
         </div>
       </section>

@@ -15,6 +15,7 @@ const getAlignClass = (format?: string): string => {
 };
 
 // Parse Lexical style string (e.g. "background-color: #fff; color: red;") into a CSSProperties object
+// Excludes font-family to allow theme fonts to apply
 const parseStyleString = (styleString?: string | null): CSSProperties => {
   const style: CSSProperties = {};
   if (!styleString || typeof styleString !== "string") return style;
@@ -26,6 +27,12 @@ const parseStyleString = (styleString?: string | null): CSSProperties => {
     .forEach((pair) => {
       const [prop, value] = pair.split(":").map((p) => p.trim());
       if (!prop || !value) return;
+      
+      // Skip font-family to allow theme fonts to apply
+      if (prop.toLowerCase() === "font-family" || prop.toLowerCase() === "fontFamily") {
+        return;
+      }
+      
       const camelProp = prop.replace(/-([a-z])/g, (_, c) =>
         c ? c.toUpperCase() : "",
       );
@@ -58,7 +65,7 @@ export const renderLexicalNodes = (nodes: any[], keyPrefix = ""): JSX.Element[] 
         const style: CSSProperties = parseStyleString(node.style);
 
         let element: JSX.Element = (
-          <span key={key} style={style}>
+          <span key={key} style={style} className="text-foreground">
             {node.text}
           </span>
         );
@@ -105,6 +112,14 @@ export const renderLexicalNodes = (nodes: any[], keyPrefix = ""): JSX.Element[] 
       }
       case "linebreak":
         return [<br key={key} />];
+      case "overflow": {
+        // Overflow nodes are typically wrappers for text with special styling
+        // Render their children directly
+        if (node.children) {
+          return renderLexicalNodes(node.children, key);
+        }
+        return [];
+      }
       case "paragraph": {
         const alignClass = getAlignClass(
           typeof node.format === "string" ? node.format : (node.align as string | undefined),
@@ -114,7 +129,7 @@ export const renderLexicalNodes = (nodes: any[], keyPrefix = ""): JSX.Element[] 
         return [
           <p
             key={key}
-            className={`mb-4 leading-relaxed text-muted-foreground ${alignClass}`.trim()}
+            className={`mb-4 leading-relaxed text-foreground ${alignClass}`.trim()}
             style={blockStyle}
           >
             {node.children ? renderLexicalNodes(node.children, key) : null}
@@ -123,16 +138,25 @@ export const renderLexicalNodes = (nodes: any[], keyPrefix = ""): JSX.Element[] 
       }
       case "heading": {
         const TagName = (node.tag || "h2") as keyof JSX.IntrinsicElements;
+        const isH2 = TagName === "h2";
+        const isH3 = TagName === "h3";
 
         const alignClass = getAlignClass(
           typeof node.format === "string" ? node.format : (node.align as string | undefined),
         );
         const blockStyle = parseStyleString(node.textStyle);
 
+        // Apply different sizes based on heading level
+        const sizeClass = isH2 
+          ? "text-2xl sm:text-3xl md:text-4xl" 
+          : isH3 
+          ? "text-xl sm:text-2xl md:text-3xl"
+          : "text-lg sm:text-xl md:text-2xl";
+
         return [
           <TagName
             key={key}
-            className={`mt-8 mb-3 text-2xl sm:text-3xl font-heading font-bold tracking-tight ${alignClass}`.trim()}
+            className={`mt-8 mb-4 font-heading font-bold tracking-tight ${sizeClass} ${alignClass}`.trim()}
             style={blockStyle}
           >
             {node.children ? renderLexicalNodes(node.children, key) : null}
@@ -143,7 +167,7 @@ export const renderLexicalNodes = (nodes: any[], keyPrefix = ""): JSX.Element[] 
         return [
           <blockquote
             key={key}
-            className="my-4 border-l-4 border-primary/40 pl-4 italic text-muted-foreground"
+            className="my-4 border-l-4 border-primary/40 pl-4 italic text-foreground leading-relaxed"
           >
             {node.children ? renderLexicalNodes(node.children, key) : null}
           </blockquote>,
@@ -156,10 +180,10 @@ export const renderLexicalNodes = (nodes: any[], keyPrefix = ""): JSX.Element[] 
         // For checklists, we render a styled list but the checkbox itself is part of list items
         const isCheckList = node.listType === "check";
         const className = isCheckList
-          ? "mb-4 ml-6 space-y-1"
+          ? "mb-4 ml-6 space-y-2 text-foreground"
           : TagName === "ol"
-            ? "mb-4 ml-6 list-decimal space-y-1"
-            : "mb-4 ml-6 list-disc space-y-1";
+            ? "mb-4 ml-6 list-decimal space-y-2 text-foreground"
+            : "mb-4 ml-6 list-disc space-y-2 text-foreground";
         const blockStyle = parseStyleString(node.textStyle);
         return [
           <TagName key={key} className={className} style={blockStyle}>
@@ -171,7 +195,7 @@ export const renderLexicalNodes = (nodes: any[], keyPrefix = ""): JSX.Element[] 
         // Support checklist items created by the CheckListPlugin
         if (node.checked === true || node.checked === false) {
           return [
-            <li key={key} className="flex items-start gap-2">
+            <li key={key} className="flex items-start gap-2 text-foreground leading-relaxed">
               <input
                 type="checkbox"
                 checked={!!node.checked}
@@ -186,7 +210,7 @@ export const renderLexicalNodes = (nodes: any[], keyPrefix = ""): JSX.Element[] 
         }
 
         return [
-          <li key={key}>
+          <li key={key} className="text-foreground leading-relaxed">
             {node.children ? renderLexicalNodes(node.children, key) : null}
           </li>,
         ];
@@ -385,7 +409,11 @@ export const LexicalContent = ({
       const parsed = JSON.parse(serializedContent);
       const rootChildren = parsed?.root?.children ?? [];
       const nodes = renderLexicalNodes(rootChildren, "root");
-      return <div className="mt-8 text-base sm:text-lg">{nodes}</div>;
+      return (
+        <div className="prose prose-lg max-w-none text-base sm:text-lg leading-relaxed">
+          {nodes}
+        </div>
+      );
     } catch {
       // fall through to fallback text
     }
@@ -393,7 +421,7 @@ export const LexicalContent = ({
 
   if (fallbackText) {
     return (
-      <p className="mt-8 text-muted-foreground whitespace-pre-line">
+      <p className="text-foreground leading-relaxed whitespace-pre-line">
         {fallbackText}
       </p>
     );
