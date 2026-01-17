@@ -10,6 +10,8 @@ import {
 } from "@/components/ui/dropdown-menu";
 import logo from "@/assets/pristine-new-logo.png";
 
+const PORTAL_URL = import.meta.env.VITE_PORTAL_URL || "http://localhost:5174";
+
 const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -217,7 +219,10 @@ const Navigation = () => {
               size="sm" 
               asChild
             >
-              <Link to="/contact">Get in Touch</Link>
+              <a href={`${PORTAL_URL}/auth/login`} target="_blank" rel="noopener noreferrer">
+                Login
+                <ArrowRight className="ml-0 h-4 w-4" />
+              </a>
             </Button>
           </div>
 
@@ -349,9 +354,10 @@ const Navigation = () => {
                 className="mx-4 mt-2" 
                 asChild
               >
-                <Link to="/contact" onClick={() => setIsMobileMenuOpen(false)}>
-                  Get in Touch
-                </Link>
+                <a href={`${PORTAL_URL}/auth/login`} target="_blank" rel="noopener noreferrer" onClick={() => setIsMobileMenuOpen(false)}>
+                  Login
+                  <ArrowRight className="ml-0 h-4 w-4" />
+                </a>
               </Button>
             </div>
           </div>
